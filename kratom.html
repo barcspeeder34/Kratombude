@@ -20,7 +20,7 @@
     </header>
 
     <!-- Product Section -->
-    <main>
+    <main class="product-page">
         <section class="product-info">
             <h2>Types of Kratom</h2>
             <ul>
@@ -52,5 +52,17 @@
             </div>
         </section>
     </main>
+
+    <script>
+        // Generate unique order ID
+        document.addEventListener("DOMContentLoaded", function() {
+            const uniqueOrderNumber = 'ORD' + Math.floor(Math.random() * 1000000);
+            const messageField = document.getElementById("message-field");
+            if (messageField) {
+                messageField.textContent = uniqueOrderNumber;
+            }
+            alert("Your Order Number: " + uniqueOrderNumber + "\nPlease enter this in the Swish message field.");
+        });
+    </script>
 </body>
 </html>
