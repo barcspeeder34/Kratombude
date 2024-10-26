@@ -41,12 +41,12 @@
                 <li>1 KG - 1596 SEK (140,00 Euro)</li>
             </ul>
 
-            <!-- Larger Product Image -->
+            <!-- Smaller Product Image -->
             <img src="ggg.jpg" alt="Kratom Product" class="product-image">
 
             <h3><strong>Checkout Instructions</strong></h3>
             <p><strong>
-                To complete your order, enter the amount you wish to purchase and generate your unique order number below. Then, scan the Swish QR code and enter your order number in the message field before sending your payment.
+                To complete your order, enter the amount you wish to purchase and click "Generate Order" to display your unique order number and the Swish QR code. Then, scan the QR code, and be sure to enter your unique order number <span id="order-number"></span> in the message field before sending your payment.
             </strong></p>
             
             <!-- Input fields and Generate Button -->
@@ -60,19 +60,20 @@
                 <button id="generate-btn" onclick="generateOrder()">Generate Order</button>
             </div>
 
-            <!-- Swish QR Code -->
-            <div id="qr-code">
+            <!-- Swish QR Code (Initially Hidden) -->
+            <div id="qr-code" style="display: none; text-align: center;">
                 <img src="swish.jpg" alt="Swish QR Code" class="qr-image">
             </div>
         </section>
     </main>
 
     <script>
-        // Generate unique order ID and update message field
+        // Generate unique order ID, update message field, and display the QR code
         function generateOrder() {
             const uniqueOrderNumber = 'ORD' + Math.floor(Math.random() * 1000000);
+            document.getElementById("order-number").textContent = uniqueOrderNumber;
             document.getElementById("message").value = uniqueOrderNumber;
-            alert("Your order number is: " + uniqueOrderNumber);
+            document.getElementById("qr-code").style.display = "block"; // Show QR code
         }
     </script>
 </body>
