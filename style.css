@@ -6,10 +6,10 @@ body {
     background-color: #1c1c1c;
 }
 
-/* Smaller Product Image */
+/* Much Smaller Product Image */
 .product-image {
     display: block;
-    max-width: 30%; /* Smaller size */
+    max-width: 20%; /* Much smaller size */
     margin: 2rem auto;
     border-radius: 8px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
