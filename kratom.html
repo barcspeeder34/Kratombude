@@ -41,13 +41,26 @@
                 <li>1 KG - 1596 SEK (140,00 Euro)</li>
             </ul>
 
+            <!-- Larger Product Image -->
             <img src="ggg.jpg" alt="Kratom Product" class="product-image">
 
             <h3><strong>Checkout Instructions</strong></h3>
             <p><strong>
-                To complete your order, scan the Swish QR code below. NOTE: Write your unique order number 
-                <span id="order-number"></span> in the message field and then send payment for the amount of Kratom you want to buy.
+                To complete your order, enter the amount you wish to purchase and generate your unique order number below. Then, scan the Swish QR code and enter your order number in the message field before sending your payment.
             </strong></p>
+            
+            <!-- Input fields and Generate Button -->
+            <div class="order-form">
+                <label for="amount">Amount (SEK):</label>
+                <input type="number" id="amount" name="amount" placeholder="Enter amount in SEK">
+
+                <label for="message">Message:</label>
+                <input type="text" id="message" name="message" readonly>
+
+                <button id="generate-btn" onclick="generateOrder()">Generate Order</button>
+            </div>
+
+            <!-- Swish QR Code -->
             <div id="qr-code">
                 <img src="swish.jpg" alt="Swish QR Code" class="qr-image">
             </div>
@@ -55,11 +68,12 @@
     </main>
 
     <script>
-        // Generate unique order ID and display it in the checkout instructions
-        document.addEventListener("DOMContentLoaded", function() {
+        // Generate unique order ID and update message field
+        function generateOrder() {
             const uniqueOrderNumber = 'ORD' + Math.floor(Math.random() * 1000000);
-            document.getElementById("order-number").textContent = uniqueOrderNumber;
-        });
+            document.getElementById("message").value = uniqueOrderNumber;
+            alert("Your order number is: " + uniqueOrderNumber);
+        }
     </script>
 </body>
 </html>
