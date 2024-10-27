@@ -70,7 +70,7 @@
             border-radius: 10px;
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
             text-align: center;
-            min-height: 100vh; /* Ensure adequate height */
+            min-height: 100vh;
         }
 
         .product-title {
@@ -95,6 +95,39 @@
             margin-bottom: 1.5rem;
         }
 
+        /* Toggle for Amount Selection */
+        .amount-toggle {
+            display: flex;
+            justify-content: center;
+            margin: 1.5rem 0;
+            gap: 10px;
+        }
+
+        .amount-option {
+            padding: 0.5rem 1.5rem;
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #2e8b57;
+            background: #f0f0f0;
+            border: 2px solid #2e8b57;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        .amount-option.selected {
+            background-color: #2e8b57;
+            color: #fff;
+        }
+
+        /* Total Price Display */
+        .price-display {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #333;
+            margin: 1.5rem 0;
+        }
+
         /* Purchase Button */
         .purchase-button {
             display: inline-block;
@@ -114,105 +147,49 @@
         .purchase-button:hover {
             background-color: #246644;
         }
-
-        /* Hidden Form and Payment Instructions */
-        .swish-checkout {
-            display: none;
-            margin-top: 2rem;
-            padding: 1.5rem;
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            background-color: #f9f9f9;
-            text-align: left;
-        }
-
-        .swish-checkout h3 {
-            font-size: 1.5rem;
-            color: #333;
-        }
-
-        .swish-checkout p {
-            font-size: 1rem;
-            color: #555;
-            margin-bottom: 1rem;
-        }
-
-        .swish-checkout img {
-            width: 150px;
-            height: auto;
-            margin-bottom: 1.5rem;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        /* Form Styling */
-        .swish-checkout label {
-            display: block;
-            font-weight: bold;
-            margin-top: 1rem;
-            color: #333;
-        }
-
-        .swish-checkout input[type="text"],
-        .swish-checkout input[type="email"],
-        .swish-checkout textarea {
-            width: 100%;
-            padding: 0.8rem;
-            margin-top: 0.5rem;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 1rem;
-        }
-
-        .swish-checkout textarea {
-            resize: vertical;
-        }
-
-        .swish-checkout button {
-            width: 100%;
-            padding: 1rem;
-            background-color: #2e8b57;
-            color: #fff;
-            font-size: 1.2rem;
-            font-weight: bold;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            margin-top: 1rem;
-        }
-
-        .swish-checkout button:hover {
-            background-color: #246644;
-        }
-
-        /* Footer Styling */
-        footer {
-            background-color: #333;
-            color: #fff;
-            text-align: center;
-            padding: 1.5rem;
-            font-size: 0.9rem;
-        }
-
-        footer p {
-            margin: 0;
-        }
     </style>
     <script>
-        // JavaScript function to generate a unique Order ID
+        // Pricing details
+        const pricing = {
+            "30 grams": 371,
+            "60 grams": 599,
+            "150 grams": 1099,
+            shipping: 96
+        };
+
+        // JavaScript to update price and selected amount based on amount selected
+        function selectAmount(element, amount) {
+            // Remove 'selected' class from all amount options
+            document.querySelectorAll('.amount-option').forEach(el => el.classList.remove('selected'));
+
+            // Add 'selected' class to clicked option
+            element.classList.add('selected');
+
+            // Calculate total price (item cost + shipping)
+            const totalPrice = pricing[amount] + pricing.shipping;
+            document.getElementById('priceDisplay').textContent = `${totalPrice} SEK`;
+
+            // Update Selected Amount field in the form
+            document.getElementById('selectedAmount').value = amount;
+        }
+
+        function initializeToggle() {
+            // Set default selection to "30 grams"
+            const defaultAmount = document.querySelector('.amount-option[data-amount="30 grams"]');
+            selectAmount(defaultAmount, "30 grams");
+        }
+
+        // Generate a unique Order ID
         function generateOrderID() {
             const orderID = 'PH' + Math.floor(100000 + Math.random() * 900000);
             document.getElementById('orderID').value = orderID;
-            document.getElementById('orderIDInput').value = orderID;
             document.getElementById('orderIDText').textContent = orderID;
         }
 
-        // JavaScript function to show the Swish checkout section
-        function showSwishCheckout() {
-            document.getElementById('swishCheckout').style.display = 'block';
+        // Initialize the toggle and Order ID on load
+        window.onload = function() {
+            initializeToggle();
             generateOrderID();
-            window.scrollTo(0, document.body.scrollHeight);
         }
     </script>
 </head>
@@ -239,11 +216,23 @@
             Our Phenibut HCL is sourced from certified labs to ensure the highest level of purity and quality.
         </p>
 
+        <!-- Fancy Toggle for Amount Selection -->
+        <div class="amount-toggle">
+            <div class="amount-option" data-amount="30 grams" onclick="selectAmount(this, '30 grams')">30 grams</div>
+            <div class="amount-option" data-amount="60 grams" onclick="selectAmount(this, '60 grams')">60 grams</div>
+            <div class="amount-option" data-amount="150 grams" onclick="selectAmount(this, '150 grams')">150 grams</div>
+        </div>
+
+        <!-- Dynamic Price Display -->
+        <div class="price-display">
+            Total: <span id="priceDisplay"></span>
+        </div>
+
         <!-- Purchase Button -->
         <button class="purchase-button" onclick="showSwishCheckout()">Purchase</button>
 
         <!-- Swish Checkout and Shipping Form (Initially Hidden) -->
-        <div class="swish-checkout" id="swishCheckout">
+        <div class="swish-checkout" id="swishCheckout" style="display: none;">
             <h3>Swish Payment Instructions</h3>
             <p>#1: Scan the QR code below to make the payment.</p>
             <p>#2: Put Your Order ID in the message on your Swish payment.</p>
@@ -255,19 +244,47 @@
             <form action="https://formspree.io/f/mrbgeqaw" method="POST">
                 <!-- Hidden Order ID Field for form submission -->
                 <input type="hidden" id="orderID" name="orderID">
-                
+
                 <!-- Visible Order ID Field for customer reference -->
                 <label for="orderIDInput">Order ID</label>
-                <input type="text" id="orderIDInput" name="orderIDInput" readonly>
+                <input type="text" id="orderIDText" name="orderIDInput" readonly>
+
+                <!-- Dynamic Selected Amount Field -->
+                <label for="selectedAmount">Selected Amount</label>
+                <input type="text" id="selectedAmount" name="selectedAmount" readonly>
 
                 <!-- Shipping Information Fields -->
                 <label for="name">Full Name</label>
                 <input type="text" id="name" name="name" required>
 
+                <label for="address">Street Address</label>
+                <input type="text" id="address" name="address" required>
+
+                <label for="city">City</label>
+                <input type="text" id="city" name="city" required>
+
+                <label for="zip">Postal Code</label>
+                <input type="text" id="zip" name="zip" required>
+
+                <label for="country">Country</label>
+                <input type="text" id="country" name="country" required>
+
+                <label for="phone">Phone Number</label>
+                <input type="text" id="phone" name="phone" required>
+
                 <label for="email">Email</label>
                 <input type="email" id="email" name="email" required>
 
-                <label for="address">Address</label>
-                <input type="text" id="address" name="address" required>
+                <label for="message">Additional Message (Optional)</label>
+                <textarea id="message" name="message" rows="4"></textarea>
 
-                <
+                <button type="submit">Submit Shipping Information</button>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Phenibut HCL Budet. All rights reserved.</p>
+    </footer>
+</body>
+</html>
