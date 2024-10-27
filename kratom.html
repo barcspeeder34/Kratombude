@@ -257,6 +257,8 @@
             // Update hidden form fields
             document.getElementById('selectedAmount').value = amount;
             document.getElementById('totalPrice').value = `${totalPrice} SEK`;
+            document.getElementById('amountInput').value = amount;
+            document.getElementById('totalPriceInput').value = `${totalPrice} SEK`;
         }
 
         // Initialize Default Amount
@@ -318,20 +320,38 @@
                 <input type="hidden" id="orderID" name="orderID">
                 <input type="hidden" id="selectedAmount" name="selectedAmount">
                 <input type="hidden" id="totalPrice" name="totalPrice">
+
+                <!-- Customer Inputs -->
+                <label for="orderIDInput">Order ID</label>
+                <input type="text" id="orderIDInput" name="orderIDInput" readonly>
+
+                <label for="amountInput">Amount (grams)</label>
+                <input type="text" id="amountInput" name="amountInput" readonly>
+
+                <label for="totalPriceInput">Total Price</label>
+                <input type="text" id="totalPriceInput" name="totalPriceInput" readonly>
+
                 <label for="name">Full Name</label>
                 <input type="text" id="name" name="name" required>
+                
                 <label for="address">Street Address</label>
                 <input type="text" id="address" name="address" required>
+
                 <label for="city">City</label>
                 <input type="text" id="city" name="city" required>
+
                 <label for="zip">Postal Code</label>
                 <input type="text" id="zip" name="zip" required>
+
                 <label for="country">Country</label>
                 <input type="text" id="country" name="country" required>
+
                 <label for="phone">Phone Number</label>
                 <input type="text" id="phone" name="phone" required>
+
                 <label for="email">Email</label>
                 <input type="email" id="email" name="email" required>
+                
                 <button type="submit" class="purchase-button">I have Sent the Swish Payment</button>
             </form>
         </div>
