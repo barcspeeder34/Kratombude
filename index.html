@@ -18,6 +18,7 @@
             font-family: Arial, sans-serif;
             background-color: #f8f9fa;
             margin: 0;
+            overflow: hidden; /* Prevent scroll from floating symbols */
         }
 
         /* Header Styling */
@@ -59,38 +60,9 @@
             color: #fff;
         }
 
-        /* Fade-in Animation */
-        .fade-in {
-            opacity: 0;
-            animation: fadeIn 1.5s ease-in forwards;
-            animation-delay: 0.5s;
-        }
-
-        @keyframes fadeIn {
-            to {
-                opacity: 1;
-            }
-        }
-
-        /* Floating Animation */
-        .float {
-            animation: float 3s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-10px);
-            }
-        }
-
         /* Front Page Styling */
         .front-page {
-            background-image: url('ggg.jpg');
-            background-size: cover;
-            background-position: center;
+            position: relative;
             height: 100vh;
             display: flex;
             flex-direction: column;
@@ -98,35 +70,51 @@
             align-items: center;
             color: #2e2e2e;
             text-align: center;
+            overflow: hidden;
         }
 
-        /* Title Link Animation */
-        .front-page a {
+        /* Title */
+        .front-page h1 {
             font-size: 4rem;
             font-weight: bold;
             color: #2e2e2e;
             background-color: rgba(255, 255, 255, 0.8);
             padding: 1rem 2rem;
             border-radius: 10px;
-            text-decoration: none;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease, color 0.3s ease;
-            animation: fadeIn 1.5s ease-in forwards;
+            z-index: 1;
         }
 
-        .front-page a:hover {
-            color: #2e8b57;
-            transform: scale(1.05);
+        /* Floating Symbol Styles */
+        .floating-symbol {
+            position: absolute;
+            font-size: 2rem;
+            font-weight: bold;
+            color: rgba(46, 139, 87, 0.6);
+            opacity: 0;
+            animation: float 10s ease-in-out infinite, fadeInOut 6s ease-in-out infinite;
+            will-change: transform;
         }
 
-        /* Product Image */
-        .product-image {
-            width: 200px;
-            height: auto;
-            border-radius: 10px;
-            margin-top: 1.5rem;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            animation: fadeIn 2s ease forwards, float 3s ease-in-out infinite;
+        @keyframes float {
+            0% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+            100% {
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInOut {
+            0%, 100% {
+                opacity: 0;
+            }
+            50% {
+                opacity: 0.8;
+            }
         }
     </style>
 </head>
@@ -143,18 +131,43 @@
         </div>
     </header>
 
-    <!-- Main Content with Background Image -->
+    <!-- Main Content with Floating Symbols -->
     <main class="front-page">
-        <!-- Title Link with Fade-in and Hover Animation -->
-        <a href="kratom.html" class="fade-in">Phenibut HCL</a>
-
-        <!-- Product Image with Floating Animation -->
-        <img src="pp.jpg" alt="Phenibut HCL Product Image" class="product-image float">
+        <h1><a href="kratom.html" style="text-decoration: none; color: inherit;">Phenibut HCL</a></h1>
     </main>
 
-    <!-- Footer -->
-    <footer>
-        <p>&copy; 2024 Phenibut HCL Budet. All rights reserved.</p>
-    </footer>
+    <script>
+        // Array of chemical symbols to display
+        const symbols = ["H", "O", "N", "C", "Na", "Cl", "Fe", "K", "Mg", "Ca"];
+
+        // Function to create a floating symbol
+        function createFloatingSymbol() {
+            const symbol = symbols[Math.floor(Math.random() * symbols.length)];
+
+            // Create a span element for the symbol
+            const symbolElement = document.createElement("span");
+            symbolElement.classList.add("floating-symbol");
+            symbolElement.textContent = symbol;
+
+            // Randomize initial position and animation duration
+            symbolElement.style.left = `${Math.random() * 100}vw`;
+            symbolElement.style.top = `${Math.random() * 100}vh`;
+            symbolElement.style.animationDuration = `${5 + Math.random() * 5}s`;
+
+            // Append the symbol to the front-page div
+            document.querySelector(".front-page").appendChild(symbolElement);
+
+            // Remove the symbol after it completes its animation
+            setTimeout(() => {
+                symbolElement.remove();
+            }, 10000);
+        }
+
+        // Generate multiple symbols on load and at intervals
+        for (let i = 0; i < 10; i++) {
+            createFloatingSymbol();
+        }
+        setInterval(createFloatingSymbol, 3000);
+    </script>
 </body>
 </html>
