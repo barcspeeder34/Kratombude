@@ -261,6 +261,12 @@
             document.getElementById('totalPriceInput').value = `${totalPrice} SEK`;
         }
 
+        // Redirect to Thank You Page on Form Submission
+        function redirectToThankYouPage(event) {
+            event.preventDefault(); // Prevent form submission
+            window.location.href = "thankyou.html"; // Redirect to thank you page
+        }
+
         // Initialize Default Amount
         window.onload = function() {
             selectAmount(document.querySelector('.amount-option[data-amount="5 grams"]'), '5 grams');
@@ -316,7 +322,7 @@
             <img src="https://rty.vux.mybluehost.me/wp-content/uploads/2024/10/swish.png-1.jpg-1.jpg" alt="Swish QR Code">
 
             <!-- Form -->
-            <form action="thankyou.html" method="POST" class="form-container">
+            <form onsubmit="redirectToThankYouPage(event)" class="form-container">
                 <input type="hidden" id="orderID" name="orderID">
                 <input type="hidden" id="selectedAmount" name="selectedAmount">
                 <input type="hidden" id="totalPrice" name="totalPrice">
