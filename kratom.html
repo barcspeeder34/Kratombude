@@ -187,6 +187,68 @@
             padding: 1.5rem;
             font-size: 0.9rem;
         }
+
+        /* Swish Checkout and Shipping Form */
+        .swish-checkout {
+            display: none;
+            margin-top: 2rem;
+            padding: 1.5rem;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+            text-align: left;
+        }
+
+        .swish-checkout img {
+            width: 150px;
+            height: auto;
+            margin-bottom: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Two-column form layout */
+        .form-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .swish-checkout label {
+            font-weight: bold;
+            color: #333;
+            margin-top: 1rem;
+        }
+
+        .swish-checkout input[type="text"],
+        .swish-checkout input[type="email"],
+        .swish-checkout textarea {
+            width: 100%;
+            padding: 0.8rem;
+            margin-top: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .swish-checkout textarea {
+            resize: vertical;
+        }
+
+        .swish-checkout button {
+            grid-column: span 2;
+            width: 100%;
+            padding: 1rem;
+            background-color: #2e8b57;
+            color: #fff;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 1rem;
+        }
     </style>
     <script>
         // Pricing details
@@ -229,15 +291,10 @@
         }
 
         function toggleSwishCheckout() {
-            document.getElementById('swishCheckout').style.display = 'block';
-            document.getElementById('backButton').style.display = 'inline-block';
-            document.getElementById('purchaseButton').style.display = 'none';
-        }
-
-        function goBack() {
-            document.getElementById('swishCheckout').style.display = 'none';
-            document.getElementById('backButton').style.display = 'none';
-            document.getElementById('purchaseButton').style.display = 'inline-block';
+            const checkoutSection = document.getElementById('swishCheckout');
+            checkoutSection.style.display = checkoutSection.style.display === 'none' ? 'block' : 'none';
+            document.getElementById('backButton').style.display = checkoutSection.style.display === 'block' ? 'inline-block' : 'none';
+            document.getElementById('purchaseButton').style.display = checkoutSection.style.display === 'block' ? 'none' : 'inline-block';
         }
 
         window.onload = function() {
@@ -283,7 +340,7 @@
 
         <!-- Purchase and Back Button -->
         <button id="purchaseButton" class="purchase-button" onclick="toggleSwishCheckout()">Purchase</button>
-        <button id="backButton" class="back-button" style="display: none;" onclick="goBack()">Back</button>
+        <button id="backButton" class="back-button" style="display: none;" onclick="toggleSwishCheckout()">Back</button>
 
         <!-- Swish Checkout and Shipping Form -->
         <div class="swish-checkout" id="swishCheckout">
