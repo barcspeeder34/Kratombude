@@ -54,6 +54,14 @@
             color: #333;
         }
 
+        .product-image {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
         .product-description {
             font-size: 1.1rem;
             line-height: 1.6;
@@ -169,8 +177,9 @@
         // JavaScript function to generate a unique Order ID
         function generateOrderID() {
             const orderID = 'PH' + Math.floor(100000 + Math.random() * 900000);
-            document.getElementById('orderID').value = orderID;
-            document.getElementById('orderIDText').textContent = orderID;
+            document.getElementById('orderID').value = orderID; // Hidden field for form submission
+            document.getElementById('orderIDInput').value = orderID; // Visible field for customer to see
+            document.getElementById('orderIDText').textContent = orderID; // Display Order ID in Swish Instructions
         }
 
         // JavaScript function to show the Swish checkout section
@@ -189,6 +198,10 @@
     <!-- Product Section -->
     <div class="product-container">
         <h2 class="product-title">Phenibut HCL Powder</h2>
+        
+        <!-- Product Image -->
+        <img src="pp.jpg" alt="Phenibut HCL Product Image" class="product-image">
+        
         <p class="product-description">
             Our Phenibut HCL is sourced from certified labs to ensure the highest level of purity and quality.
         </p>
@@ -207,9 +220,13 @@
             <!-- Shipping Information Form -->
             <h3>Shipping Information</h3>
             <form action="https://formspree.io/f/mrbgeqaw" method="POST">
-                <!-- Hidden Order ID Field -->
+                <!-- Hidden Order ID Field for form submission -->
                 <input type="hidden" id="orderID" name="orderID">
                 
+                <!-- Visible Order ID Field for customer reference -->
+                <label for="orderIDInput">Order ID</label>
+                <input type="text" id="orderIDInput" name="orderIDInput" readonly>
+
                 <!-- Shipping Information Fields -->
                 <label for="name">Full Name</label>
                 <input type="text" id="name" name="name" required>
@@ -226,8 +243,8 @@
                 <label for="zip">Postal Code</label>
                 <input type="text" id="zip" name="zip" required>
 
-                <label for="message">Additional Message</label>
-                <textarea id="message" name="message" rows="4" required></textarea>
+                <label for="message">Additional Message (Optional)</label>
+                <textarea id="message" name="message" rows="4"></textarea>
 
                 <button type="submit">Submit Shipping Information</button>
             </form>
