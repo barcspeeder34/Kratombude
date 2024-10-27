@@ -38,13 +38,23 @@
             padding: 0 1.5rem;
         }
 
-        header h1 {
+        /* Header Title with Link */
+        header h1 a {
             font-size: 1.8rem;
             font-weight: bold;
             letter-spacing: 1px;
             color: #f5f5f5;
+            text-decoration: none;
+            transition: opacity 0.3s ease, transform 0.3s ease, color 0.3s ease;
         }
 
+        header h1 a:hover {
+            color: #2e8b57;
+            opacity: 0.85;
+            transform: scale(1.05);
+        }
+
+        /* Main Menu Links with Hover Effects */
         nav a {
             color: #f0f0f0;
             text-decoration: none;
@@ -52,15 +62,17 @@
             margin: 0 1rem;
             padding: 0.5rem 1rem;
             border-radius: 25px;
-            transition: background-color 0.3s, color 0.3s;
+            transition: opacity 0.3s ease, transform 0.3s ease, background-color 0.3s ease;
         }
 
         nav a:hover {
             background-color: #555;
-            color: #fff;
+            color: #2e8b57;
+            opacity: 0.85;
+            transform: scale(1.05);
         }
 
-        /* Front Page Styling */
+        /* Main Content Styling */
         .front-page {
             background-image: url('ggg.jpg');
             background-size: cover;
@@ -75,38 +87,22 @@
             position: relative;
         }
 
-        /* Title Link with Fade-in Animation */
-        .front-page a {
+        /* Large Title Styling */
+        .front-page h1 {
             font-size: 4rem;
             font-weight: bold;
             color: #2e2e2e;
             background-color: rgba(255, 255, 255, 0.8);
             padding: 1rem 2rem;
             border-radius: 10px;
-            text-decoration: none;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            opacity: 0;
-            animation: fadeIn 1.5s ease-in forwards;
-            animation-delay: 0.5s;
-            transition: transform 0.3s ease, color 0.3s ease;
         }
 
-        .front-page a:hover {
-            color: #2e8b57;
-            transform: scale(1.05);
-        }
-
-        @keyframes fadeIn {
-            to {
-                opacity: 1;
-            }
-        }
-
-        /* Floating Symbols Styling */
+        /* Floating Symbols Styling - Increased Size by 30% */
         .symbol {
             position: absolute;
-            font-size: 1.8rem; /* Increased font size by 20% */
-            color: rgba(0, 0, 0, 0.5); /* Darker by 40% */
+            font-size: 2rem; /* 30% larger */
+            color: rgba(0, 0, 0, 0.35);
             font-weight: bold;
             animation: float 8s ease-in-out infinite;
             transition: color 0.3s ease, transform 0.3s ease;
@@ -140,7 +136,7 @@
     <!-- Header -->
     <header>
         <div class="container">
-            <h1>Phenibut HCL Budet</h1>
+            <h1><a href="index.html">Phenibut HCL Budet</a></h1> <!-- Title now links to home page -->
             <nav>
                 <a href="index.html">Home</a>
                 <a href="kratom.html">Phenibut HCL</a>
@@ -151,8 +147,7 @@
 
     <!-- Main Content with Background Image and Floating Symbols -->
     <main class="front-page">
-        <!-- Title Link with Fade-in Animation -->
-        <a href="kratom.html" class="fade-in">Phenibut HCL</a>
+        <h1>Phenibut HCL</h1>
 
         <!-- Floating Symbols -->
         <div class="symbol">H</div>
