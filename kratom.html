@@ -93,7 +93,7 @@
             position: relative;
         }
 
-        /* Floating Symbols Styling */
+        /* Repositioned Floating Symbols Styling */
         .symbol {
             position: absolute;
             font-size: 2rem;
@@ -108,7 +108,7 @@
             transform: scale(1.1);
         }
 
-        /* Repositioning Floating Symbols to the Sides */
+        /* Positioned Floating Symbols to the Sides */
         .symbol:nth-child(1) { left: 5%; top: 15%; animation-delay: 1s; }
         .symbol:nth-child(2) { left: 85%; top: 25%; animation-delay: 2s; }
         .symbol:nth-child(3) { left: 10%; top: 60%; animation-delay: 3s; }
@@ -283,6 +283,18 @@
     <main class="front-page">
         <h1>Phenibut HCL</h1>
 
+        <!-- Floating Symbols -->
+        <div class="symbol">H</div>
+        <div class="symbol">C</div>
+        <div class="symbol">O</div>
+        <div class="symbol">N</div>
+        <div class="symbol">Na</div>
+        <div class="symbol">Cl</div>
+        <div class="symbol">Fe</div>
+        <div class="symbol">Mg</div>
+        <div class="symbol">K</div>
+        <div class="symbol">S</div>
+
         <!-- Product Image -->
         <img src="pp.jpg" alt="Phenibut HCL Product Image" class="product-image">
 
@@ -316,7 +328,7 @@
 
             <!-- Shipping Information Form with Two-column Layout -->
             <h3>Shipping Information</h3>
-            <form action="https://formspree.io/f/mrbgeqaw" method="POST" class="form-container">
+            <form action="thankyou.html" method="POST" class="form-container">
                 <input type="hidden" id="orderID" name="orderID">
                 <label for="orderIDInput">Order ID</label>
                 <input type="text" id="orderIDInput" name="orderIDInput" readonly>
