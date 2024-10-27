@@ -5,171 +5,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Us - Phenibut HCL Budet</title>
     <link rel="stylesheet" href="style.css">
-    <style>
-        /* General Reset */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+    <script>
+        // JavaScript function to generate a unique Order ID
+        function generateOrderID() {
+            const orderID = 'PH' + Math.floor(100000 + Math.random() * 900000);
+            document.getElementById('orderID').value = orderID;
         }
-
-        /* Body Styling */
-        body {
-            font-family: 'Helvetica Neue', Arial, sans-serif;
-            background-color: #f8f9fa;
-            margin: 0;
-            color: #2e2e2e;
-        }
-
-        /* Header Styling */
-        header {
-            background-color: #222;
-            color: #fff;
-            padding: 1rem 0;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
-
-        header .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1200px;
-            margin: auto;
-            padding: 0 1.5rem;
-        }
-
-        header h1 {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: #f5f5f5;
-            letter-spacing: 1.5px;
-        }
-
-        /* Modern Menu Styling */
-        nav a {
-            color: #e0e0e0;
-            text-decoration: none;
-            font-weight: 500;
-            margin: 0 1.2rem;
-            padding: 0.6rem 1.2rem;
-            border-radius: 25px;
-            transition: background-color 0.3s, color 0.3s;
-        }
-
-        nav a:hover {
-            background-color: #444;
-            color: #fff;
-        }
-
-        /* Contact Form Styling */
-        .contact-container {
-            max-width: 800px;
-            margin: 2rem auto;
-            padding: 2rem;
-            background-color: #ffffff;
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-            border-radius: 10px;
-        }
-
-        .contact-container h2 {
-            text-align: center;
-            font-size: 2rem;
-            font-weight: bold;
-            margin-bottom: 1rem;
-        }
-
-        .contact-container p {
-            text-align: center;
-            font-size: 1.1rem;
-            color: #555;
-            margin-bottom: 2rem;
-        }
-
-        .contact-form label {
-            display: block;
-            font-weight: bold;
-            color: #2e2e2e;
-            margin-bottom: 0.5rem;
-        }
-
-        .contact-form input[type="text"],
-        .contact-form input[type="email"],
-        .contact-form textarea {
-            width: 100%;
-            padding: 0.8rem;
-            margin-bottom: 1.5rem;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            font-size: 1rem;
-        }
-
-        .contact-form button {
-            width: 100%;
-            padding: 1rem;
-            background-color: #2e8b57;
-            color: #fff;
-            font-size: 1.2rem;
-            font-weight: bold;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        .contact-form button:hover {
-            background-color: #246644;
-        }
-
-        /* Footer Styling */
-        footer {
-            background-color: #222;
-            color: #fff;
-            text-align: center;
-            padding: 1.5rem;
-            font-size: 0.9rem;
-            box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.2);
-        }
-
-        footer p {
-            margin: 0;
-            color: #bbb;
-        }
-    </style>
+    </script>
 </head>
-<body>
-    <!-- Header -->
-    <header>
-        <div class="container">
-            <h1>Phenibut HCL Budet</h1>
-            <nav>
-                <a href="index.html">Home</a>
-                <a href="kratom.html">Phenibut HCL</a>
-                <a href="contact.html">Contact</a>
-            </nav>
-        </div>
-    </header>
+<body onload="generateOrderID()">
+    <h2>Contact Us with Shipping Information</h2>
+    <form id="contactForm" action="https://formspree.io/f/mrbgeqaw" method="POST">
+        <label for="name">Full Name</label>
+        <input type="text" id="name" name="name" required>
 
-    <!-- Contact Form Section -->
-    <main class="contact-container">
-        <h2>Contact Us</h2>
-        <p>If you have any questions or need assistance, please reach out to us by filling in the form below. We're here to help!</p>
-        <form class="contact-form" action="send_email.php" method="POST">
-            <label for="name">Full Name</label>
-            <input type="text" id="name" name="name" required>
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required>
 
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" required>
+        <label for="orderID">Order ID</label>
+        <input type="text" id="orderID" name="orderID" readonly>
 
-            <label for="message">Message</label>
-            <textarea id="message" name="message" rows="5" required></textarea>
+        <label for="address">Address</label>
+        <input type="text" id="address" name="address" required>
 
-            <button type="submit">Send Message</button>
-        </form>
-    </main>
+        <label for="city">City</label>
+        <input type="text" id="city" name="city" required>
 
-    <!-- Footer -->
-    <footer>
-        <p>&copy; 2024 Phenibut HCL Budet. All rights reserved.</p>
-    </footer>
+        <label for="zip">Postal Code</label>
+        <input type="text" id="zip" name="zip" required>
+
+        <label for="message">Message</label>
+        <textarea id="message" name="message" rows="4"></textarea>
+
+        <button type="submit">Send Message</button>
+    </form>
 </body>
 </html>
