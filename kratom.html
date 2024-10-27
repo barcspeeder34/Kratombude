@@ -37,13 +37,23 @@
             padding: 0 1.5rem;
         }
 
-        header h1 {
+        /* Header Title with Link and Hover Effect */
+        header h1 a {
             font-size: 1.8rem;
             font-weight: bold;
             letter-spacing: 1px;
             color: #f5f5f5;
+            text-decoration: none;
+            transition: opacity 0.3s ease, transform 0.3s ease, color 0.3s ease;
         }
 
+        header h1 a:hover {
+            color: #2e8b57;
+            opacity: 0.85;
+            transform: scale(1.05);
+        }
+
+        /* Main Menu Links with Hover Effects */
         nav a {
             color: #f0f0f0;
             text-decoration: none;
@@ -51,12 +61,14 @@
             margin: 0 1rem;
             padding: 0.5rem 1rem;
             border-radius: 25px;
-            transition: background-color 0.3s, color 0.3s;
+            transition: opacity 0.3s ease, transform 0.3s ease, background-color 0.3s ease;
         }
 
         nav a:hover {
             background-color: #555;
-            color: #fff;
+            color: #2e8b57;
+            opacity: 0.85;
+            transform: scale(1.05);
         }
 
         /* Main Content Styling */
@@ -71,9 +83,10 @@
             align-items: center;
             color: #2e2e2e;
             text-align: center;
+            position: relative;
         }
 
-        /* Large Title Styling */
+        /* Large Title Styling with Hover Animation */
         .front-page h1 {
             font-size: 4rem;
             font-weight: bold;
@@ -82,6 +95,13 @@
             padding: 1rem 2rem;
             border-radius: 10px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: color 0.3s ease, transform 0.3s ease, background-color 0.3s ease;
+        }
+
+        .front-page h1:hover {
+            color: #2e8b57;
+            transform: scale(1.05);
+            background-color: rgba(230, 250, 230, 0.9);
         }
 
         /* Product Image */
@@ -93,51 +113,40 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
-        /* Toggle for Amount Selection */
-        .amount-toggle {
-            display: flex;
-            justify-content: center;
-            margin: 1.5rem 0;
-            gap: 10px;
+        /* Floating Symbols Styling */
+        .symbol {
+            position: absolute;
+            font-size: 2rem;
+            color: rgba(0, 0, 0, 0.35);
+            font-weight: bold;
+            animation: float 8s ease-in-out infinite;
+            transition: color 0.3s ease, transform 0.3s ease;
         }
 
-        /* Amount Option with Hover Animation */
-        .amount-option {
-            padding: 0.5rem 1.5rem;
-            font-size: 1.1rem;
-            font-weight: bold;
+        .symbol:hover {
             color: #2e8b57;
-            background: #f0f0f0;
-            border: 2px solid #2e8b57;
-            border-radius: 20px;
-            cursor: pointer;
-            transition: opacity 0.3s ease, transform 0.3s ease, background-color 0.3s ease;
+            transform: scale(1.1);
         }
 
-        .amount-option:hover {
-            background-color: #246644;
-            color: #fff;
-            opacity: 0.85;
-            transform: scale(1.05);
+        @keyframes float {
+            0% { transform: translateY(0); opacity: 0.7; }
+            50% { transform: translateY(-30px); opacity: 1; }
+            100% { transform: translateY(0); opacity: 0.7; }
         }
 
-        .amount-option.selected {
-            background-color: #2e8b57;
-            color: #fff;
-        }
+        /* Positioning for Multiple Floating Symbols */
+        .symbol:nth-child(1) { left: 10%; top: 20%; animation-delay: 1s; }
+        .symbol:nth-child(2) { left: 30%; top: 60%; animation-delay: 2s; }
+        .symbol:nth-child(3) { left: 50%; top: 40%; animation-delay: 3s; }
+        .symbol:nth-child(4) { left: 70%; top: 30%; animation-delay: 1.5s; }
+        .symbol:nth-child(5) { left: 80%; top: 70%; animation-delay: 2.5s; }
+        .symbol:nth-child(6) { left: 40%; top: 10%; animation-delay: 2s; }
+        .symbol:nth-child(7) { left: 20%; top: 80%; animation-delay: 3s; }
+        .symbol:nth-child(8) { left: 60%; top: 20%; animation-delay: 4s; }
+        .symbol:nth-child(9) { left: 90%; top: 50%; animation-delay: 1.2s; }
+        .symbol:nth-child(10) { left: 15%; top: 40%; animation-delay: 2.8s; }
 
-        /* Price Breakdown Display */
-        .price-breakdown {
-            font-size: 1.5rem;
-            color: #333;
-            margin: 1.5rem 0;
-        }
-
-        .price-breakdown span {
-            font-weight: bold;
-        }
-
-        /* Purchase Button with Hover Animation */
+        /* Purchase and Back Button Animations */
         .purchase-button, .back-button {
             display: inline-block;
             padding: 1rem 2rem;
@@ -157,6 +166,44 @@
             background-color: #246644;
             opacity: 0.85;
             transform: scale(1.05);
+        }
+
+        /* Toggle for Amount Selection */
+        .amount-toggle {
+            display: flex;
+            justify-content: center;
+            margin: 1.5rem 0;
+            gap: 10px;
+        }
+
+        .amount-option {
+            padding: 0.5rem 1.5rem;
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #2e8b57;
+            background: #f0f0f0;
+            border: 2px solid #2e8b57;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: opacity 0.3s ease, transform 0.3s ease, background-color 0.3s ease;
+        }
+
+        .amount-option:hover {
+            background-color: #246644;
+            color: #fff;
+            opacity: 0.85;
+            transform: scale(1.05);
+        }
+
+        /* Price Breakdown Display */
+        .price-breakdown {
+            font-size: 1.5rem;
+            color: #333;
+            margin: 1.5rem 0;
+        }
+
+        .price-breakdown span {
+            font-weight: bold;
         }
 
         /* Footer Styling */
@@ -240,12 +287,10 @@
             shipping: 96
         };
 
-        // JavaScript to update price based on amount selected
         function selectAmount(element, amount) {
             document.querySelectorAll('.amount-option').forEach(el => el.classList.remove('selected'));
             element.classList.add('selected');
 
-            // Update Item Price, Shipping Price, and Order Total
             const itemPrice = pricing[amount];
             const shippingPrice = pricing.shipping;
             const totalPrice = itemPrice + shippingPrice;
@@ -254,11 +299,9 @@
             document.getElementById('shippingPriceDisplay').textContent = `${shippingPrice} SEK`;
             document.getElementById('totalPriceDisplay').textContent = `${totalPrice} SEK`;
 
-            // Update Selected Amount and Total Price fields in the form
             document.getElementById('selectedAmount').value = amount;
             document.getElementById('totalPrice').value = `${totalPrice} SEK`;
 
-            // Update Total Price in the Swish instructions
             document.getElementById('dynamicTotalPrice').textContent = `${totalPrice} SEK`;
         }
 
@@ -267,7 +310,6 @@
             selectAmount(defaultAmount, "30 grams");
         }
 
-        // Generate and fill Order ID automatically
         function generateOrderID() {
             const orderID = 'PH' + Math.floor(100000 + Math.random() * 900000);
             document.getElementById('orderID').value = orderID;
@@ -297,7 +339,7 @@
     <!-- Header -->
     <header>
         <div class="container">
-            <h1>Phenibut HCL Budet</h1>
+            <h1><a href="index.html">Phenibut HCL Budet</a></h1>
             <nav>
                 <a href="index.html">Home</a>
                 <a href="kratom.html">Phenibut HCL</a>
@@ -306,9 +348,21 @@
         </div>
     </header>
 
-    <!-- Main Content with Background Image -->
+    <!-- Main Content with Background Image and Floating Symbols -->
     <main class="front-page">
         <h1>Phenibut HCL</h1>
+
+        <!-- Floating Symbols -->
+        <div class="symbol">H</div>
+        <div class="symbol">C</div>
+        <div class="symbol">O</div>
+        <div class="symbol">N</div>
+        <div class="symbol">Na</div>
+        <div class="symbol">Cl</div>
+        <div class="symbol">Fe</div>
+        <div class="symbol">Mg</div>
+        <div class="symbol">K</div>
+        <div class="symbol">S</div>
 
         <!-- Product Image -->
         <img src="pp.jpg" alt="Phenibut HCL Product Image" class="product-image">
@@ -344,46 +398,29 @@
             <!-- Shipping Information Form with Two-column Layout -->
             <h3>Shipping Information</h3>
             <form action="https://formspree.io/f/mrbgeqaw" method="POST" class="form-container">
-                <!-- Hidden Order ID Field for form submission -->
                 <input type="hidden" id="orderID" name="orderID">
-
-                <!-- Visible Order ID Field for customer reference -->
                 <label for="orderIDInput">Order ID</label>
                 <input type="text" id="orderIDInput" name="orderIDInput" readonly>
-
-                <!-- Dynamic Selected Amount Field -->
                 <label for="selectedAmount">Selected Amount</label>
                 <input type="text" id="selectedAmount" name="selectedAmount" readonly>
-
-                <!-- Dynamic Total Price Field -->
                 <label for="totalPrice">Total Price</label>
                 <input type="text" id="totalPrice" name="totalPrice" readonly>
-
-                <!-- Shipping Information Fields in Two Columns -->
                 <label for="name">Full Name</label>
                 <input type="text" id="name" name="name" required>
-
                 <label for="address">Street Address</label>
                 <input type="text" id="address" name="address" required>
-
                 <label for="city">City</label>
                 <input type="text" id="city" name="city" required>
-
                 <label for="zip">Postal Code</label>
                 <input type="text" id="zip" name="zip" required>
-
                 <label for="country">Country</label>
                 <input type="text" id="country" name="country" required>
-
                 <label for="phone">Phone Number</label>
                 <input type="text" id="phone" name="phone" required>
-
                 <label for="email">Email</label>
                 <input type="email" id="email" name="email" required>
-
                 <label for="message">Additional Message (Optional)</label>
                 <textarea id="message" name="message" rows="4"></textarea>
-
                 <button type="submit" class="purchase-button">I have Sent the Swish Payment</button>
             </form>
         </div>
