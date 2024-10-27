@@ -18,7 +18,7 @@
             font-family: Arial, sans-serif;
             background-color: #f8f9fa;
             margin: 0;
-            overflow: hidden; /* Prevent scroll from floating symbols */
+            overflow: hidden; /* Prevents scrolling */
         }
 
         /* Header Styling */
@@ -62,7 +62,9 @@
 
         /* Front Page Styling */
         .front-page {
-            position: relative;
+            background-image: url('ggg.jpg');
+            background-size: cover;
+            background-position: center;
             height: 100vh;
             display: flex;
             flex-direction: column;
@@ -70,52 +72,71 @@
             align-items: center;
             color: #2e2e2e;
             text-align: center;
-            overflow: hidden;
+            position: relative;
         }
 
-        /* Title */
-        .front-page h1 {
+        /* Title Link with Fade-in Animation */
+        .front-page a {
             font-size: 4rem;
             font-weight: bold;
             color: #2e2e2e;
             background-color: rgba(255, 255, 255, 0.8);
             padding: 1rem 2rem;
             border-radius: 10px;
+            text-decoration: none;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            z-index: 1;
+            opacity: 0;
+            animation: fadeIn 1.5s ease-in forwards;
+            animation-delay: 0.5s;
+            transition: transform 0.3s ease, color 0.3s ease;
         }
 
-        /* Floating Symbol Styles */
-        .floating-symbol {
+        .front-page a:hover {
+            color: #2e8b57;
+            transform: scale(1.05);
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Floating Symbols Styling */
+        .symbol {
             position: absolute;
-            font-size: 2rem;
+            font-size: 1.5rem;
+            color: rgba(0, 0, 0, 0.1);
             font-weight: bold;
-            color: rgba(46, 139, 87, 0.6);
-            opacity: 0;
-            animation: float 10s ease-in-out infinite, fadeInOut 6s ease-in-out infinite;
-            will-change: transform;
+            animation: float 8s ease-in-out infinite;
         }
 
         @keyframes float {
             0% {
                 transform: translateY(0);
+                opacity: 0.5;
             }
             50% {
-                transform: translateY(-20px);
+                transform: translateY(-30px);
+                opacity: 0.7;
             }
             100% {
                 transform: translateY(0);
+                opacity: 0.5;
             }
         }
 
-        @keyframes fadeInOut {
-            0%, 100% {
-                opacity: 0;
-            }
-            50% {
-                opacity: 0.8;
-            }
-        }
+        /* Positioning for Multiple Floating Symbols */
+        .symbol:nth-child(1) { left: 10%; top: 20%; animation-delay: 1s; }
+        .symbol:nth-child(2) { left: 30%; top: 60%; animation-delay: 2s; }
+        .symbol:nth-child(3) { left: 50%; top: 40%; animation-delay: 3s; }
+        .symbol:nth-child(4) { left: 70%; top: 30%; animation-delay: 1.5s; }
+        .symbol:nth-child(5) { left: 80%; top: 70%; animation-delay: 2.5s; }
+        .symbol:nth-child(6) { left: 40%; top: 10%; animation-delay: 2s; }
+        .symbol:nth-child(7) { left: 20%; top: 80%; animation-delay: 3s; }
+        .symbol:nth-child(8) { left: 60%; top: 20%; animation-delay: 4s; }
+        .symbol:nth-child(9) { left: 90%; top: 50%; animation-delay: 1.2s; }
+        .symbol:nth-child(10) { left: 15%; top: 40%; animation-delay: 2.8s; }
     </style>
 </head>
 <body>
@@ -131,43 +152,27 @@
         </div>
     </header>
 
-    <!-- Main Content with Floating Symbols -->
+    <!-- Main Content with Background Image and Floating Symbols -->
     <main class="front-page">
-        <h1><a href="kratom.html" style="text-decoration: none; color: inherit;">Phenibut HCL</a></h1>
+        <!-- Title Link with Fade-in Animation -->
+        <a href="kratom.html" class="fade-in">Phenibut HCL</a>
+
+        <!-- Floating Symbols -->
+        <div class="symbol">H</div>
+        <div class="symbol">C</div>
+        <div class="symbol">O</div>
+        <div class="symbol">N</div>
+        <div class="symbol">Na</div>
+        <div class="symbol">Cl</div>
+        <div class="symbol">Fe</div>
+        <div class="symbol">Mg</div>
+        <div class="symbol">K</div>
+        <div class="symbol">S</div>
     </main>
 
-    <script>
-        // Array of chemical symbols to display
-        const symbols = ["H", "O", "N", "C", "Na", "Cl", "Fe", "K", "Mg", "Ca"];
-
-        // Function to create a floating symbol
-        function createFloatingSymbol() {
-            const symbol = symbols[Math.floor(Math.random() * symbols.length)];
-
-            // Create a span element for the symbol
-            const symbolElement = document.createElement("span");
-            symbolElement.classList.add("floating-symbol");
-            symbolElement.textContent = symbol;
-
-            // Randomize initial position and animation duration
-            symbolElement.style.left = `${Math.random() * 100}vw`;
-            symbolElement.style.top = `${Math.random() * 100}vh`;
-            symbolElement.style.animationDuration = `${5 + Math.random() * 5}s`;
-
-            // Append the symbol to the front-page div
-            document.querySelector(".front-page").appendChild(symbolElement);
-
-            // Remove the symbol after it completes its animation
-            setTimeout(() => {
-                symbolElement.remove();
-            }, 10000);
-        }
-
-        // Generate multiple symbols on load and at intervals
-        for (let i = 0; i < 10; i++) {
-            createFloatingSymbol();
-        }
-        setInterval(createFloatingSymbol, 3000);
-    </script>
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Phenibut HCL Budet. All rights reserved.</p>
+    </footer>
 </body>
 </html>
