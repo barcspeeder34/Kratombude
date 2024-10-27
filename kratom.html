@@ -322,47 +322,70 @@
     <img src="https://rty.vux.mybluehost.me/wp-content/uploads/2024/10/swish.png-1.jpg-1.jpg" alt="Swish QR Code">
 
     <!-- Formspree Form -->
-    <form action="https://formspree.io/f/mrbgeqaw" method="POST" class="form-container">
-        <input type="hidden" id="orderID" name="orderID">
-        <input type="hidden" id="selectedAmount" name="selectedAmount">
-        <input type="hidden" id="totalPrice" name="totalPrice">
+    <form id="contactForm" action="https://formspree.io/f/mrbgeqaw" method="POST" class="form-container">
+    <input type="hidden" id="orderID" name="orderID">
+    <input type="hidden" id="selectedAmount" name="selectedAmount">
+    <input type="hidden" id="totalPrice" name="totalPrice">
 
-        <!-- Customer Inputs -->
-        <label for="orderIDInput">Order ID</label>
-        <input type="text" id="orderIDInput" name="orderIDInput" readonly>
+    <!-- Customer Inputs -->
+    <label for="orderIDInput">Order ID</label>
+    <input type="text" id="orderIDInput" name="orderIDInput" readonly>
 
-        <label for="amountInput">Amount (grams)</label>
-        <input type="text" id="amountInput" name="amountInput" readonly>
+    <label for="amountInput">Amount (grams)</label>
+    <input type="text" id="amountInput" name="amountInput" readonly>
 
-        <label for="totalPriceInput">Total Price</label>
-        <input type="text" id="totalPriceInput" name="totalPriceInput" readonly>
+    <label for="totalPriceInput">Total Price</label>
+    <input type="text" id="totalPriceInput" name="totalPriceInput" readonly>
 
-        <label for="name">Full Name</label>
-        <input type="text" id="name" name="name" required>
-        
-        <label for="address">Street Address</label>
-        <input type="text" id="address" name="address" required>
+    <label for="name">Full Name</label>
+    <input type="text" id="name" name="name" required>
+    
+    <label for="address">Street Address</label>
+    <input type="text" id="address" name="address" required>
 
-        <label for="city">City</label>
-        <input type="text" id="city" name="city" required>
+    <label for="city">City</label>
+    <input type="text" id="city" name="city" required>
 
-        <label for="zip">Postal Code</label>
-        <input type="text" id="zip" name="zip" required>
+    <label for="zip">Postal Code</label>
+    <input type="text" id="zip" name="zip" required>
 
-        <label for="country">Country</label>
-        <input type="text" id="country" name="country" required>
+    <label for="country">Country</label>
+    <input type="text" id="country" name="country" required>
 
-        <label for="phone">Phone Number</label>
-        <input type="text" id="phone" name="phone" required>
+    <label for="phone">Phone Number</label>
+    <input type="text" id="phone" name="phone" required>
 
-        <label for="email">Email</label>
-        <input type="email" id="email" name="email" required>
-        
-        <label for="message">Additional Message (Optional)</label>
-        <textarea id="message" name="message" rows="4"></textarea>
-        
-        <button type="submit" class="purchase-button">I have Sent the Swish Payment</button>
-    </form>
+    <label for="email">Email</label>
+    <input type="email" id="email" name="email" required>
+    
+    <button type="submit" class="purchase-button">I have Sent the Swish Payment</button>
+</form>
+
+<script>
+    document.getElementById("contactForm").addEventListener("submit", function(event) {
+        event.preventDefault(); // Prevent default form submission
+
+        // Fetch form data
+        const formData = new FormData(event.target);
+
+        // Send data to Formspree
+        fetch(event.target.action, {
+            method: "POST",
+            body: formData,
+            headers: {
+                'Accept': 'application/json'
+            }
+        }).then(response => {
+            if (response.ok) {
+                window.location.href = "thankyou.html"; // Redirect on success
+            } else {
+                alert("There was an issue submitting the form. Please try again.");
+            }
+        }).catch(error => {
+            alert("Oops! There was a problem submitting your form.");
+        });
+    });
+</script>
 </div>
     </main>
 
