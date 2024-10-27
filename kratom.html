@@ -15,147 +15,154 @@
 
         /* Body Styling */
         body {
-            font-family: 'Georgia', serif;
-            background-color: #f5f5f5;
-            margin: 0;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background-color: #f8f9fa;
             color: #2e2e2e;
-            line-height: 1.6;
+            margin: 0;
         }
 
         /* Header Styling */
         header {
-            background: linear-gradient(135deg, #141e30, #243b55);
-            color: #f0f0f0;
+            background-color: #333;
+            color: #fff;
             padding: 1.5rem 0;
             text-align: center;
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
         }
 
         header h1 {
-            font-size: 2.2rem;
+            font-size: 2rem;
             font-weight: bold;
             letter-spacing: 1px;
-            color: #f5f5f5;
-            font-family: 'Playfair Display', serif;
         }
 
-        /* Product Main Section */
-        main {
+        /* Main Product Section */
+        .product-container {
             max-width: 800px;
             margin: 3rem auto;
             padding: 2rem;
             background-color: #ffffff;
-            border-radius: 15px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-            position: relative;
-            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            text-align: center;
         }
 
-        main::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(to right, rgba(240, 240, 240, 0.5), rgba(255, 255, 255, 0.9));
-            z-index: -1;
-        }
-
-        main h2 {
-            font-family: 'Playfair Display', serif;
+        .product-title {
             font-size: 2.2rem;
             font-weight: bold;
+            margin-bottom: 1rem;
             color: #333;
-            text-align: center;
+        }
+
+        .product-description {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #4d4d4d;
             margin-bottom: 1.5rem;
         }
 
-        main p {
-            text-align: center;
-            color: #4d4d4d;
-            margin-bottom: 2rem;
-            font-size: 1.1rem;
+        /* Purchase Button */
+        .purchase-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            margin: 1rem 0;
+            background-color: #2e8b57;
+            color: #fff;
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s;
         }
 
-        /* Swish Payment Instructions Styling */
-        h3 {
-            text-align: center;
-            font-size: 1.5rem;
-            color: #2e2e2e;
+        .purchase-button:hover {
+            background-color: #246644;
+        }
+
+        /* Hidden Form and Payment Instructions */
+        .swish-checkout {
+            display: none; /* Hidden by default */
             margin-top: 2rem;
+            padding: 1.5rem;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+            text-align: left;
         }
 
-        img {
-            display: block;
-            margin: 1.5rem auto;
+        .swish-checkout h3 {
+            font-size: 1.5rem;
+            color: #333;
+        }
+
+        .swish-checkout p {
+            font-size: 1rem;
+            color: #555;
+            margin-bottom: 1rem;
+        }
+
+        .swish-checkout img {
             width: 150px;
             height: auto;
+            margin-bottom: 1.5rem;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
         /* Form Styling */
-        form {
-            max-width: 700px;
-            margin: 2rem auto;
-        }
-
-        label {
+        .swish-checkout label {
+            display: block;
             font-weight: bold;
-            font-size: 1rem;
+            margin-top: 1rem;
             color: #333;
         }
 
-        input[type="text"],
-        input[type="email"],
-        textarea {
+        .swish-checkout input[type="text"],
+        .swish-checkout input[type="email"],
+        .swish-checkout textarea {
             width: 100%;
             padding: 0.8rem;
-            margin: 0.8rem 0 1.5rem;
+            margin-top: 0.5rem;
             border: 1px solid #ddd;
-            border-radius: 8px;
+            border-radius: 5px;
             font-size: 1rem;
         }
 
-        textarea {
+        .swish-checkout textarea {
             resize: vertical;
         }
 
-        button {
-            display: inline-block;
+        .swish-checkout button {
             width: 100%;
             padding: 1rem;
+            background-color: #2e8b57;
+            color: #fff;
             font-size: 1.2rem;
             font-weight: bold;
-            color: #ffffff;
-            background: linear-gradient(135deg, #243b55, #141e30);
             border: none;
             border-radius: 8px;
             cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+            transition: background-color 0.3s;
+            margin-top: 1rem;
         }
 
-        button:hover {
-            background: linear-gradient(135deg, #1c2a3a, #0f1a26);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        .swish-checkout button:hover {
+            background-color: #246644;
         }
 
         /* Footer Styling */
         footer {
-            background: linear-gradient(135deg, #243b55, #141e30);
-            color: #f0f0f0;
+            background-color: #333;
+            color: #fff;
             text-align: center;
             padding: 1.5rem;
             font-size: 0.9rem;
-            margin-top: 3rem;
-            font-family: 'Georgia', serif;
         }
 
         footer p {
             margin: 0;
-            color: #bbb;
         }
     </style>
     <script>
@@ -165,66 +172,70 @@
             document.getElementById('orderID').value = orderID;
             document.getElementById('orderIDText').textContent = orderID;
         }
+
+        // JavaScript function to show the Swish checkout section
+        function showSwishCheckout() {
+            document.getElementById('swishCheckout').style.display = 'block';
+            generateOrderID();
+            window.scrollTo(0, document.body.scrollHeight);
+        }
     </script>
 </head>
-<body onload="generateOrderID()">
+<body>
     <header>
         <h1>Phenibut HCL Budet</h1>
     </header>
 
     <!-- Product Section -->
-    <main>
-        <h2>Phenibut HCL Powder</h2>
-        <p>Our Phenibut HCL is sourced from certified labs to ensure the highest level of purity and quality.</p>
+    <div class="product-container">
+        <h2 class="product-title">Phenibut HCL Powder</h2>
+        <p class="product-description">
+            Our Phenibut HCL is sourced from certified labs to ensure the highest level of purity and quality.
+        </p>
 
-        <!-- Swish Payment Instructions -->
-        <h3>Swish Payment Instructions</h3>
-        <p>#1: Scan the QR code below to make the payment.</p>
-        <p>#2: Put Your Order ID in the message on your Swish payment.</p>
-        <p><strong>Your Order ID:</strong> <span id="orderIDText"></span></p>
-        <img src="https://rty.vux.mybluehost.me/wp-content/uploads/2024/10/swish.png-1.jpg-1.jpg" alt="Swish QR Code">
+        <!-- Purchase Button -->
+        <button class="purchase-button" onclick="showSwishCheckout()">Purchase</button>
 
-        <!-- Shipping Information Form (Formspree) -->
-        <h3>Shipping Information</h3>
-        <form id="shippingForm" action="https://formspree.io/f/mrbgeqaw" method="POST">
-            <!-- Hidden Order ID Field -->
-            <input type="hidden" id="orderID" name="orderID">
-            
-            <!-- Shipping Information Fields -->
-            <label for="name">Full Name</label>
-            <input type="text" id="name" name="name" required>
+        <!-- Swish Checkout and Shipping Form (Initially Hidden) -->
+        <div class="swish-checkout" id="swishCheckout">
+            <h3>Swish Payment Instructions</h3>
+            <p>#1: Scan the QR code below to make the payment.</p>
+            <p>#2: Put Your Order ID in the message on your Swish payment.</p>
+            <p><strong>Your Order ID:</strong> <span id="orderIDText"></span></p>
+            <img src="https://rty.vux.mybluehost.me/wp-content/uploads/2024/10/swish.png-1.jpg-1.jpg" alt="Swish QR Code">
 
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" required>
+            <!-- Shipping Information Form -->
+            <h3>Shipping Information</h3>
+            <form action="https://formspree.io/f/mrbgeqaw" method="POST">
+                <!-- Hidden Order ID Field -->
+                <input type="hidden" id="orderID" name="orderID">
+                
+                <!-- Shipping Information Fields -->
+                <label for="name">Full Name</label>
+                <input type="text" id="name" name="name" required>
 
-            <label for="address">Address</label>
-            <input type="text" id="address" name="address" required>
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
 
-            <label for="city">City</label>
-            <input type="text" id="city" name="city" required>
+                <label for="address">Address</label>
+                <input type="text" id="address" name="address" required>
 
-            <label for="zip">Postal Code</label>
-            <input type="text" id="zip" name="zip" required>
+                <label for="city">City</label>
+                <input type="text" id="city" name="city" required>
 
-            <label for="message">Additional Message</label>
-            <textarea id="message" name="message" rows="4" required></textarea>
+                <label for="zip">Postal Code</label>
+                <input type="text" id="zip" name="zip" required>
 
-            <button type="submit">Submit Shipping Information</button>
-        </form>
-    </main>
+                <label for="message">Additional Message</label>
+                <textarea id="message" name="message" rows="4" required></textarea>
 
-    <!-- Footer -->
+                <button type="submit">Submit Shipping Information</button>
+            </form>
+        </div>
+    </div>
+
     <footer>
         <p>&copy; 2024 Phenibut HCL Budet. All rights reserved.</p>
     </footer>
-
-    <script>
-        // Generate Order ID and set it in both visible and hidden fields
-        function generateOrderID() {
-            const orderID = 'PH' + Math.floor(100000 + Math.random() * 900000);
-            document.getElementById('orderID').value = orderID; // Hidden field for form submission
-            document.getElementById('orderIDText').textContent = orderID; // Visible field for customer display
-        }
-    </script>
 </body>
 </html>
