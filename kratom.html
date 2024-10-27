@@ -5,11 +5,165 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Phenibut HCL Product Page</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body Styling */
+        body {
+            font-family: 'Georgia', serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            color: #2e2e2e;
+            line-height: 1.6;
+        }
+
+        /* Header Styling */
+        header {
+            background: linear-gradient(135deg, #141e30, #243b55);
+            color: #f0f0f0;
+            padding: 1.5rem 0;
+            text-align: center;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        header h1 {
+            font-size: 2.2rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+            color: #f5f5f5;
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Product Main Section */
+        main {
+            max-width: 800px;
+            margin: 3rem auto;
+            padding: 2rem;
+            background-color: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+
+        main::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, rgba(240, 240, 240, 0.5), rgba(255, 255, 255, 0.9));
+            z-index: -1;
+        }
+
+        main h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            font-weight: bold;
+            color: #333;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        main p {
+            text-align: center;
+            color: #4d4d4d;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        /* Swish Payment Instructions Styling */
+        h3 {
+            text-align: center;
+            font-size: 1.5rem;
+            color: #2e2e2e;
+            margin-top: 2rem;
+        }
+
+        img {
+            display: block;
+            margin: 1.5rem auto;
+            width: 150px;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Form Styling */
+        form {
+            max-width: 700px;
+            margin: 2rem auto;
+        }
+
+        label {
+            font-weight: bold;
+            font-size: 1rem;
+            color: #333;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        textarea {
+            width: 100%;
+            padding: 0.8rem;
+            margin: 0.8rem 0 1.5rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        textarea {
+            resize: vertical;
+        }
+
+        button {
+            display: inline-block;
+            width: 100%;
+            padding: 1rem;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #ffffff;
+            background: linear-gradient(135deg, #243b55, #141e30);
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        button:hover {
+            background: linear-gradient(135deg, #1c2a3a, #0f1a26);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Footer Styling */
+        footer {
+            background: linear-gradient(135deg, #243b55, #141e30);
+            color: #f0f0f0;
+            text-align: center;
+            padding: 1.5rem;
+            font-size: 0.9rem;
+            margin-top: 3rem;
+            font-family: 'Georgia', serif;
+        }
+
+        footer p {
+            margin: 0;
+            color: #bbb;
+        }
+    </style>
     <script>
         // JavaScript function to generate a unique Order ID
         function generateOrderID() {
             const orderID = 'PH' + Math.floor(100000 + Math.random() * 900000);
             document.getElementById('orderID').value = orderID;
+            document.getElementById('orderIDText').textContent = orderID;
         }
     </script>
 </head>
@@ -59,6 +213,7 @@
         </form>
     </main>
 
+    <!-- Footer -->
     <footer>
         <p>&copy; 2024 Phenibut HCL Budet. All rights reserved.</p>
     </footer>
