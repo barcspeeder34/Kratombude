@@ -53,7 +53,7 @@
             transform: scale(1.05);
         }
 
-        /* Main Menu Links with Hover Effects */
+        /* Main Menu Links with Initial Fade-in Animation */
         nav a {
             color: #f0f0f0;
             text-decoration: none;
@@ -61,14 +61,25 @@
             margin: 0 1rem;
             padding: 0.5rem 1rem;
             border-radius: 25px;
-            transition: opacity 0.3s ease, transform 0.3s ease, background-color 0.3s ease;
+            opacity: 0;
+            transform: translateY(-20px);
+            transition: opacity 0.6s ease, transform 0.6s ease, background-color 0.3s ease;
+            animation: fadeInMove 0.6s forwards;
         }
 
         nav a:hover {
             background-color: #555;
             color: #2e8b57;
-            opacity: 0.85;
-            transform: scale(1.05);
+        }
+
+        nav a:nth-child(1) { animation-delay: 0.3s; }
+        nav a:nth-child(2) { animation-delay: 0.4s; }
+        nav a:nth-child(3) { animation-delay: 0.5s; }
+
+        /* Fade-in Animation */
+        @keyframes fadeInMove {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         /* Main Content Styling */
@@ -146,7 +157,7 @@
         .symbol:nth-child(9) { left: 90%; top: 50%; animation-delay: 1.2s; }
         .symbol:nth-child(10) { left: 15%; top: 40%; animation-delay: 2.8s; }
 
-        /* Purchase and Back Button Animations */
+        /* Purchase Button Animations */
         .purchase-button, .back-button {
             display: inline-block;
             padding: 1rem 2rem;
@@ -159,7 +170,9 @@
             border: none;
             border-radius: 8px;
             cursor: pointer;
-            transition: opacity 0.3s ease, transform 0.3s ease, background-color 0.3s ease;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInMove 0.5s forwards;
         }
 
         .purchase-button:hover, .back-button:hover {
@@ -168,14 +181,10 @@
             transform: scale(1.05);
         }
 
-        /* Toggle for Amount Selection */
-        .amount-toggle {
-            display: flex;
-            justify-content: center;
-            margin: 1.5rem 0;
-            gap: 10px;
-        }
+        .purchase-button { animation-delay: 1.2s; }
+        .back-button { animation-delay: 1.4s; }
 
+        /* Amount Options with Staggered Fade-in and Green Color Effect */
         .amount-option {
             padding: 0.5rem 1.5rem;
             font-size: 1.1rem;
@@ -185,15 +194,27 @@
             border: 2px solid #2e8b57;
             border-radius: 20px;
             cursor: pointer;
-            transition: opacity 0.3s ease, transform 0.3s ease, background-color 0.3s ease;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInMove 0.5s forwards;
+        }
+
+        .amount-option.selected {
+            background-color: #2e8b57;
+            color: #fff;
         }
 
         .amount-option:hover {
             background-color: #246644;
             color: #fff;
-            opacity: 0.85;
             transform: scale(1.05);
         }
+
+        /* Staggered Animation Delays for Amount Options */
+        .amount-option:nth-child(1) { animation-delay: 0.6s; }
+        .amount-option:nth-child(2) { animation-delay: 0.8s; }
+        .amount-option:nth-child(3) { animation-delay: 1s; }
+        .amount-option:nth-child(4) { animation-delay: 1.2s; }
 
         /* Price Breakdown Display */
         .price-breakdown {
@@ -232,49 +253,6 @@
             margin-bottom: 1.5rem;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        /* Two-column form layout */
-        .form-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-        }
-
-        .swish-checkout label {
-            font-weight: bold;
-            color: #333;
-            margin-top: 1rem;
-        }
-
-        .swish-checkout input[type="text"],
-        .swish-checkout input[type="email"],
-        .swish-checkout textarea {
-            width: 100%;
-            padding: 0.8rem;
-            margin-top: 0.5rem;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 1rem;
-        }
-
-        .swish-checkout textarea {
-            resize: vertical;
-        }
-
-        .swish-checkout button {
-            grid-column: span 2;
-            width: 100%;
-            padding: 1rem;
-            background-color: #2e8b57;
-            color: #fff;
-            font-size: 1.2rem;
-            font-weight: bold;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            margin-top: 1rem;
         }
     </style>
     <script>
