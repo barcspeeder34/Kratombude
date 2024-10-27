@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kratom Product Page</title>
+    <title>Phenibut HCL Product Page</title>
     <link rel="stylesheet" href="style.css">
     <style>
         /* General Reset */
@@ -142,16 +142,55 @@
             border-radius: 10px;
         }
 
+        /* Shipping Form Styling */
+        .shipping-form {
+            margin-top: 1.5rem;
+            text-align: left;
+        }
+
+        .shipping-form label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            color: #2e2e2e;
+        }
+
+        .shipping-form input[type="text"],
+        .shipping-form input[type="email"] {
+            width: 100%;
+            padding: 0.8rem;
+            margin-bottom: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .shipping-form button {
+            width: 100%;
+            padding: 1rem;
+            background-color: #2e8b57;
+            color: #fff;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .shipping-form button:hover {
+            background-color: #246644;
+        }
     </style>
 </head>
 <body>
     <!-- Header -->
     <header>
         <div class="container">
-            <h1>KratomBudet</h1>
+            <h1>Phenibut HCL Budet</h1>
             <nav>
                 <a href="index.html">Home</a>
-                <a href="kratom.html">Kratom</a>
+                <a href="kratom.html">Phenibut HCL</a>
                 <a href="contact.html">Contact</a>
             </nav>
         </div>
@@ -160,15 +199,15 @@
     <!-- Product Page Content -->
     <main class="product-container">
         <!-- Product Title -->
-        <h2 class="product-title">Kratom Powder</h2>
+        <h2 class="product-title">Phenibut HCL Powder</h2>
 
         <!-- Product Image -->
-        <img src="pp.jpg" alt="Kratom Product Image" class="product-image">
+        <img src="pp.jpg" alt="Phenibut HCL Product Image" class="product-image">
 
         <!-- Product Description -->
         <div class="product-description">
             <p>
-                Sourced directly from the lush forests of Indonesia, this kratom powder represents the highest quality and purity. The powder is finely ground, preserving all of its natural benefits and characteristics.
+                Our Phenibut HCL is sourced from certified labs to ensure the highest level of purity and quality. Each batch undergoes rigorous quality control and purification processes, resulting in an ultra-fine powder that meets exacting standards. This purity ensures that you're receiving a clean, concentrated product that maintains its beneficial characteristics and potency.
             </p>
         </div>
 
@@ -178,15 +217,39 @@
         <!-- Custom Swish Checkout Section -->
         <div class="swish-checkout" id="swishCheckout" style="display:none;">
             <h3>Swish Payment Instructions</h3>
-            <p>Scan the QR code below to make the payment and put your Order ID in the message on your Swish payment.</p>
+            <p>#1: Scan the QR code below to make the payment.</p>
+            <p>#2: Put Your Order ID in the message on your Swish payment.</p>
             <p><strong>Your Order ID:</strong> <span id="orderID"></span></p>
             <img src="https://rty.vux.mybluehost.me/wp-content/uploads/2024/10/swish.png-1.jpg-1.jpg" alt="Swish QR Code">
+            
+            <!-- Shipping Form -->
+            <div class="shipping-form">
+                <h3>Shipping Information</h3>
+                <form action="submit_shipping.php" method="POST">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" name="name" required>
+
+                    <label for="address">Address</label>
+                    <input type="text" id="address" name="address" required>
+
+                    <label for="city">City</label>
+                    <input type="text" id="city" name="city" required>
+
+                    <label for="zip">Postal Code</label>
+                    <input type="text" id="zip" name="zip" required>
+
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+
+                    <button type="submit">Submit Shipping Information</button>
+                </form>
+            </div>
         </div>
     </main>
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2024 KratomBudet. All rights reserved.</p>
+        <p>&copy; 2024 Phenibut HCL Budet. All rights reserved.</p>
     </footer>
 
     <!-- JavaScript to Show Swish Checkout and Generate Order ID -->
@@ -198,7 +261,7 @@
         }
 
         function generateOrderID() {
-            const orderID = 'KB' + Math.floor(100000 + Math.random() * 900000); // Unique Order ID generation
+            const orderID = 'PH' + Math.floor(100000 + Math.random() * 900000); // Unique Order ID generation
             document.getElementById('orderID').textContent = orderID;
         }
     </script>
