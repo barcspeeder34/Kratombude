@@ -20,7 +20,7 @@
             margin: 0;
         }
 
-        /* Header Styling with Drop-in/Fade and Green Flash on Load */
+        /* Header Styling */
         header {
             background-color: #333;
             color: #fff;
@@ -47,7 +47,7 @@
             transition: color 0.3s ease;
         }
 
-        /* Drop-in and Flash Animation for Main Menu */
+        /* Main Menu Links */
         nav a {
             color: #f0f0f0;
             text-decoration: none;
@@ -65,17 +65,9 @@
         nav a:nth-child(2) { animation-delay: 0.4s; }
         nav a:nth-child(3) { animation-delay: 0.5s; }
 
-        /* Make Header Menu Buttons Turn Green on Hover */
         nav a:hover {
             background-color: #2e8b57;
             color: #fff;
-        }
-
-        /* Drop-in and Green Flash Animation */
-        @keyframes fadeInFlash {
-            0% { opacity: 0; transform: translateY(-20px); }
-            70% { opacity: 1; transform: translateY(0); background-color: #2e8b57; color: #fff; }
-            100% { opacity: 1; transform: translateY(0); background-color: transparent; color: inherit; }
         }
 
         /* Main Content Styling */
@@ -97,7 +89,7 @@
         .symbol {
             position: absolute;
             font-size: 2rem;
-            color: rgba(0, 0, 0, 0.35);
+            color: rgba(0, 0, 0, 0.2);
             font-weight: bold;
             animation: float 8s ease-in-out infinite;
             transition: color 0.3s ease, transform 0.3s ease;
@@ -108,23 +100,17 @@
             transform: scale(1.1);
         }
 
-        @keyframes float {
-            0% { transform: translateY(0); opacity: 0.7; }
-            50% { transform: translateY(-30px); opacity: 1; }
-            100% { transform: translateY(0); opacity: 0.7; }
-        }
-
-        /* Positioning for Multiple Floating Symbols */
-        .symbol:nth-child(1) { left: 10%; top: 20%; animation-delay: 1s; }
-        .symbol:nth-child(2) { left: 60%; top: 60%; animation-delay: 2s; } /* Moved C to the right */
-        .symbol:nth-child(3) { left: 50%; top: 40%; animation-delay: 3s; }
-        .symbol:nth-child(4) { left: 70%; top: 30%; animation-delay: 1.5s; }
-        .symbol:nth-child(5) { left: 80%; top: 70%; animation-delay: 2.5s; }
-        .symbol:nth-child(6) { left: 40%; top: 10%; animation-delay: 2s; }
-        .symbol:nth-child(7) { left: 15%; top: 80%; animation-delay: 3s; } /* Moved S to the left */
-        .symbol:nth-child(8) { left: 60%; top: 20%; animation-delay: 4s; }
-        .symbol:nth-child(9) { left: 90%; top: 50%; animation-delay: 1.2s; }
-        .symbol:nth-child(10) { left: 15%; top: 40%; animation-delay: 2.8s; }
+        /* Adjusted Floating Symbol Positions */
+        .symbol:nth-child(1) { left: 5%; top: 10%; animation-delay: 1s; }
+        .symbol:nth-child(2) { left: 90%; top: 20%; animation-delay: 2s; }
+        .symbol:nth-child(3) { left: 10%; top: 80%; animation-delay: 3s; }
+        .symbol:nth-child(4) { left: 95%; top: 70%; animation-delay: 1.5s; }
+        .symbol:nth-child(5) { left: 85%; top: 90%; animation-delay: 2.5s; }
+        .symbol:nth-child(6) { left: 15%; top: 5%; animation-delay: 2s; }
+        .symbol:nth-child(7) { left: 5%; top: 90%; animation-delay: 3s; }
+        .symbol:nth-child(8) { left: 90%; top: 5%; animation-delay: 4s; }
+        .symbol:nth-child(9) { left: 20%; top: 10%; animation-delay: 1.2s; }
+        .symbol:nth-child(10) { left: 80%; top: 95%; animation-delay: 2.8s; }
 
         /* Product Image */
         .product-image {
@@ -135,7 +121,7 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
-        /* Horizontal Toggle for Amount Selection */
+        /* Toggle Buttons */
         .amount-toggle {
             display: flex;
             justify-content: center;
@@ -143,7 +129,7 @@
             gap: 10px;
         }
 
-        /* Amount Option Buttons - Solid Green When Selected */
+        /* Amount Option Buttons */
         .amount-option {
             padding: 0.5rem 1.5rem;
             font-size: 1.1rem;
@@ -167,7 +153,7 @@
             transform: scale(1.05);
         }
 
-        /* Purchase Button Styling with Flash Effect */
+        /* Purchase Button Styling */
         .purchase-button, .back-button {
             display: inline-block;
             padding: 1rem 2rem;
@@ -196,20 +182,7 @@
             margin: 1.5rem 0;
         }
 
-        .price-breakdown span {
-            font-weight: bold;
-        }
-
-        /* Footer Styling */
-        footer {
-            background-color: #333;
-            color: #fff;
-            text-align: center;
-            padding: 1.5rem;
-            font-size: 0.9rem;
-        }
-
-        /* Swish Checkout and Shipping Form */
+        /* Swish Checkout */
         .swish-checkout {
             display: none;
             margin-top: 2rem;
@@ -228,47 +201,11 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
-        /* Two-column form layout */
+        /* Form Layout */
         .form-container {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 1rem;
-        }
-
-        .swish-checkout label {
-            font-weight: bold;
-            color: #333;
-            margin-top: 1rem;
-        }
-
-        .swish-checkout input[type="text"],
-        .swish-checkout input[type="email"],
-        .swish-checkout textarea {
-            width: 100%;
-            padding: 0.8rem;
-            margin-top: 0.5rem;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 1rem;
-        }
-
-        .swish-checkout textarea {
-            resize: vertical;
-        }
-
-        .swish-checkout button {
-            grid-column: span 2;
-            width: 100%;
-            padding: 1rem;
-            background-color: #2e8b57;
-            color: #fff;
-            font-size: 1.2rem;
-            font-weight: bold;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            margin-top: 1rem;
         }
     </style>
 </head>
@@ -304,7 +241,7 @@
         <!-- Product Image -->
         <img src="pp.jpg" alt="Phenibut HCL Product Image" class="product-image">
 
-        <!-- Fancy Toggle for Amount Selection -->
+        <!-- Amount Selection -->
         <div class="amount-toggle">
             <div class="amount-option" data-amount="5 grams" onclick="selectAmount(this, '5 grams')">5 Gram Sample</div>
             <div class="amount-option" data-amount="30 grams" onclick="selectAmount(this, '30 grams')">30 grams</div>
@@ -332,7 +269,7 @@
             <p><strong>Your Order ID:</strong> <span id="orderIDText"></span></p>
             <img src="https://rty.vux.mybluehost.me/wp-content/uploads/2024/10/swish.png-1.jpg-1.jpg" alt="Swish QR Code">
 
-            <!-- Shipping Information Form with Two-column Layout -->
+            <!-- Shipping Information Form -->
             <h3>Shipping Information</h3>
             <form action="https://formspree.io/f/mrbgeqaw" method="POST" class="form-container">
                 <input type="hidden" id="orderID" name="orderID">
@@ -367,5 +304,24 @@
     <footer>
         <p>&copy; 2024 Phenibut HCL Budet. All rights reserved.</p>
     </footer>
+
+    <script>
+        function toggleSwishCheckout() {
+            const checkout = document.getElementById('swishCheckout');
+            const purchaseButton = document.getElementById('purchaseButton');
+            const backButton = document.getElementById('backButton');
+            if (checkout.style.display === 'none' || !checkout.style.display) {
+                checkout.style.display = 'block';
+                purchaseButton.style.display = 'none';
+                backButton.style.display = 'inline-block';
+            } else {
+                checkout.style.display = 'none';
+                purchaseButton.style.display = 'inline-block';
+                backButton.style.display = 'none';
+            }
+        }
+
+        // Additional Swish Checkout Logic here...
+    </script>
 </body>
 </html>
