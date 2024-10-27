@@ -21,19 +21,43 @@
             margin: 0;
         }
 
-        /* Header Styling */
+        /* Consistent Header Styling */
         header {
-            background-color: #333;
+            background-color: #333; /* Dark background for header */
             color: #fff;
-            padding: 1.5rem 0;
-            text-align: center;
+            padding: 1rem 0;
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
         }
 
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: auto;
+            padding: 0 1.5rem;
+        }
+
         header h1 {
-            font-size: 2rem;
+            font-size: 1.8rem;
             font-weight: bold;
             letter-spacing: 1px;
+            color: #f5f5f5;
+        }
+
+        nav a {
+            color: #f0f0f0;
+            text-decoration: none;
+            font-weight: 500;
+            margin: 0 1rem;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        nav a:hover {
+            background-color: #555;
+            color: #fff;
         }
 
         /* Main Product Section */
@@ -177,9 +201,9 @@
         // JavaScript function to generate a unique Order ID
         function generateOrderID() {
             const orderID = 'PH' + Math.floor(100000 + Math.random() * 900000);
-            document.getElementById('orderID').value = orderID; // Hidden field for form submission
-            document.getElementById('orderIDInput').value = orderID; // Visible field for customer to see
-            document.getElementById('orderIDText').textContent = orderID; // Display Order ID in Swish Instructions
+            document.getElementById('orderID').value = orderID;
+            document.getElementById('orderIDInput').value = orderID;
+            document.getElementById('orderIDText').textContent = orderID;
         }
 
         // JavaScript function to show the Swish checkout section
@@ -192,7 +216,14 @@
 </head>
 <body>
     <header>
-        <h1>Phenibut HCL Budet</h1>
+        <div class="container">
+            <h1>Phenibut HCL Budet</h1>
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="kratom.html">Phenibut HCL</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+        </div>
     </header>
 
     <!-- Product Section -->
@@ -235,24 +266,4 @@
                 <input type="email" id="email" name="email" required>
 
                 <label for="address">Address</label>
-                <input type="text" id="address" name="address" required>
-
-                <label for="city">City</label>
-                <input type="text" id="city" name="city" required>
-
-                <label for="zip">Postal Code</label>
-                <input type="text" id="zip" name="zip" required>
-
-                <label for="message">Additional Message (Optional)</label>
-                <textarea id="message" name="message" rows="4"></textarea>
-
-                <button type="submit">Submit Shipping Information</button>
-            </form>
-        </div>
-    </div>
-
-    <footer>
-        <p>&copy; 2024 Phenibut HCL Budet. All rights reserved.</p>
-    </footer>
-</body>
-</html>
+                <input type="text" id
