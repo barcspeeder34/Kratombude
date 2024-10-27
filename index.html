@@ -18,7 +18,7 @@
             font-family: Arial, sans-serif;
             background-color: #f8f9fa;
             margin: 0;
-            overflow: hidden; /* Prevents scrolling */
+            overflow: hidden;
         }
 
         /* Header Styling */
@@ -38,14 +38,16 @@
             padding: 0 1.5rem;
         }
 
-        /* Header Title with Link */
+        /* Header Title with Link and Hover Effect */
         header h1 a {
             font-size: 1.8rem;
             font-weight: bold;
             letter-spacing: 1px;
             color: #f5f5f5;
             text-decoration: none;
-            transition: opacity 0.3s ease, transform 0.3s ease, color 0.3s ease;
+            opacity: 0;
+            transform: translateY(-20px);
+            animation: fadeInMove 0.6s forwards 0.3s;
         }
 
         header h1 a:hover {
@@ -54,7 +56,7 @@
             transform: scale(1.05);
         }
 
-        /* Main Menu Links with Hover Effects */
+        /* Main Menu Links with Initial Fade-in Animation */
         nav a {
             color: #f0f0f0;
             text-decoration: none;
@@ -62,14 +64,25 @@
             margin: 0 1rem;
             padding: 0.5rem 1rem;
             border-radius: 25px;
-            transition: opacity 0.3s ease, transform 0.3s ease, background-color 0.3s ease;
+            opacity: 0;
+            transform: translateY(-20px);
+            transition: opacity 0.6s ease, transform 0.6s ease, background-color 0.3s ease;
+            animation: fadeInMove 0.6s forwards;
         }
 
         nav a:hover {
             background-color: #555;
             color: #2e8b57;
-            opacity: 0.85;
-            transform: scale(1.05);
+        }
+
+        nav a:nth-child(1) { animation-delay: 0.4s; }
+        nav a:nth-child(2) { animation-delay: 0.5s; }
+        nav a:nth-child(3) { animation-delay: 0.6s; }
+
+        /* Fade-in Animation */
+        @keyframes fadeInMove {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         /* Main Content Styling */
@@ -87,7 +100,7 @@
             position: relative;
         }
 
-        /* Center Button with Link and Animations */
+        /* Large Title Styling with Fade-in and Hover Animation */
         .front-page a.center-link {
             font-size: 4rem;
             font-weight: bold;
@@ -97,6 +110,9 @@
             border-radius: 10px;
             text-decoration: none;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInMove 0.6s forwards 0.8s;
             transition: color 0.3s ease, transform 0.3s ease, background-color 0.3s ease;
         }
 
@@ -106,10 +122,10 @@
             background-color: rgba(230, 250, 230, 0.9);
         }
 
-        /* Floating Symbols Styling - Increased Size by 30% */
+        /* Floating Symbols Styling */
         .symbol {
             position: absolute;
-            font-size: 2rem; /* 30% larger */
+            font-size: 2rem;
             color: rgba(0, 0, 0, 0.35);
             font-weight: bold;
             animation: float 8s ease-in-out infinite;
@@ -117,8 +133,8 @@
         }
 
         .symbol:hover {
-            color: #2e8b57; /* Turns green on hover */
-            transform: scale(1.1); /* Scales up by 10% on hover */
+            color: #2e8b57;
+            transform: scale(1.1);
         }
 
         @keyframes float {
@@ -138,6 +154,7 @@
         .symbol:nth-child(8) { left: 60%; top: 20%; animation-delay: 4s; }
         .symbol:nth-child(9) { left: 90%; top: 50%; animation-delay: 1.2s; }
         .symbol:nth-child(10) { left: 15%; top: 40%; animation-delay: 2.8s; }
+
     </style>
 </head>
 <body>
@@ -155,7 +172,7 @@
 
     <!-- Main Content with Background Image and Floating Symbols -->
     <main class="front-page">
-        <!-- Center Button with Link and Animations -->
+        <!-- Center Button with Fade-in Animation -->
         <a href="kratom.html" class="center-link">Phenibut HCL</a>
 
         <!-- Floating Symbols -->
