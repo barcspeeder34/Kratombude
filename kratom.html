@@ -109,12 +109,15 @@
             color: #fff;
         }
 
-        /* Total Price Display */
-        .price-display {
-            font-size: 1.8rem;
-            font-weight: bold;
+        /* Price Breakdown Display */
+        .price-breakdown {
+            font-size: 1.5rem;
             color: #333;
             margin: 1.5rem 0;
+        }
+
+        .price-breakdown span {
+            font-weight: bold;
         }
 
         /* Purchase Button */
@@ -206,8 +209,17 @@
         function selectAmount(element, amount) {
             document.querySelectorAll('.amount-option').forEach(el => el.classList.remove('selected'));
             element.classList.add('selected');
-            const totalPrice = pricing[amount] + pricing.shipping;
-            document.getElementById('priceDisplay').textContent = `${totalPrice} SEK`;
+
+            // Update Item Price, Shipping Price, and Order Total
+            const itemPrice = pricing[amount];
+            const shippingPrice = pricing.shipping;
+            const totalPrice = itemPrice + shippingPrice;
+
+            document.getElementById('itemPriceDisplay').textContent = `${itemPrice} SEK`;
+            document.getElementById('shippingPriceDisplay').textContent = `${shippingPrice} SEK`;
+            document.getElementById('totalPriceDisplay').textContent = `${totalPrice} SEK`;
+
+            // Update Selected Amount field in the form
             document.getElementById('selectedAmount').value = amount;
         }
 
@@ -222,7 +234,6 @@
             document.getElementById('orderIDText').textContent = orderID;
         }
 
-        // Ensure the toggle initializes with a default amount and generates Order ID on load
         window.onload = function() {
             initializeToggle();
             generateOrderID();
@@ -253,9 +264,11 @@
             <div class="amount-option" data-amount="150 grams" onclick="selectAmount(this, '150 grams')">150 grams</div>
         </div>
 
-        <!-- Dynamic Price Display -->
-        <div class="price-display">
-            Total: <span id="priceDisplay"></span>
+        <!-- Price Breakdown Display -->
+        <div class="price-breakdown">
+            <p>Item Price: <span id="itemPriceDisplay"></span></p>
+            <p>Shipping Price: <span id="shippingPriceDisplay"></span></p>
+            <p>Total: <span id="totalPriceDisplay"></span></p>
         </div>
 
         <!-- Purchase Button -->
@@ -272,14 +285,11 @@
             <!-- Shipping Information Form -->
             <h3>Shipping Information</h3>
             <form action="https://formspree.io/f/mrbgeqaw" method="POST">
-                <!-- Hidden Order ID Field for form submission -->
                 <input type="hidden" id="orderID" name="orderID">
-
-                <!-- Visible Order ID Field for customer reference -->
+                
                 <label for="orderIDInput">Order ID</label>
                 <input type="text" id="orderIDText" name="orderIDInput" readonly>
 
-                <!-- Dynamic Selected Amount Field -->
                 <label for="selectedAmount">Selected Amount</label>
                 <input type="text" id="selectedAmount" name="selectedAmount" readonly>
 
