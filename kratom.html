@@ -101,6 +101,7 @@
             gap: 10px;
         }
 
+        /* Amount Option with Hover Animation */
         .amount-option {
             padding: 0.5rem 1.5rem;
             font-size: 1.1rem;
@@ -110,7 +111,14 @@
             border: 2px solid #2e8b57;
             border-radius: 20px;
             cursor: pointer;
-            transition: background 0.3s, color 0.3s;
+            transition: opacity 0.3s ease, transform 0.3s ease, background-color 0.3s ease;
+        }
+
+        .amount-option:hover {
+            background-color: #246644;
+            color: #fff;
+            opacity: 0.85;
+            transform: scale(1.05);
         }
 
         .amount-option.selected {
@@ -129,7 +137,7 @@
             font-weight: bold;
         }
 
-        /* Purchase Button */
+        /* Purchase Button with Hover Animation */
         .purchase-button, .back-button {
             display: inline-block;
             padding: 1rem 2rem;
@@ -142,11 +150,13 @@
             border: none;
             border-radius: 8px;
             cursor: pointer;
-            transition: background-color 0.3s;
+            transition: opacity 0.3s ease, transform 0.3s ease, background-color 0.3s ease;
         }
 
         .purchase-button:hover, .back-button:hover {
             background-color: #246644;
+            opacity: 0.85;
+            transform: scale(1.05);
         }
 
         /* Footer Styling */
@@ -374,7 +384,7 @@
                 <label for="message">Additional Message (Optional)</label>
                 <textarea id="message" name="message" rows="4"></textarea>
 
-                <button type="submit">I have Sent the Swish Payment</button>
+                <button type="submit" class="purchase-button">I have Sent the Swish Payment</button>
             </form>
         </div>
     </main>
