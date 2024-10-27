@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Phenibut HCL Product Page</title>
+    <title>Welcome to Phenibut HCL Budet</title>
     <link rel="stylesheet" href="style.css">
     <style>
         /* General Reset */
@@ -15,14 +15,12 @@
 
         /* Body Styling */
         body {
-            font-family: 'Helvetica Neue', Arial, sans-serif;
+            font-family: Arial, sans-serif;
             background-color: #f8f9fa;
-            color: #2e2e2e;
             margin: 0;
-            min-height: 100vh;
         }
 
-        /* Consistent Header Styling */
+        /* Header Styling */
         header {
             background-color: #333;
             color: #fff;
@@ -61,38 +59,29 @@
             color: #fff;
         }
 
-        /* Main Product Section */
-        .product-container {
-            max-width: 800px;
-            margin: 3rem auto;
-            padding: 2rem;
-            background-color: #ffffff;
-            border-radius: 10px;
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        /* Main Content Styling */
+        .front-page {
+            background-image: url('ggg.jpg');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #2e2e2e;
             text-align: center;
-            min-height: 100vh;
         }
 
-        .product-title {
-            font-size: 2.2rem;
+        /* Large Title Styling */
+        .front-page h1 {
+            font-size: 4rem;
             font-weight: bold;
-            margin-bottom: 1rem;
-            color: #333;
-        }
-
-        .product-image {
-            width: 100%;
-            height: auto;
+            color: #2e2e2e;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 1rem 2rem;
             border-radius: 10px;
-            margin-bottom: 1.5rem;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .product-description {
-            font-size: 1.1rem;
-            line-height: 1.6;
-            color: #4d4d4d;
-            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
 
         /* Toggle for Amount Selection */
@@ -147,6 +136,15 @@
         .purchase-button:hover {
             background-color: #246644;
         }
+
+        /* Footer Styling */
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 1.5rem;
+            font-size: 0.9rem;
+        }
     </style>
     <script>
         // Pricing details
@@ -157,43 +155,25 @@
             shipping: 96
         };
 
-        // JavaScript to update price and selected amount based on amount selected
+        // JavaScript to update price based on amount selected
         function selectAmount(element, amount) {
-            // Remove 'selected' class from all amount options
             document.querySelectorAll('.amount-option').forEach(el => el.classList.remove('selected'));
-
-            // Add 'selected' class to clicked option
             element.classList.add('selected');
-
-            // Calculate total price (item cost + shipping)
             const totalPrice = pricing[amount] + pricing.shipping;
             document.getElementById('priceDisplay').textContent = `${totalPrice} SEK`;
-
-            // Update Selected Amount field in the form
-            document.getElementById('selectedAmount').value = amount;
         }
 
         function initializeToggle() {
-            // Set default selection to "30 grams"
             const defaultAmount = document.querySelector('.amount-option[data-amount="30 grams"]');
             selectAmount(defaultAmount, "30 grams");
         }
 
-        // Generate a unique Order ID
-        function generateOrderID() {
-            const orderID = 'PH' + Math.floor(100000 + Math.random() * 900000);
-            document.getElementById('orderID').value = orderID;
-            document.getElementById('orderIDText').textContent = orderID;
-        }
-
-        // Initialize the toggle and Order ID on load
-        window.onload = function() {
-            initializeToggle();
-            generateOrderID();
-        }
+        // Ensure the toggle initializes with a default amount
+        window.onload = initializeToggle;
     </script>
 </head>
 <body>
+    <!-- Header -->
     <header>
         <div class="container">
             <h1>Phenibut HCL Budet</h1>
@@ -205,16 +185,9 @@
         </div>
     </header>
 
-    <!-- Product Section -->
-    <div class="product-container">
-        <h2 class="product-title">Phenibut HCL Powder</h2>
-        
-        <!-- Product Image -->
-        <img src="pp.jpg" alt="Phenibut HCL Product Image" class="product-image">
-        
-        <p class="product-description">
-            Our Phenibut HCL is sourced from certified labs to ensure the highest level of purity and quality.
-        </p>
+    <!-- Main Content with Background Image -->
+    <main class="front-page">
+        <h1>Phenibut HCL</h1>
 
         <!-- Fancy Toggle for Amount Selection -->
         <div class="amount-toggle">
@@ -229,60 +202,10 @@
         </div>
 
         <!-- Purchase Button -->
-        <button class="purchase-button" onclick="showSwishCheckout()">Purchase</button>
+        <button class="purchase-button">Purchase</button>
+    </main>
 
-        <!-- Swish Checkout and Shipping Form (Initially Hidden) -->
-        <div class="swish-checkout" id="swishCheckout" style="display: none;">
-            <h3>Swish Payment Instructions</h3>
-            <p>#1: Scan the QR code below to make the payment.</p>
-            <p>#2: Put Your Order ID in the message on your Swish payment.</p>
-            <p><strong>Your Order ID:</strong> <span id="orderIDText"></span></p>
-            <img src="https://rty.vux.mybluehost.me/wp-content/uploads/2024/10/swish.png-1.jpg-1.jpg" alt="Swish QR Code">
-
-            <!-- Shipping Information Form -->
-            <h3>Shipping Information</h3>
-            <form action="https://formspree.io/f/mrbgeqaw" method="POST">
-                <!-- Hidden Order ID Field for form submission -->
-                <input type="hidden" id="orderID" name="orderID">
-
-                <!-- Visible Order ID Field for customer reference -->
-                <label for="orderIDInput">Order ID</label>
-                <input type="text" id="orderIDText" name="orderIDInput" readonly>
-
-                <!-- Dynamic Selected Amount Field -->
-                <label for="selectedAmount">Selected Amount</label>
-                <input type="text" id="selectedAmount" name="selectedAmount" readonly>
-
-                <!-- Shipping Information Fields -->
-                <label for="name">Full Name</label>
-                <input type="text" id="name" name="name" required>
-
-                <label for="address">Street Address</label>
-                <input type="text" id="address" name="address" required>
-
-                <label for="city">City</label>
-                <input type="text" id="city" name="city" required>
-
-                <label for="zip">Postal Code</label>
-                <input type="text" id="zip" name="zip" required>
-
-                <label for="country">Country</label>
-                <input type="text" id="country" name="country" required>
-
-                <label for="phone">Phone Number</label>
-                <input type="text" id="phone" name="phone" required>
-
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" required>
-
-                <label for="message">Additional Message (Optional)</label>
-                <textarea id="message" name="message" rows="4"></textarea>
-
-                <button type="submit">Submit Shipping Information</button>
-            </form>
-        </div>
-    </div>
-
+    <!-- Footer -->
     <footer>
         <p>&copy; 2024 Phenibut HCL Budet. All rights reserved.</p>
     </footer>
