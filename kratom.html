@@ -37,31 +37,17 @@
             padding: 0 1.5rem;
         }
 
-        /* Header Title Link with Green Flash Effect */
+        /* Header Title Link */
         header h1 a {
             font-size: 1.8rem;
             font-weight: bold;
             letter-spacing: 1px;
             color: #f5f5f5;
             text-decoration: none;
-            opacity: 0;
-            transform: translateY(-20px);
-            animation: fadeInFlashText 0.8s forwards 0.3s;
             transition: color 0.3s ease;
         }
 
-        /* Green Flash Animation for Header */
-        @keyframes fadeInFlashText {
-            0% { opacity: 0; transform: translateY(-20px); color: #f5f5f5; }
-            70% { opacity: 1; transform: translateY(0); color: #2e8b57; }
-            100% { opacity: 1; transform: translateY(0); color: #f5f5f5; }
-        }
-
-        header h1 a:hover {
-            color: #2e8b57;
-        }
-
-        /* Main Menu Links */
+        /* Drop-in and Flash Animation for Main Menu */
         nav a {
             color: #f0f0f0;
             text-decoration: none;
@@ -69,12 +55,26 @@
             margin: 0 1rem;
             padding: 0.5rem 1rem;
             border-radius: 25px;
+            opacity: 0;
+            transform: translateY(-20px);
+            animation: fadeInFlash 0.5s forwards;
             transition: color 0.3s ease, background-color 0.3s ease;
         }
+
+        nav a:nth-child(1) { animation-delay: 0.3s; }
+        nav a:nth-child(2) { animation-delay: 0.4s; }
+        nav a:nth-child(3) { animation-delay: 0.5s; }
 
         nav a:hover {
             background-color: #2e8b57;
             color: #fff;
+        }
+
+        /* Drop-in and Green Flash Animation */
+        @keyframes fadeInFlash {
+            0% { opacity: 0; transform: translateY(-20px); }
+            70% { opacity: 1; transform: translateY(0); background-color: #2e8b57; color: #fff; }
+            100% { opacity: 1; transform: translateY(0); background-color: transparent; color: inherit; }
         }
 
         /* Main Content Styling */
@@ -109,7 +109,7 @@
             gap: 10px;
         }
 
-        /* Amount Option Buttons - Transparent with Green Border */
+        /* Amount Option Buttons - Solid Green When Selected */
         .amount-option {
             padding: 0.5rem 1.5rem;
             font-size: 1.1rem;
@@ -122,19 +122,24 @@
             transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
         }
 
+        .amount-option.selected {
+            background-color: #2e8b57;
+            color: #fff;
+        }
+
         .amount-option:hover {
             background-color: #2e8b57;
             color: #fff;
             transform: scale(1.05);
         }
 
-        /* Purchase Button - Transparent with Green Border */
+        /* Purchase Button Styling with Flash Effect */
         .purchase-button, .back-button {
             display: inline-block;
             padding: 1rem 2rem;
             margin: 1rem 0;
             background-color: transparent;
-            color: #fff;
+            color: #2e8b57;
             font-size: 1.2rem;
             font-weight: bold;
             text-transform: uppercase;
