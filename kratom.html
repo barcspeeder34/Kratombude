@@ -187,8 +187,13 @@
             background-color: #f9f9f9;
         }
 
-            display: block;
-}
+        .swish-checkout img {
+            width: 150px;
+            height: auto;
+            margin-bottom: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
 
         /* Form Layout */
         .form-container {
@@ -251,7 +256,7 @@
             <p>#2: Put Your Order ID in the message on your Swish payment.</p>
             <p><strong>Your Order ID:</strong> <span id="orderIDDisplay"></span></p>
             <p><strong>Total Price to Swish:</strong> <span id="dynamicTotalPrice"></span></p>
-            <img src="https://rty.vux.mybluehost.me/wp-content/uploads/2024/10/swish.png-1.jpg-1.jpg" alt="Swish QR Code" >
+            <img src="https://rty.vux.mybluehost.me/wp-content/uploads/2024/10/swish.png-1.jpg-1.jpg" alt="Swish QR Code" loading="lazy">
 
             <!-- Formspree Form -->
             <form id="contactForm" action="https://formspree.io/f/mrbgeqaw" method="POST" class="form-container">
