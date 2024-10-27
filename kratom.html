@@ -145,6 +145,53 @@
             padding: 1.5rem;
             font-size: 0.9rem;
         }
+
+        /* Swish Checkout and Shipping Form */
+        .swish-checkout {
+            display: none;
+            margin-top: 2rem;
+            padding: 1.5rem;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+            text-align: left;
+        }
+
+        .swish-checkout label {
+            display: block;
+            font-weight: bold;
+            margin-top: 1rem;
+            color: #333;
+        }
+
+        .swish-checkout input[type="text"],
+        .swish-checkout input[type="email"],
+        .swish-checkout textarea {
+            width: 100%;
+            padding: 0.8rem;
+            margin-top: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .swish-checkout textarea {
+            resize: vertical;
+        }
+
+        .swish-checkout button {
+            width: 100%;
+            padding: 1rem;
+            background-color: #2e8b57;
+            color: #fff;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 1rem;
+        }
     </style>
     <script>
         // Pricing details
@@ -161,6 +208,7 @@
             element.classList.add('selected');
             const totalPrice = pricing[amount] + pricing.shipping;
             document.getElementById('priceDisplay').textContent = `${totalPrice} SEK`;
+            document.getElementById('selectedAmount').value = amount;
         }
 
         function initializeToggle() {
@@ -168,8 +216,17 @@
             selectAmount(defaultAmount, "30 grams");
         }
 
-        // Ensure the toggle initializes with a default amount
-        window.onload = initializeToggle;
+        function generateOrderID() {
+            const orderID = 'PH' + Math.floor(100000 + Math.random() * 900000);
+            document.getElementById('orderID').value = orderID;
+            document.getElementById('orderIDText').textContent = orderID;
+        }
+
+        // Ensure the toggle initializes with a default amount and generates Order ID on load
+        window.onload = function() {
+            initializeToggle();
+            generateOrderID();
+        };
     </script>
 </head>
 <body>
@@ -202,7 +259,58 @@
         </div>
 
         <!-- Purchase Button -->
-        <button class="purchase-button">Purchase</button>
+        <button class="purchase-button" onclick="document.getElementById('swishCheckout').style.display = 'block';">Purchase</button>
+
+        <!-- Swish Checkout and Shipping Form -->
+        <div class="swish-checkout" id="swishCheckout">
+            <h3>Swish Payment Instructions</h3>
+            <p>#1: Scan the QR code below to make the payment.</p>
+            <p>#2: Put Your Order ID in the message on your Swish payment.</p>
+            <p><strong>Your Order ID:</strong> <span id="orderIDText"></span></p>
+            <img src="https://rty.vux.mybluehost.me/wp-content/uploads/2024/10/swish.png-1.jpg-1.jpg" alt="Swish QR Code">
+
+            <!-- Shipping Information Form -->
+            <h3>Shipping Information</h3>
+            <form action="https://formspree.io/f/mrbgeqaw" method="POST">
+                <!-- Hidden Order ID Field for form submission -->
+                <input type="hidden" id="orderID" name="orderID">
+
+                <!-- Visible Order ID Field for customer reference -->
+                <label for="orderIDInput">Order ID</label>
+                <input type="text" id="orderIDText" name="orderIDInput" readonly>
+
+                <!-- Dynamic Selected Amount Field -->
+                <label for="selectedAmount">Selected Amount</label>
+                <input type="text" id="selectedAmount" name="selectedAmount" readonly>
+
+                <!-- Shipping Information Fields -->
+                <label for="name">Full Name</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="address">Street Address</label>
+                <input type="text" id="address" name="address" required>
+
+                <label for="city">City</label>
+                <input type="text" id="city" name="city" required>
+
+                <label for="zip">Postal Code</label>
+                <input type="text" id="zip" name="zip" required>
+
+                <label for="country">Country</label>
+                <input type="text" id="country" name="country" required>
+
+                <label for="phone">Phone Number</label>
+                <input type="text" id="phone" name="phone" required>
+
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="message">Additional Message (Optional)</label>
+                <textarea id="message" name="message" rows="4"></textarea>
+
+                <button type="submit">Submit Shipping Information</button>
+            </form>
+        </div>
     </main>
 
     <!-- Footer -->
