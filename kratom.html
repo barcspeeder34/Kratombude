@@ -170,18 +170,24 @@
         }
 
         .swish-checkout img {
-            width: 150px; /* Adjusted size */
+            width: 150px;
             height: auto;
             margin-bottom: 1.5rem;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
+        /* Two-column form layout */
+        .form-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
         .swish-checkout label {
-            display: block;
             font-weight: bold;
-            margin-top: 1rem;
             color: #333;
+            margin-top: 1rem;
         }
 
         .swish-checkout input[type="text"],
@@ -200,6 +206,7 @@
         }
 
         .swish-checkout button {
+            grid-column: span 2;
             width: 100%;
             padding: 1rem;
             background-color: #2e8b57;
@@ -245,9 +252,11 @@
             selectAmount(defaultAmount, "30 grams");
         }
 
+        // Generate and fill Order ID automatically
         function generateOrderID() {
             const orderID = 'PH' + Math.floor(100000 + Math.random() * 900000);
             document.getElementById('orderID').value = orderID;
+            document.getElementById('orderIDInput').value = orderID;
             document.getElementById('orderIDText').textContent = orderID;
         }
 
@@ -302,18 +311,21 @@
             <p><strong>Your Order ID:</strong> <span id="orderIDText"></span></p>
             <img src="https://rty.vux.mybluehost.me/wp-content/uploads/2024/10/swish.png-1.jpg-1.jpg" alt="Swish QR Code">
 
-            <!-- Shipping Information Form -->
+            <!-- Shipping Information Form with Two-column Layout -->
             <h3>Shipping Information</h3>
-            <form action="https://formspree.io/f/mrbgeqaw" method="POST">
+            <form action="https://formspree.io/f/mrbgeqaw" method="POST" class="form-container">
+                <!-- Hidden Order ID Field for form submission -->
                 <input type="hidden" id="orderID" name="orderID">
-                
-                <label for="orderIDInput">Order ID</label>
-                <input type="text" id="orderIDText" name="orderIDInput" readonly>
 
+                <!-- Visible Order ID Field for customer reference -->
+                <label for="orderIDInput">Order ID</label>
+                <input type="text" id="orderIDInput" name="orderIDInput" readonly>
+
+                <!-- Dynamic Selected Amount Field -->
                 <label for="selectedAmount">Selected Amount</label>
                 <input type="text" id="selectedAmount" name="selectedAmount" readonly>
 
-                <!-- Shipping Information Fields -->
+                <!-- Shipping Information Fields in Two Columns -->
                 <label for="name">Full Name</label>
                 <input type="text" id="name" name="name" required>
 
