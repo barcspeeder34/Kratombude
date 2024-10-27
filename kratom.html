@@ -152,18 +152,19 @@
         }
 
         /* Product Image */
-        .product-image {
-            width: 150px;
-            height: auto;
-            border-radius: 10px;
-            margin-top: 1.5rem;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
+        250px.product-image {
+    width: 250px;
+    height: auto;
+    border-radius: 10px;
+    margin-top: 1.5rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
 
-        @media (min-width: 768px) {
-            .product-image {
-                width: 200px;
-            }
+@media (max-width: 480px) {
+    .product-image {
+        width: 300px;
+    }
+}
         }
 
         /* Amount Option Buttons */
@@ -391,7 +392,7 @@
         function toggleSwishCheckout() {
             const checkoutSection = document.getElementById('swishCheckout');
             const purchaseButton = document.getElementById('purchaseButton');
-            checkoutSection.style.display = checkoutSection.style.display === 'none' ? 'block' : 'none';
+            checkoutSection.style.display = checkoutSection.style.display === 'none' || checkoutSection.style.display === '' ? 'block' : 'none';
             purchaseButton.textContent = checkoutSection.style.display === 'block' ? 'Back' : 'Purchase';
         }
 
