@@ -142,15 +142,6 @@
             border-radius: 10px;
         }
 
-        .swish-checkout input[type="text"] {
-            width: 80%;
-            padding: 0.5rem;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            font-size: 1rem;
-            margin-bottom: 1rem;
-        }
-
     </style>
 </head>
 <body>
@@ -172,7 +163,7 @@
         <h2 class="product-title">Kratom Powder</h2>
 
         <!-- Product Image -->
-        <img src="ggg.jpg" alt="Kratom Product Image" class="product-image">
+        <img src="pp.jpg" alt="Kratom Product Image" class="product-image">
 
         <!-- Product Description -->
         <div class="product-description">
@@ -187,11 +178,9 @@
         <!-- Custom Swish Checkout Section -->
         <div class="swish-checkout" id="swishCheckout" style="display:none;">
             <h3>Swish Payment Instructions</h3>
-            <p>Please Swish the payment amount to <strong>0735515463</strong>.</p>
-            <p>Scan the QR code below to make the payment:</p>
+            <p>Scan the QR code below to make the payment and put your Order ID in the message on your Swish payment.</p>
+            <p><strong>Your Order ID:</strong> <span id="orderID"></span></p>
             <img src="https://rty.vux.mybluehost.me/wp-content/uploads/2024/10/swish.png-1.jpg-1.jpg" alt="Swish QR Code">
-            <p><label for="swish-payment-reference">Swish Reference Code:</label></p>
-            <input type="text" id="swish-payment-reference" name="swish_payment_reference" placeholder="e.g., Order ID" required>
         </div>
     </main>
 
@@ -200,11 +189,17 @@
         <p>&copy; 2024 KratomBudet. All rights reserved.</p>
     </footer>
 
-    <!-- JavaScript to Show Swish Checkout on Button Click -->
+    <!-- JavaScript to Show Swish Checkout and Generate Order ID -->
     <script>
         function showSwishCheckout() {
             document.getElementById('swishCheckout').style.display = 'block';
+            generateOrderID();
             window.scrollTo(0, document.body.scrollHeight);
+        }
+
+        function generateOrderID() {
+            const orderID = 'KB' + Math.floor(100000 + Math.random() * 900000); // Unique Order ID generation
+            document.getElementById('orderID').textContent = orderID;
         }
     </script>
 </body>
