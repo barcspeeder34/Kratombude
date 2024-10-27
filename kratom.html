@@ -37,6 +37,7 @@
             padding: 0 1.5rem;
         }
 
+        /* Header Title with Link and Hover Effect */
         header h1 a {
             font-size: 1.8rem;
             font-weight: bold;
@@ -52,7 +53,7 @@
             transform: scale(1.05);
         }
 
-        /* Main Menu Links */
+        /* Main Menu Links with Hover Effects */
         nav a {
             color: #f0f0f0;
             text-decoration: none;
@@ -60,26 +61,14 @@
             margin: 0 1rem;
             padding: 0.5rem 1rem;
             border-radius: 25px;
-            opacity: 0;
-            transform: translateY(-20px);
-            animation: fadeInFlash 0.5s forwards;
+            transition: opacity 0.3s ease, transform 0.3s ease, background-color 0.3s ease;
         }
-
-        nav a:nth-child(1) { animation-delay: 0.3s; }
-        nav a:nth-child(2) { animation-delay: 0.4s; }
-        nav a:nth-child(3) { animation-delay: 0.5s; }
 
         nav a:hover {
-            background-color: #2e8b57;
-            color: #fff;
+            background-color: #555;
+            color: #2e8b57;
+            opacity: 0.85;
             transform: scale(1.05);
-        }
-
-        /* Fade-in and Flash Green Animation */
-        @keyframes fadeInFlash {
-            0% { opacity: 0; transform: translateY(-20px); }
-            70% { opacity: 1; transform: translateY(0); background-color: #2e8b57; color: #fff; }
-            100% { opacity: 1; transform: translateY(0); background-color: transparent; color: inherit; }
         }
 
         /* Main Content Styling */
@@ -97,6 +86,24 @@
             position: relative;
         }
 
+        /* Large Title Styling with Hover Animation */
+        .front-page h1 {
+            font-size: 4rem;
+            font-weight: bold;
+            color: #2e2e2e;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: color 0.3s ease, transform 0.3s ease, background-color 0.3s ease;
+        }
+
+        .front-page h1:hover {
+            color: #2e8b57;
+            transform: scale(1.05);
+            background-color: rgba(230, 250, 230, 0.9);
+        }
+
         /* Product Image */
         .product-image {
             width: 200px;
@@ -106,42 +113,40 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
-        /* Horizontal Toggle for Amount Selection */
-        .amount-toggle {
-            display: flex;
-            justify-content: center;
-            margin: 1.5rem 0;
-            gap: 10px;
-        }
-
-        /* Amount Option Buttons with Flash on Load and Hover */
-        .amount-option {
-            padding: 0.5rem 1.5rem;
-            font-size: 1.1rem;
+        /* Floating Symbols Styling */
+        .symbol {
+            position: absolute;
+            font-size: 2rem;
+            color: rgba(0, 0, 0, 0.35);
             font-weight: bold;
+            animation: float 8s ease-in-out infinite;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        .symbol:hover {
             color: #2e8b57;
-            background: #f0f0f0;
-            border: 2px solid #2e8b57;
-            border-radius: 20px;
-            cursor: pointer;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInFlash 0.5s forwards;
-            transition: background-color 0.3s ease, transform 0.3s ease;
+            transform: scale(1.1);
         }
 
-        .amount-option:nth-child(1) { animation-delay: 0.6s; }
-        .amount-option:nth-child(2) { animation-delay: 0.7s; }
-        .amount-option:nth-child(3) { animation-delay: 0.8s; }
-        .amount-option:nth-child(4) { animation-delay: 0.9s; }
-
-        .amount-option:hover {
-            background-color: #2e8b57;
-            color: #fff;
-            transform: scale(1.05);
+        @keyframes float {
+            0% { transform: translateY(0); opacity: 0.7; }
+            50% { transform: translateY(-30px); opacity: 1; }
+            100% { transform: translateY(0); opacity: 0.7; }
         }
 
-        /* Purchase Button Styling with Flash Effect */
+        /* Positioning for Multiple Floating Symbols */
+        .symbol:nth-child(1) { left: 10%; top: 20%; animation-delay: 1s; }
+        .symbol:nth-child(2) { left: 30%; top: 60%; animation-delay: 2s; }
+        .symbol:nth-child(3) { left: 50%; top: 40%; animation-delay: 3s; }
+        .symbol:nth-child(4) { left: 70%; top: 30%; animation-delay: 1.5s; }
+        .symbol:nth-child(5) { left: 80%; top: 70%; animation-delay: 2.5s; }
+        .symbol:nth-child(6) { left: 40%; top: 10%; animation-delay: 2s; }
+        .symbol:nth-child(7) { left: 20%; top: 80%; animation-delay: 3s; }
+        .symbol:nth-child(8) { left: 60%; top: 20%; animation-delay: 4s; }
+        .symbol:nth-child(9) { left: 90%; top: 50%; animation-delay: 1.2s; }
+        .symbol:nth-child(10) { left: 15%; top: 40%; animation-delay: 2.8s; }
+
+        /* Purchase and Back Button Animations */
         .purchase-button, .back-button {
             display: inline-block;
             padding: 1rem 2rem;
@@ -154,17 +159,39 @@
             border: none;
             border-radius: 8px;
             cursor: pointer;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInFlash 0.5s forwards;
-            transition: background-color 0.3s ease, transform 0.3s ease;
+            transition: opacity 0.3s ease, transform 0.3s ease, background-color 0.3s ease;
         }
 
-        .purchase-button { animation-delay: 1.2s; }
-        .back-button { animation-delay: 1.4s; }
-
         .purchase-button:hover, .back-button:hover {
-            background-color: #2e8b57;
+            background-color: #246644;
+            opacity: 0.85;
+            transform: scale(1.05);
+        }
+
+        /* Toggle for Amount Selection */
+        .amount-toggle {
+            display: flex;
+            justify-content: center;
+            margin: 1.5rem 0;
+            gap: 10px;
+        }
+
+        .amount-option {
+            padding: 0.5rem 1.5rem;
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #2e8b57;
+            background: #f0f0f0;
+            border: 2px solid #2e8b57;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: opacity 0.3s ease, transform 0.3s ease, background-color 0.3s ease;
+        }
+
+        .amount-option:hover {
+            background-color: #246644;
+            color: #fff;
+            opacity: 0.85;
             transform: scale(1.05);
         }
 
@@ -291,10 +318,15 @@
         }
 
         function toggleSwishCheckout() {
-            const checkoutSection = document.getElementById('swishCheckout');
-            checkoutSection.style.display = checkoutSection.style.display === 'none' ? 'block' : 'none';
-            document.getElementById('backButton').style.display = checkoutSection.style.display === 'block' ? 'inline-block' : 'none';
-            document.getElementById('purchaseButton').style.display = checkoutSection.style.display === 'block' ? 'none' : 'inline-block';
+            document.getElementById('swishCheckout').style.display = 'block';
+            document.getElementById('backButton').style.display = 'inline-block';
+            document.getElementById('purchaseButton').style.display = 'none';
+        }
+
+        function goBack() {
+            document.getElementById('swishCheckout').style.display = 'none';
+            document.getElementById('backButton').style.display = 'none';
+            document.getElementById('purchaseButton').style.display = 'inline-block';
         }
 
         window.onload = function() {
@@ -316,9 +348,21 @@
         </div>
     </header>
 
-    <!-- Main Content with Background Image -->
+    <!-- Main Content with Background Image and Floating Symbols -->
     <main class="front-page">
         <h1>Phenibut HCL</h1>
+
+        <!-- Floating Symbols -->
+        <div class="symbol">H</div>
+        <div class="symbol">C</div>
+        <div class="symbol">O</div>
+        <div class="symbol">N</div>
+        <div class="symbol">Na</div>
+        <div class="symbol">Cl</div>
+        <div class="symbol">Fe</div>
+        <div class="symbol">Mg</div>
+        <div class="symbol">K</div>
+        <div class="symbol">S</div>
 
         <!-- Product Image -->
         <img src="pp.jpg" alt="Phenibut HCL Product Image" class="product-image">
@@ -340,7 +384,7 @@
 
         <!-- Purchase and Back Button -->
         <button id="purchaseButton" class="purchase-button" onclick="toggleSwishCheckout()">Purchase</button>
-        <button id="backButton" class="back-button" style="display: none;" onclick="toggleSwishCheckout()">Back</button>
+        <button id="backButton" class="back-button" style="display: none;" onclick="goBack()">Back</button>
 
         <!-- Swish Checkout and Shipping Form -->
         <div class="swish-checkout" id="swishCheckout">
