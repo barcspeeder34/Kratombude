@@ -84,6 +84,38 @@
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
 
+        /* Amount Selection Buttons */
+        .amount-toggle {
+            display: flex;
+            justify-content: center;
+            margin: 1.5rem 0;
+            gap: 10px;
+        }
+
+        .amount-option {
+            padding: 0.5rem 1.5rem;
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #2e8b57;
+            background: #f0f0f0;
+            border: 2px solid #2e8b57;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: opacity 0.3s ease, transform 0.3s ease, background-color 0.3s ease;
+        }
+
+        .amount-option:hover {
+            opacity: 0.85;
+            background-color: #246644;
+            color: #fff;
+            transform: scale(1.05);
+        }
+
+        .amount-option.selected {
+            background-color: #2e8b57;
+            color: #fff;
+        }
+
         /* Button Animation: Fade-in, Fade-out, and Color Change */
         .purchase-button, .back-button {
             display: inline-block;
@@ -208,6 +240,14 @@
     <!-- Main Content with Background Image -->
     <main class="front-page">
         <h1>Phenibut HCL</h1>
+
+        <!-- Amount Selection with Animation -->
+        <div class="amount-toggle">
+            <div class="amount-option" onclick="selectAmount(this, '5 grams')">5 Gram Sample</div>
+            <div class="amount-option" onclick="selectAmount(this, '30 grams')">30 grams</div>
+            <div class="amount-option" onclick="selectAmount(this, '60 grams')">60 grams</div>
+            <div class="amount-option" onclick="selectAmount(this, '150 grams')">150 grams</div>
+        </div>
 
         <!-- Purchase and Back Buttons -->
         <button id="purchaseButton" class="purchase-button" onclick="toggleSwishCheckout()">Purchase</button>
