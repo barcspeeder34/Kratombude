@@ -93,33 +93,6 @@
             position: relative;
         }
 
-        /* Floating Symbols Styling */
-        .symbol {
-            position: absolute;
-            font-size: 2rem;
-            color: rgba(0, 0, 0, 0.35);
-            font-weight: bold;
-            animation: float 8s ease-in-out infinite;
-            transition: color 0.3s ease, transform 0.3s ease;
-        }
-
-        .symbol:hover {
-            color: #2e8b57;
-            transform: scale(1.1);
-        }
-
-        @keyframes float {
-            0% { transform: translateY(0); opacity: 0.7; }
-            50% { transform: translateY(-30px); opacity: 1; }
-            100% { transform: translateY(0); opacity: 0.7; }
-        }
-
-        /* Floating Symbols Positioning */
-        .symbol:nth-child(1) { left: 10%; top: 20%; animation-delay: 1s; }
-        .symbol:nth-child(2) { left: 60%; top: 60%; animation-delay: 2s; }
-        .symbol:nth-child(3) { left: 50%; top: 40%; animation-delay: 3s; }
-        .symbol:nth-child(4) { left: 70%; top: 30%; animation-delay: 1.5s; }
-
         /* Product Image */
         .product-image {
             width: 200px;
@@ -129,7 +102,7 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
-        /* Amount Option Buttons */
+        /* Horizontal Toggle for Amount Selection */
         .amount-toggle {
             display: flex;
             justify-content: center;
@@ -137,6 +110,7 @@
             gap: 10px;
         }
 
+        /* Amount Option Buttons - Solid Green When Selected */
         .amount-option {
             padding: 0.5rem 1.5rem;
             font-size: 1.1rem;
@@ -160,7 +134,7 @@
             transform: scale(1.05);
         }
 
-        /* Purchase Button */
+        /* Purchase Button Styling with Flash Effect */
         .purchase-button, .back-button {
             display: inline-block;
             padding: 1rem 2rem;
@@ -182,7 +156,27 @@
             transform: scale(1.05);
         }
 
-        /* Swish Checkout */
+        /* Price Breakdown Display */
+        .price-breakdown {
+            font-size: 1.5rem;
+            color: #333;
+            margin: 1.5rem 0;
+        }
+
+        .price-breakdown span {
+            font-weight: bold;
+        }
+
+        /* Footer Styling */
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 1.5rem;
+            font-size: 0.9rem;
+        }
+
+        /* Swish Checkout and Shipping Form */
         .swish-checkout {
             display: none;
             margin-top: 2rem;
@@ -190,6 +184,7 @@
             border: 1px solid #ddd;
             border-radius: 10px;
             background-color: #f9f9f9;
+            text-align: left;
         }
 
         .swish-checkout img {
@@ -200,29 +195,51 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
-        /* Form Layout */
+        /* Two-column form layout */
         .form-container {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 1rem;
         }
 
-        .swish-checkout input[type="text"] {
+        .swish-checkout label {
+            font-weight: bold;
+            color: #333;
+            margin-top: 1rem;
+        }
+
+        .swish-checkout input[type="text"],
+        .swish-checkout input[type="email"],
+        .swish-checkout textarea {
             width: 100%;
             padding: 0.8rem;
+            margin-top: 0.5rem;
             border: 1px solid #ddd;
             border-radius: 5px;
             font-size: 1rem;
         }
-    </style>
-    <script>
-        // Toggle Checkout
-        function toggleSwishCheckout() {
-            const checkoutSection = document.getElementById('swishCheckout');
-            checkoutSection.style.display = checkoutSection.style.display === 'none' ? 'block' : 'none';
+
+        .swish-checkout textarea {
+            resize: vertical;
         }
 
-        // Select Amount and Display Prices
+        .swish-checkout button {
+            grid-column: span 2;
+            width: 100%;
+            padding: 1rem;
+            background-color: #2e8b57;
+            color: #fff;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 1rem;
+        }
+    </style>
+    <script>
+        // Pricing details
         const pricing = {
             "5 grams": 99,
             "30 grams": 371,
@@ -242,16 +259,35 @@
             document.getElementById('itemPriceDisplay').textContent = `${itemPrice} SEK`;
             document.getElementById('shippingPriceDisplay').textContent = `${shippingPrice} SEK`;
             document.getElementById('totalPriceDisplay').textContent = `${totalPrice} SEK`;
-            document.getElementById('dynamicTotalPrice').textContent = `${totalPrice} SEK`;
 
-            // Update hidden form fields
             document.getElementById('selectedAmount').value = amount;
             document.getElementById('totalPrice').value = `${totalPrice} SEK`;
+
+            document.getElementById('dynamicTotalPrice').textContent = `${totalPrice} SEK`;
         }
 
-        // Initialize Default Amount
+        function initializeToggle() {
+            const defaultAmount = document.querySelector('.amount-option[data-amount="30 grams"]');
+            selectAmount(defaultAmount, "30 grams");
+        }
+
+        function generateOrderID() {
+            const orderID = 'PH' + Math.floor(100000 + Math.random() * 900000);
+            document.getElementById('orderID').value = orderID;
+            document.getElementById('orderIDInput').value = orderID;
+            document.getElementById('orderIDText').textContent = orderID;
+        }
+
+        function toggleSwishCheckout() {
+            const checkoutSection = document.getElementById('swishCheckout');
+            checkoutSection.style.display = checkoutSection.style.display === 'none' ? 'block' : 'none';
+            document.getElementById('backButton').style.display = checkoutSection.style.display === 'block' ? 'inline-block' : 'none';
+            document.getElementById('purchaseButton').style.display = checkoutSection.style.display === 'block' ? 'none' : 'inline-block';
+        }
+
         window.onload = function() {
-            selectAmount(document.querySelector('.amount-option[data-amount="5 grams"]'), '5 grams');
+            initializeToggle();
+            generateOrderID();
         };
     </script>
 </head>
@@ -268,14 +304,14 @@
         </div>
     </header>
 
-    <!-- Main Content -->
+    <!-- Main Content with Background Image -->
     <main class="front-page">
         <h1>Phenibut HCL</h1>
 
         <!-- Product Image -->
         <img src="pp.jpg" alt="Phenibut HCL Product Image" class="product-image">
 
-        <!-- Amount Selection -->
+        <!-- Fancy Toggle for Amount Selection -->
         <div class="amount-toggle">
             <div class="amount-option" data-amount="5 grams" onclick="selectAmount(this, '5 grams')">5 Gram Sample</div>
             <div class="amount-option" data-amount="30 grams" onclick="selectAmount(this, '30 grams')">30 grams</div>
@@ -283,28 +319,36 @@
             <div class="amount-option" data-amount="150 grams" onclick="selectAmount(this, '150 grams')">150 grams</div>
         </div>
 
-        <!-- Price Display -->
+        <!-- Price Breakdown Display -->
         <div class="price-breakdown">
             <p>Item Price: <span id="itemPriceDisplay"></span></p>
             <p>Shipping Price: <span id="shippingPriceDisplay"></span></p>
             <p>Total: <span id="totalPriceDisplay"></span></p>
         </div>
 
-        <!-- Purchase Button -->
+        <!-- Purchase and Back Button -->
         <button id="purchaseButton" class="purchase-button" onclick="toggleSwishCheckout()">Purchase</button>
+        <button id="backButton" class="back-button" style="display: none;" onclick="toggleSwishCheckout()">Back</button>
 
-        <!-- Swish Checkout -->
+        <!-- Swish Checkout and Shipping Form -->
         <div class="swish-checkout" id="swishCheckout">
             <h3>Swish Payment Instructions</h3>
             <p>#1: Scan the QR code and Swish the Total Payment.</p>
             <p>#2: Put Your Order ID in the message on your Swish payment.</p>
             <p><strong>Total Price to Swish:</strong> <span id="dynamicTotalPrice"></span></p>
+            <p><strong>Your Order ID:</strong> <span id="orderIDText"></span></p>
             <img src="https://rty.vux.mybluehost.me/wp-content/uploads/2024/10/swish.png-1.jpg-1.jpg" alt="Swish QR Code">
 
-            <!-- Form -->
+            <!-- Shipping Information Form with Two-column Layout -->
+            <h3>Shipping Information</h3>
             <form action="https://formspree.io/f/mrbgeqaw" method="POST" class="form-container">
-                <input type="hidden" id="selectedAmount" name="selectedAmount">
-                <input type="hidden" id="totalPrice" name="totalPrice">
+                <input type="hidden" id="orderID" name="orderID">
+                <label for="orderIDInput">Order ID</label>
+                <input type="text" id="orderIDInput" name="orderIDInput" readonly>
+                <label for="selectedAmount">Selected Amount</label>
+                <input type="text" id="selectedAmount" name="selectedAmount" readonly>
+                <label for="totalPrice">Total Price</label>
+                <input type="text" id="totalPrice" name="totalPrice" readonly>
                 <label for="name">Full Name</label>
                 <input type="text" id="name" name="name" required>
                 <label for="address">Street Address</label>
@@ -319,6 +363,8 @@
                 <input type="text" id="phone" name="phone" required>
                 <label for="email">Email</label>
                 <input type="email" id="email" name="email" required>
+                <label for="message">Additional Message (Optional)</label>
+                <textarea id="message" name="message" rows="4"></textarea>
                 <button type="submit" class="purchase-button">I have Sent the Swish Payment</button>
             </form>
         </div>
