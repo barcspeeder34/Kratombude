@@ -1,46 +1,313 @@
-<form onsubmit="handleFormSubmit(event)" class="form-container">
-    <input type="hidden" id="orderID" name="orderID">
-    <input type="hidden" id="selectedAmount" name="selectedAmount">
-    <input type="hidden" id="totalPrice" name="totalPrice">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Phenibut HCL Budet</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    <!-- Customer Inputs -->
-    <label for="orderIDInput">Order ID</label>
-    <input type="text" id="orderIDInput" name="orderIDInput" readonly>
+        /* Body Styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+        }
 
-    <label for="amountInput">Amount (grams)</label>
-    <input type="text" id="amountInput" name="amountInput" readonly>
+        /* Header Styling with Drop-in/Fade and Green Flash on Load */
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 1rem 0;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
 
-    <label for="totalPriceInput">Total Price</label>
-    <input type="text" id="totalPriceInput" name="totalPriceInput" readonly>
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: auto;
+            padding: 0 1.5rem;
+        }
 
-    <label for="name">Full Name</label>
-    <input type="text" id="name" name="name" required>
-    
-    <label for="address">Street Address</label>
-    <input type="text" id="address" name="address" required>
+        /* Header Title Link */
+        header h1 a {
+            font-size: 1.8rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+            color: #f5f5f5;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
 
-    <label for="city">City</label>
-    <input type="text" id="city" name="city" required>
+        /* Main Menu Links with Hover Effect */
+        nav a {
+            color: #f0f0f0;
+            text-decoration: none;
+            font-weight: 500;
+            margin: 0 1rem;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            opacity: 0;
+            transform: translateY(-20px);
+            animation: fadeInFlash 0.5s forwards;
+            transition: color 0.3s ease, background-color 0.3s ease;
+        }
 
-    <label for="zip">Postal Code</label>
-    <input type="text" id="zip" name="zip" required>
+        nav a:hover {
+            background-color: #2e8b57; /* Green background on hover */
+            color: #fff; /* White text on hover */
+        }
 
-    <label for="country">Country</label>
-    <input type="text" id="country" name="country" required>
+        nav a:nth-child(1) { animation-delay: 0.3s; }
+        nav a:nth-child(2) { animation-delay: 0.4s; }
+        nav a:nth-child(3) { animation-delay: 0.5s; }
 
-    <label for="phone">Phone Number</label>
-    <input type="text" id="phone" name="phone" required>
+        /* Drop-in and Green Flash Animation */
+        @keyframes fadeInFlash {
+            0% { opacity: 0; transform: translateY(-20px); }
+            70% { opacity: 1; transform: translateY(0); background-color: #2e8b57; color: #fff; }
+            100% { opacity: 1; transform: translateY(0); background-color: transparent; color: inherit; }
+        }
 
-    <label for="email">Email</label>
-    <input type="email" id="email" name="email" required>
-    
-    <button type="submit" class="purchase-button">I have Sent the Swish Payment</button>
-</form>
+        /* Main Content Styling */
+        .front-page {
+            background-image: url('ggg.jpg');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #2e2e2e;
+            text-align: center;
+            position: relative;
+        }
 
-<script>
-    function handleFormSubmit(event) {
-        event.preventDefault();
-        // Redirect to the thank you page after "submitting" the form
-        window.location.href = 'thankyou.html';
-    }
-</script>
+        /* Floating Symbols Styling */
+        .symbol {
+            position: absolute;
+            font-size: 2rem;
+            color: rgba(0, 0, 0, 0.35);
+            font-weight: bold;
+            animation: float 8s ease-in-out infinite;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        .symbol:hover {
+            color: #2e8b57;
+            transform: scale(1.1);
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0); opacity: 0.7; }
+            50% { transform: translateY(-30px); opacity: 1; }
+            100% { transform: translateY(0); opacity: 0.7; }
+        }
+
+        /* Floating Symbols Positioning */
+        .symbol:nth-child(1) { left: 10%; top: 20%; animation-delay: 1s; }
+        .symbol:nth-child(2) { left: 60%; top: 60%; animation-delay: 2s; }
+        .symbol:nth-child(3) { left: 50%; top: 40%; animation-delay: 3s; }
+        .symbol:nth-child(4) { left: 70%; top: 30%; animation-delay: 1.5s; }
+
+        /* Product Image */
+        .product-image {
+            width: 200px;
+            height: auto;
+            border-radius: 10px;
+            margin-top: 1.5rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Amount Option Buttons */
+        .amount-toggle {
+            display: flex;
+            justify-content: center;
+            margin: 1.5rem 0;
+            gap: 10px;
+        }
+
+        .amount-option {
+            padding: 0.5rem 1.5rem;
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #2e8b57;
+            background: transparent;
+            border: 2px solid #2e8b57;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+        }
+
+        .amount-option.selected {
+            background-color: #2e8b57;
+            color: #fff;
+        }
+
+        .amount-option:hover {
+            background-color: #2e8b57;
+            color: #fff;
+            transform: scale(1.05);
+        }
+
+        /* Purchase Button */
+        .purchase-button, .back-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            margin: 1rem 0;
+            background-color: transparent;
+            color: #2e8b57;
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            border: 2px solid #2e8b57;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+        }
+
+        .purchase-button:hover, .back-button:hover {
+            background-color: #2e8b57;
+            color: #fff;
+            transform: scale(1.05);
+        }
+
+        /* Swish Checkout */
+        .swish-checkout {
+            display: none;
+            margin-top: 2rem;
+            padding: 1.5rem;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+        }
+
+        .swish-checkout img {
+            width: 150px;
+            height: auto;
+            margin-bottom: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Form Layout */
+        .form-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .swish-checkout input[type="text"] {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+    </style>
+    <!-- JavaScript to dynamically generate the Order ID and handle other interactive elements will remain unchanged -->
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <h1><a href="index.html">Phenibut HCL Budet</a></h1>
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="kratom.html">Phenibut HCL</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="front-page">
+        <h1>Phenibut HCL</h1>
+
+        <!-- Product Image -->
+        <img src="pp.jpg" alt="Phenibut HCL Product Image" class="product-image">
+
+        <!-- Amount Selection -->
+        <div class="amount-toggle">
+            <div class="amount-option" data-amount="5 grams" onclick="selectAmount(this, '5 grams')">5 Gram Sample</div>
+            <div class="amount-option" data-amount="30 grams" onclick="selectAmount(this, '30 grams')">30 grams</div>
+            <div class="amount-option" data-amount="60 grams" onclick="selectAmount(this, '60 grams')">60 grams</div>
+            <div class="amount-option" data-amount="150 grams" onclick="selectAmount(this, '150 grams')">150 grams</div>
+        </div>
+
+        <!-- Price Display -->
+        <div class="price-breakdown">
+            <p>Item Price: <span id="itemPriceDisplay"></span></p>
+            <p>Shipping Price: <span id="shippingPriceDisplay"></span></p>
+            <p>Total: <span id="totalPriceDisplay"></span></p>
+        </div>
+
+        <!-- Purchase Button -->
+        <button id="purchaseButton" class="purchase-button" onclick="toggleSwishCheckout()">Purchase</button>
+
+        <!-- Swish Checkout -->
+        <div class="swish-checkout" id="swishCheckout">
+            <h3>Swish Payment Instructions</h3>
+            <p>#1: Scan the QR code and Swish the Total Payment.</p>
+            <p>#2: Put Your Order ID in the message on your Swish payment.</p>
+            <p><strong>Your Order ID:</strong> <span id="orderIDDisplay"></span></p>
+            <p><strong>Total Price to Swish:</strong> <span id="dynamicTotalPrice"></span></p>
+            <img src="https://rty.vux.mybluehost.me/wp-content/uploads/2024/10/swish.png-1.jpg-1.jpg" alt="Swish QR Code">
+
+            <!-- Form -->
+            <form action="https://formspree.io/f/mrbgeqaw" method="POST" class="form-container">
+                <input type="hidden" id="orderID" name="orderID">
+                <input type="hidden" id="selectedAmount" name="selectedAmount">
+                <input type="hidden" id="totalPrice" name="totalPrice">
+
+                <!-- Customer Inputs -->
+                <label for="orderIDInput">Order ID</label>
+                <input type="text" id="orderIDInput" name="orderIDInput" readonly>
+
+                <label for="amountInput">Amount (grams)</label>
+                <input type="text" id="amountInput" name="amountInput" readonly>
+
+                <label for="totalPriceInput">Total Price</label>
+                <input type="text" id="totalPriceInput" name="totalPriceInput" readonly>
+
+                <label for="name">Full Name</label>
+                <input type="text" id="name" name="name" required>
+                
+                <label for="address">Street Address</label>
+                <input type="text" id="address" name="address" required>
+
+                <label for="city">City</label>
+                <input type="text" id="city" name="city" required>
+
+                <label for="zip">Postal Code</label>
+                <input type="text" id="zip" name="zip" required>
+
+                <label for="country">Country</label>
+                <input type="text" id="country" name="country" required>
+
+                <label for="phone">Phone Number</label>
+                <input type="text" id="phone" name="phone" required>
+
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+                
+                <button type="submit" class="purchase-button">I have Sent the Swish Payment</button>
+            </form>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Phenibut HCL Budet. All rights reserved.</p>
+    </footer>
+</body>
+</html>
