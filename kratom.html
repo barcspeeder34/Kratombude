@@ -17,6 +17,7 @@
             font-family: Arial, sans-serif;
             background-color: #f8f9fa;
             margin: 0;
+            overflow: hidden; /* Prevents scrolling */
         }
 
         /* Header Styling */
@@ -58,12 +59,13 @@
             color: #fff;
         }
 
-        /* Main Content Styling */
+        /* Product Page Styling */
         .product-page {
             max-width: 800px;
             margin: 2rem auto;
             padding: 1rem;
             text-align: center;
+            position: relative; /* Needed for floating symbols */
         }
 
         .product-title {
@@ -77,7 +79,7 @@
             margin-bottom: 2rem;
         }
 
-        /* Fade-in and Hover Animation for Buttons */
+        /* Button Fade-In and Out Animation */
         .animated-button {
             font-size: 1.2rem;
             font-weight: bold;
@@ -87,23 +89,15 @@
             background-color: #2e8b57;
             border: none;
             cursor: pointer;
-            opacity: 0;
-            animation: fadeInButton 1.5s ease-in forwards;
-            animation-delay: 0.5s;
-            transition: transform 0.3s ease, background-color 0.3s ease;
+            opacity: 1;
+            transition: opacity 0.3s ease, transform 0.3s ease, background-color 0.3s ease;
             margin: 0.5rem;
         }
 
         .animated-button:hover {
+            opacity: 0.85;
             transform: scale(1.05);
             background-color: #246644;
-        }
-
-        /* Fade-in Animation */
-        @keyframes fadeInButton {
-            to {
-                opacity: 1;
-            }
         }
 
         /* Form Styling */
@@ -155,6 +149,33 @@
         .swish-checkout button:hover {
             background-color: #246644;
         }
+
+        /* Floating Symbols Styling */
+        .symbol {
+            position: absolute;
+            font-size: 1.5rem;
+            color: rgba(0, 0, 0, 0.35); /* Increased opacity for visibility */
+            font-weight: bold;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0); opacity: 0.7; }
+            50% { transform: translateY(-30px); opacity: 1; }
+            100% { transform: translateY(0); opacity: 0.7; }
+        }
+
+        /* Positioning for Multiple Floating Symbols */
+        .symbol:nth-child(1) { left: 10%; top: 20%; animation-delay: 1s; }
+        .symbol:nth-child(2) { left: 30%; top: 60%; animation-delay: 2s; }
+        .symbol:nth-child(3) { left: 50%; top: 40%; animation-delay: 3s; }
+        .symbol:nth-child(4) { left: 70%; top: 30%; animation-delay: 1.5s; }
+        .symbol:nth-child(5) { left: 80%; top: 70%; animation-delay: 2.5s; }
+        .symbol:nth-child(6) { left: 40%; top: 10%; animation-delay: 2s; }
+        .symbol:nth-child(7) { left: 20%; top: 80%; animation-delay: 3s; }
+        .symbol:nth-child(8) { left: 60%; top: 20%; animation-delay: 4s; }
+        .symbol:nth-child(9) { left: 90%; top: 50%; animation-delay: 1.2s; }
+        .symbol:nth-child(10) { left: 15%; top: 40%; animation-delay: 2.8s; }
     </style>
     <script>
         // Generate and fill Order ID automatically
@@ -189,6 +210,18 @@
         <p class="product-description">
             Experience the highest quality Phenibut HCL, sourced from trusted suppliers. Our Phenibut HCL powder is refined to ensure optimal purity, with every batch tested for quality and consistency.
         </p>
+
+        <!-- Floating Symbols -->
+        <div class="symbol">H</div>
+        <div class="symbol">C</div>
+        <div class="symbol">O</div>
+        <div class="symbol">N</div>
+        <div class="symbol">Na</div>
+        <div class="symbol">Cl</div>
+        <div class="symbol">Fe</div>
+        <div class="symbol">Mg</div>
+        <div class="symbol">K</div>
+        <div class="symbol">S</div>
 
         <!-- Form for Swish Checkout and Shipping Information -->
         <div class="swish-checkout">
