@@ -20,7 +20,7 @@
             margin: 0;
         }
 
-        /* Header Styling */
+        /* Header Styling with Drop-in/Fade and Green Flash on Load */
         header {
             background-color: #333;
             color: #fff;
@@ -55,15 +55,8 @@
             margin: 0 1rem;
             padding: 0.5rem 1rem;
             border-radius: 25px;
-            opacity: 0;
-            transform: translateY(-20px);
-            animation: fadeInFlash 0.5s forwards;
             transition: color 0.3s ease, background-color 0.3s ease;
         }
-
-        nav a:nth-child(1) { animation-delay: 0.3s; }
-        nav a:nth-child(2) { animation-delay: 0.4s; }
-        nav a:nth-child(3) { animation-delay: 0.5s; }
 
         nav a:hover {
             background-color: #2e8b57;
@@ -85,32 +78,19 @@
             position: relative;
         }
 
-        /* Floating Symbols Styling */
+        /* Floating Symbols */
         .symbol {
             position: absolute;
             font-size: 2rem;
-            color: rgba(0, 0, 0, 0.2);
+            color: rgba(0, 0, 0, 0.35);
             font-weight: bold;
             animation: float 8s ease-in-out infinite;
-            transition: color 0.3s ease, transform 0.3s ease;
         }
 
-        .symbol:hover {
-            color: #2e8b57;
-            transform: scale(1.1);
-        }
-
-        /* Adjusted Floating Symbol Positions */
-        .symbol:nth-child(1) { left: 5%; top: 10%; animation-delay: 1s; }
-        .symbol:nth-child(2) { left: 90%; top: 20%; animation-delay: 2s; }
-        .symbol:nth-child(3) { left: 10%; top: 80%; animation-delay: 3s; }
-        .symbol:nth-child(4) { left: 95%; top: 70%; animation-delay: 1.5s; }
-        .symbol:nth-child(5) { left: 85%; top: 90%; animation-delay: 2.5s; }
-        .symbol:nth-child(6) { left: 15%; top: 5%; animation-delay: 2s; }
-        .symbol:nth-child(7) { left: 5%; top: 90%; animation-delay: 3s; }
-        .symbol:nth-child(8) { left: 90%; top: 5%; animation-delay: 4s; }
-        .symbol:nth-child(9) { left: 20%; top: 10%; animation-delay: 1.2s; }
-        .symbol:nth-child(10) { left: 80%; top: 95%; animation-delay: 2.8s; }
+        .symbol:nth-child(1) { left: 5%; top: 15%; }
+        .symbol:nth-child(2) { left: 85%; top: 25%; }
+        .symbol:nth-child(3) { left: 10%; top: 60%; }
+        .symbol:nth-child(4) { left: 80%; top: 75%; }
 
         /* Product Image */
         .product-image {
@@ -121,7 +101,7 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
-        /* Toggle Buttons */
+        /* Amount Option Buttons */
         .amount-toggle {
             display: flex;
             justify-content: center;
@@ -129,7 +109,6 @@
             gap: 10px;
         }
 
-        /* Amount Option Buttons */
         .amount-option {
             padding: 0.5rem 1.5rem;
             font-size: 1.1rem;
@@ -153,7 +132,7 @@
             transform: scale(1.05);
         }
 
-        /* Purchase Button Styling */
+        /* Purchase Button */
         .purchase-button, .back-button {
             display: inline-block;
             padding: 1rem 2rem;
@@ -175,13 +154,6 @@
             transform: scale(1.05);
         }
 
-        /* Price Breakdown Display */
-        .price-breakdown {
-            font-size: 1.5rem;
-            color: #333;
-            margin: 1.5rem 0;
-        }
-
         /* Swish Checkout */
         .swish-checkout {
             display: none;
@@ -190,24 +162,59 @@
             border: 1px solid #ddd;
             border-radius: 10px;
             background-color: #f9f9f9;
-            text-align: left;
         }
 
-        .swish-checkout img {
-            width: 150px;
-            height: auto;
-            margin-bottom: 1.5rem;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        /* Form Layout */
-        .form-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
+        .swish-checkout button {
+            grid-column: span 2;
+            width: 100%;
+            padding: 1rem;
+            background-color: #2e8b57;
+            color: #fff;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 1rem;
         }
     </style>
+    <script>
+        // Toggle Checkout
+        function toggleSwishCheckout() {
+            const checkoutSection = document.getElementById('swishCheckout');
+            checkoutSection.style.display = checkoutSection.style.display === 'none' ? 'block' : 'none';
+        }
+
+        // Select Amount and Display Prices
+        const pricing = {
+            "5 grams": 99,
+            "30 grams": 371,
+            "60 grams": 599,
+            "150 grams": 1099,
+            shipping: 96
+        };
+
+        function selectAmount(element, amount) {
+            document.querySelectorAll('.amount-option').forEach(el => el.classList.remove('selected'));
+            element.classList.add('selected');
+
+            const itemPrice = pricing[amount];
+            const shippingPrice = pricing.shipping;
+            const totalPrice = itemPrice + shippingPrice;
+
+            document.getElementById('itemPriceDisplay').textContent = `${itemPrice} SEK`;
+            document.getElementById('shippingPriceDisplay').textContent = `${shippingPrice} SEK`;
+            document.getElementById('totalPriceDisplay').textContent = `${totalPrice} SEK`;
+            document.getElementById('dynamicTotalPrice').textContent = `${totalPrice} SEK`;
+        }
+
+        // Initialize Default Amount
+        window.onload = function() {
+            const defaultAmount = document.querySelector('.amount-option[data-amount="30 grams"]');
+            selectAmount(defaultAmount, "30 grams");
+        }
+    </script>
 </head>
 <body>
     <!-- Header -->
@@ -222,7 +229,7 @@
         </div>
     </header>
 
-    <!-- Main Content with Background Image and Floating Symbols -->
+    <!-- Main Content -->
     <main class="front-page">
         <h1>Phenibut HCL</h1>
 
@@ -231,12 +238,6 @@
         <div class="symbol">C</div>
         <div class="symbol">O</div>
         <div class="symbol">N</div>
-        <div class="symbol">Na</div>
-        <div class="symbol">Cl</div>
-        <div class="symbol">Fe</div>
-        <div class="symbol">Mg</div>
-        <div class="symbol">K</div>
-        <div class="symbol">S</div>
 
         <!-- Product Image -->
         <img src="pp.jpg" alt="Phenibut HCL Product Image" class="product-image">
@@ -249,30 +250,24 @@
             <div class="amount-option" data-amount="150 grams" onclick="selectAmount(this, '150 grams')">150 grams</div>
         </div>
 
-        <!-- Price Breakdown Display -->
+        <!-- Price Breakdown -->
         <div class="price-breakdown">
-            <p>Item Price: <span id="itemPriceDisplay"></span></p>
-            <p>Shipping Price: <span id="shippingPriceDisplay"></span></p>
-            <p>Total: <span id="totalPriceDisplay"></span></p>
+            <p>Item Price: <span id="itemPriceDisplay">371 SEK</span></p>
+            <p>Shipping Price: <span id="shippingPriceDisplay">96 SEK</span></p>
+            <p>Total: <span id="totalPriceDisplay">467 SEK</span></p>
         </div>
 
-        <!-- Purchase and Back Button -->
+        <!-- Purchase Button -->
         <button id="purchaseButton" class="purchase-button" onclick="toggleSwishCheckout()">Purchase</button>
-        <button id="backButton" class="back-button" style="display: none;" onclick="toggleSwishCheckout()">Back</button>
 
-        <!-- Swish Checkout and Shipping Form -->
+        <!-- Swish Checkout Form -->
         <div class="swish-checkout" id="swishCheckout">
             <h3>Swish Payment Instructions</h3>
             <p>#1: Scan the QR code and Swish the Total Payment.</p>
             <p>#2: Put Your Order ID in the message on your Swish payment.</p>
-            <p><strong>Total Price to Swish:</strong> <span id="dynamicTotalPrice"></span></p>
-            <p><strong>Your Order ID:</strong> <span id="orderIDText"></span></p>
+            <p><strong>Total Price to Swish:</strong> <span id="dynamicTotalPrice">467 SEK</span></p>
             <img src="https://rty.vux.mybluehost.me/wp-content/uploads/2024/10/swish.png-1.jpg-1.jpg" alt="Swish QR Code">
-
-            <!-- Shipping Information Form -->
-            <h3>Shipping Information</h3>
-            <form action="https://formspree.io/f/mrbgeqaw" method="POST" class="form-container">
-                <input type="hidden" id="orderID" name="orderID">
+            <form action="thankyou.html" method="POST" class="form-container">
                 <label for="orderIDInput">Order ID</label>
                 <input type="text" id="orderIDInput" name="orderIDInput" readonly>
                 <label for="selectedAmount">Selected Amount</label>
@@ -281,47 +276,9 @@
                 <input type="text" id="totalPrice" name="totalPrice" readonly>
                 <label for="name">Full Name</label>
                 <input type="text" id="name" name="name" required>
-                <label for="address">Street Address</label>
-                <input type="text" id="address" name="address" required>
-                <label for="city">City</label>
-                <input type="text" id="city" name="city" required>
-                <label for="zip">Postal Code</label>
-                <input type="text" id="zip" name="zip" required>
-                <label for="country">Country</label>
-                <input type="text" id="country" name="country" required>
-                <label for="phone">Phone Number</label>
-                <input type="text" id="phone" name="phone" required>
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" required>
-                <label for="message">Additional Message (Optional)</label>
-                <textarea id="message" name="message" rows="4"></textarea>
                 <button type="submit" class="purchase-button">I have Sent the Swish Payment</button>
             </form>
         </div>
     </main>
-
-    <!-- Footer -->
-    <footer>
-        <p>&copy; 2024 Phenibut HCL Budet. All rights reserved.</p>
-    </footer>
-
-    <script>
-        function toggleSwishCheckout() {
-            const checkout = document.getElementById('swishCheckout');
-            const purchaseButton = document.getElementById('purchaseButton');
-            const backButton = document.getElementById('backButton');
-            if (checkout.style.display === 'none' || !checkout.style.display) {
-                checkout.style.display = 'block';
-                purchaseButton.style.display = 'none';
-                backButton.style.display = 'inline-block';
-            } else {
-                checkout.style.display = 'none';
-                purchaseButton.style.display = 'inline-block';
-                backButton.style.display = 'none';
-            }
-        }
-
-        // Additional Swish Checkout Logic here...
-    </script>
 </body>
 </html>
