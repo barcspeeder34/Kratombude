@@ -20,7 +20,7 @@
             margin: 0;
         }
 
-        /* Header Styling */
+        /* Header Styling with Drop-in/Fade and Green Flash on Load */
         header {
             background-color: #333;
             color: #fff;
@@ -37,6 +37,7 @@
             padding: 0 1.5rem;
         }
 
+        /* Header Title Link */
         header h1 a {
             font-size: 1.8rem;
             font-weight: bold;
@@ -46,7 +47,7 @@
             transition: color 0.3s ease;
         }
 
-        /* Main Menu Links */
+        /* Drop-in and Flash Animation for Main Menu */
         nav a {
             color: #f0f0f0;
             text-decoration: none;
@@ -54,12 +55,27 @@
             margin: 0 1rem;
             padding: 0.5rem 1rem;
             border-radius: 25px;
+            opacity: 0;
+            transform: translateY(-20px);
+            animation: fadeInFlash 0.5s forwards;
             transition: color 0.3s ease, background-color 0.3s ease;
         }
 
+        nav a:nth-child(1) { animation-delay: 0.3s; }
+        nav a:nth-child(2) { animation-delay: 0.4s; }
+        nav a:nth-child(3) { animation-delay: 0.5s; }
+
+        /* Make Header Menu Buttons Turn Green on Hover */
         nav a:hover {
             background-color: #2e8b57;
             color: #fff;
+        }
+
+        /* Drop-in and Green Flash Animation */
+        @keyframes fadeInFlash {
+            0% { opacity: 0; transform: translateY(-20px); }
+            70% { opacity: 1; transform: translateY(0); background-color: #2e8b57; color: #fff; }
+            100% { opacity: 1; transform: translateY(0); background-color: transparent; color: inherit; }
         }
 
         /* Main Content Styling */
@@ -84,13 +100,25 @@
             color: rgba(0, 0, 0, 0.35);
             font-weight: bold;
             animation: float 8s ease-in-out infinite;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        .symbol:hover {
+            color: #2e8b57;
+            transform: scale(1.1);
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0); opacity: 0.7; }
+            50% { transform: translateY(-30px); opacity: 1; }
+            100% { transform: translateY(0); opacity: 0.7; }
         }
 
         /* Floating Symbols Positioning */
-        .symbol:nth-child(1) { left: 10%; top: 20%; }
-        .symbol:nth-child(2) { left: 85%; top: 25%; }
-        .symbol:nth-child(3) { left: 5%; top: 70%; }
-        .symbol:nth-child(4) { left: 95%; top: 15%; }
+        .symbol:nth-child(1) { left: 10%; top: 20%; animation-delay: 1s; }
+        .symbol:nth-child(2) { left: 60%; top: 60%; animation-delay: 2s; }
+        .symbol:nth-child(3) { left: 50%; top: 40%; animation-delay: 3s; }
+        .symbol:nth-child(4) { left: 70%; top: 30%; animation-delay: 1.5s; }
 
         /* Product Image */
         .product-image {
@@ -165,7 +193,7 @@
         }
 
         .swish-checkout img {
-            width: 150px; /* Adjusted size */
+            width: 150px;
             height: auto;
             margin-bottom: 1.5rem;
             border-radius: 10px;
@@ -223,9 +251,8 @@
 
         // Initialize Default Amount
         window.onload = function() {
-            const defaultAmount = document.querySelector('.amount-option[data-amount="30 grams"]');
-            selectAmount(defaultAmount, "30 grams");
-        }
+            selectAmount(document.querySelector('.amount-option[data-amount="5 grams"]'), '5 grams');
+        };
     </script>
 </head>
 <body>
@@ -256,18 +283,17 @@
             <div class="amount-option" data-amount="150 grams" onclick="selectAmount(this, '150 grams')">150 grams</div>
         </div>
 
-        <!-- Price Breakdown -->
+        <!-- Price Display -->
         <div class="price-breakdown">
             <p>Item Price: <span id="itemPriceDisplay"></span></p>
             <p>Shipping Price: <span id="shippingPriceDisplay"></span></p>
             <p>Total: <span id="totalPriceDisplay"></span></p>
         </div>
 
-        <!-- Purchase and Back Button -->
+        <!-- Purchase Button -->
         <button id="purchaseButton" class="purchase-button" onclick="toggleSwishCheckout()">Purchase</button>
-        <button id="backButton" class="back-button" style="display: none;" onclick="toggleSwishCheckout()">Back</button>
 
-        <!-- Swish Checkout and Shipping Form -->
+        <!-- Swish Checkout -->
         <div class="swish-checkout" id="swishCheckout">
             <h3>Swish Payment Instructions</h3>
             <p>#1: Scan the QR code and Swish the Total Payment.</p>
@@ -275,12 +301,10 @@
             <p><strong>Total Price to Swish:</strong> <span id="dynamicTotalPrice"></span></p>
             <img src="https://rty.vux.mybluehost.me/wp-content/uploads/2024/10/swish.png-1.jpg-1.jpg" alt="Swish QR Code">
 
-            <!-- Shipping Form -->
-            <form action="thankyou.html" method="POST" class="form-container">
-                <label for="selectedAmount">Selected Amount</label>
-                <input type="text" id="selectedAmount" name="selectedAmount" readonly>
-                <label for="totalPrice">Total Price</label>
-                <input type="text" id="totalPrice" name="totalPrice" readonly>
+            <!-- Form -->
+            <form action="https://formspree.io/f/mrbgeqaw" method="POST" class="form-container">
+                <input type="hidden" id="selectedAmount" name="selectedAmount">
+                <input type="hidden" id="totalPrice" name="totalPrice">
                 <label for="name">Full Name</label>
                 <input type="text" id="name" name="name" required>
                 <label for="address">Street Address</label>
