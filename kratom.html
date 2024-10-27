@@ -97,7 +97,7 @@
         .symbol {
             position: absolute;
             font-size: 2rem;
-            color: rgba(0, 0, 0, 0.35);
+            color: rgba(0, 0, 0, 0.2);
             font-weight: bold;
             animation: float 8s ease-in-out infinite;
             transition: color 0.3s ease, transform 0.3s ease;
@@ -108,23 +108,17 @@
             transform: scale(1.1);
         }
 
-        @keyframes float {
-            0% { transform: translateY(0); opacity: 0.7; }
-            50% { transform: translateY(-30px); opacity: 1; }
-            100% { transform: translateY(0); opacity: 0.7; }
-        }
-
-        /* Positioning for Multiple Floating Symbols */
-        .symbol:nth-child(1) { left: 10%; top: 20%; animation-delay: 1s; }
-        .symbol:nth-child(2) { left: 60%; top: 60%; animation-delay: 2s; } /* Moved C to the right */
-        .symbol:nth-child(3) { left: 50%; top: 40%; animation-delay: 3s; }
-        .symbol:nth-child(4) { left: 70%; top: 30%; animation-delay: 1.5s; }
-        .symbol:nth-child(5) { left: 80%; top: 70%; animation-delay: 2.5s; }
-        .symbol:nth-child(6) { left: 40%; top: 10%; animation-delay: 2s; }
-        .symbol:nth-child(7) { left: 15%; top: 80%; animation-delay: 3s; } /* Moved S to the left */
-        .symbol:nth-child(8) { left: 60%; top: 20%; animation-delay: 4s; }
-        .symbol:nth-child(9) { left: 90%; top: 50%; animation-delay: 1.2s; }
-        .symbol:nth-child(10) { left: 15%; top: 40%; animation-delay: 2.8s; }
+        /* Repositioning Floating Symbols to the Sides */
+        .symbol:nth-child(1) { left: 5%; top: 15%; animation-delay: 1s; }
+        .symbol:nth-child(2) { left: 85%; top: 25%; animation-delay: 2s; }
+        .symbol:nth-child(3) { left: 10%; top: 60%; animation-delay: 3s; }
+        .symbol:nth-child(4) { left: 80%; top: 75%; animation-delay: 1.5s; }
+        .symbol:nth-child(5) { left: 90%; top: 10%; animation-delay: 2.5s; }
+        .symbol:nth-child(6) { left: 20%; top: 85%; animation-delay: 2s; }
+        .symbol:nth-child(7) { left: 70%; top: 5%; animation-delay: 3s; }
+        .symbol:nth-child(8) { left: 95%; top: 50%; animation-delay: 4s; }
+        .symbol:nth-child(9) { left: 25%; top: 5%; animation-delay: 1.2s; }
+        .symbol:nth-child(10) { left: 60%; top: 90%; animation-delay: 2.8s; }
 
         /* Product Image */
         .product-image {
@@ -271,63 +265,6 @@
             margin-top: 1rem;
         }
     </style>
-    <script>
-        // Pricing details
-        const pricing = {
-            "5 grams": 99,
-            "30 grams": 371,
-            "60 grams": 599,
-            "150 grams": 1099,
-            shipping: 96
-        };
-
-        // Function to select amount and update prices
-        function selectAmount(element, amount) {
-            document.querySelectorAll('.amount-option').forEach(el => el.classList.remove('selected'));
-            element.classList.add('selected');
-
-            const itemPrice = pricing[amount];
-            const shippingPrice = pricing.shipping;
-            const totalPrice = itemPrice + shippingPrice;
-
-            document.getElementById('itemPriceDisplay').textContent = `${itemPrice} SEK`;
-            document.getElementById('shippingPriceDisplay').textContent = `${shippingPrice} SEK`;
-            document.getElementById('totalPriceDisplay').textContent = `${totalPrice} SEK`;
-
-            document.getElementById('selectedAmount').value = amount;
-            document.getElementById('totalPrice').value = `${totalPrice} SEK`;
-
-            document.getElementById('dynamicTotalPrice').textContent = `${totalPrice} SEK`;
-        }
-
-        // Function to initialize the toggle and set a default value
-        function initializeToggle() {
-            const defaultAmount = document.querySelector('.amount-option[data-amount="30 grams"]');
-            selectAmount(defaultAmount, "30 grams");
-        }
-
-        // Function to generate a random order ID
-        function generateOrderID() {
-            const orderID = 'PH' + Math.floor(100000 + Math.random() * 900000);
-            document.getElementById('orderID').value = orderID;
-            document.getElementById('orderIDInput').value = orderID;
-            document.getElementById('orderIDText').textContent = orderID;
-        }
-
-        // Function to toggle the Swish checkout section
-        function toggleSwishCheckout() {
-            const checkoutSection = document.getElementById('swishCheckout');
-            checkoutSection.style.display = checkoutSection.style.display === 'none' ? 'block' : 'none';
-            document.getElementById('backButton').style.display = checkoutSection.style.display === 'block' ? 'inline-block' : 'none';
-            document.getElementById('purchaseButton').style.display = checkoutSection.style.display === 'block' ? 'none' : 'inline-block';
-        }
-
-        // Initialize values on page load
-        window.onload = function() {
-            initializeToggle();
-            generateOrderID();
-        };
-    </script>
 </head>
 <body>
     <!-- Header -->
@@ -345,18 +282,6 @@
     <!-- Main Content with Background Image and Floating Symbols -->
     <main class="front-page">
         <h1>Phenibut HCL</h1>
-
-        <!-- Floating Symbols -->
-        <div class="symbol">H</div>
-        <div class="symbol">C</div>
-        <div class="symbol">O</div>
-        <div class="symbol">N</div>
-        <div class="symbol">Na</div>
-        <div class="symbol">Cl</div>
-        <div class="symbol">Fe</div>
-        <div class="symbol">Mg</div>
-        <div class="symbol">K</div>
-        <div class="symbol">S</div>
 
         <!-- Product Image -->
         <img src="pp.jpg" alt="Phenibut HCL Product Image" class="product-image">
@@ -387,7 +312,7 @@
             <p>#2: Put Your Order ID in the message on your Swish payment.</p>
             <p><strong>Total Price to Swish:</strong> <span id="dynamicTotalPrice"></span></p>
             <p><strong>Your Order ID:</strong> <span id="orderIDText"></span></p>
-            <img src="https://phenibutbudet.se/wp-content/uploads/2024/10/swish.png-1.jpg-1.jpg" alt="Swish QR Code">
+            <img src="https://rty.vux.mybluehost.me/wp-content/uploads/2024/10/swish.png-1.jpg-1.jpg" alt="Swish QR Code">
 
             <!-- Shipping Information Form with Two-column Layout -->
             <h3>Shipping Information</h3>
