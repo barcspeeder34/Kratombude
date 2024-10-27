@@ -105,25 +105,22 @@
         /* Floating Symbols Styling */
         .symbol {
             position: absolute;
-            font-size: 1.5rem;
-            color: rgba(0, 0, 0, 0.35); /* Increased opacity for 50% more visibility */
+            font-size: 1.8rem; /* Increased font size by 20% */
+            color: rgba(0, 0, 0, 0.5); /* Darker by 40% */
             font-weight: bold;
             animation: float 8s ease-in-out infinite;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        .symbol:hover {
+            color: #2e8b57; /* Turns green on hover */
+            transform: scale(1.1); /* Scales up by 10% on hover */
         }
 
         @keyframes float {
-            0% {
-                transform: translateY(0);
-                opacity: 0.7;
-            }
-            50% {
-                transform: translateY(-30px);
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(0);
-                opacity: 0.7;
-            }
+            0% { transform: translateY(0); opacity: 0.7; }
+            50% { transform: translateY(-30px); opacity: 1; }
+            100% { transform: translateY(0); opacity: 0.7; }
         }
 
         /* Positioning for Multiple Floating Symbols */
