@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome to Phenibut HCL Budet</title>
+    <title>Phenibut HCL Product Page</title>
     <link rel="stylesheet" href="style.css">
     <style>
         /* General Reset */
@@ -56,32 +56,18 @@
 
         nav a:hover {
             background-color: #555;
-            color: #fff;
+            color: #2e8b57;
+            opacity: 0.85;
+            transform: scale(1.05);
         }
 
         /* Main Content Styling */
-        .front-page {
-            background-image: url('ggg.jpg');
-            background-size: cover;
-            background-position: center;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            color: #2e2e2e;
+        .product-page {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 1rem;
             text-align: center;
-        }
-
-        /* Large Title Styling */
-        .front-page h1 {
-            font-size: 4rem;
-            font-weight: bold;
-            color: #2e2e2e;
-            background-color: rgba(255, 255, 255, 0.8);
-            padding: 1rem 2rem;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            position: relative;
         }
 
         /* Amount Selection Buttons */
@@ -101,22 +87,17 @@
             border: 2px solid #2e8b57;
             border-radius: 20px;
             cursor: pointer;
-            transition: opacity 0.3s ease, transform 0.3s ease, background-color 0.3s ease;
+            transition: all 0.3s ease; /* Simplified to ensure smooth animations */
         }
 
         .amount-option:hover {
-            opacity: 0.85;
             background-color: #246644;
             color: #fff;
+            opacity: 0.85;
             transform: scale(1.05);
         }
 
-        .amount-option.selected {
-            background-color: #2e8b57;
-            color: #fff;
-        }
-
-        /* Button Animation: Fade-in, Fade-out, and Color Change */
+        /* Purchase and Back Buttons with Hover Effects */
         .purchase-button, .back-button {
             display: inline-block;
             padding: 1rem 2rem;
@@ -129,12 +110,12 @@
             border: none;
             border-radius: 8px;
             cursor: pointer;
-            transition: opacity 0.3s ease, transform 0.3s ease, background-color 0.3s ease;
+            transition: background-color 0.3s, opacity 0.3s, transform 0.3s;
         }
 
         .purchase-button:hover, .back-button:hover {
-            opacity: 0.85;
             background-color: #246644;
+            opacity: 0.85;
             transform: scale(1.05);
         }
 
@@ -237,11 +218,11 @@
         </div>
     </header>
 
-    <!-- Main Content with Background Image -->
-    <main class="front-page">
-        <h1>Phenibut HCL</h1>
+    <!-- Main Product Page Content -->
+    <main class="product-page">
+        <h2>Phenibut HCL</h2>
 
-        <!-- Amount Selection with Animation -->
+        <!-- Amount Selection with Hover Effects -->
         <div class="amount-toggle">
             <div class="amount-option" onclick="selectAmount(this, '5 grams')">5 Gram Sample</div>
             <div class="amount-option" onclick="selectAmount(this, '30 grams')">30 grams</div>
