@@ -87,15 +87,23 @@
             position: relative;
         }
 
-        /* Large Title Styling */
-        .front-page h1 {
+        /* Center Button with Link and Animations */
+        .front-page a.center-link {
             font-size: 4rem;
             font-weight: bold;
             color: #2e2e2e;
             background-color: rgba(255, 255, 255, 0.8);
             padding: 1rem 2rem;
             border-radius: 10px;
+            text-decoration: none;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: color 0.3s ease, transform 0.3s ease, background-color 0.3s ease;
+        }
+
+        .front-page a.center-link:hover {
+            color: #2e8b57;
+            transform: scale(1.05);
+            background-color: rgba(230, 250, 230, 0.9);
         }
 
         /* Floating Symbols Styling - Increased Size by 30% */
@@ -147,7 +155,8 @@
 
     <!-- Main Content with Background Image and Floating Symbols -->
     <main class="front-page">
-        <h1>Phenibut HCL</h1>
+        <!-- Center Button with Link and Animations -->
+        <a href="kratom.html" class="center-link">Phenibut HCL</a>
 
         <!-- Floating Symbols -->
         <div class="symbol">H</div>
