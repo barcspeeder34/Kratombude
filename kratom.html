@@ -397,13 +397,8 @@
         function toggleSwishCheckout() {
             const checkoutSection = document.getElementById('swishCheckout');
             const purchaseButton = document.getElementById('purchaseButton');
-            if (checkoutSection.style.display === 'none' || checkoutSection.style.display === '') {
-                checkoutSection.style.display = 'block';
-                purchaseButton.textContent = 'Back';
-            } else {
-                checkoutSection.style.display = 'none';
-                purchaseButton.textContent = 'Purchase';
-            }
+            checkoutSection.style.display = 'block';
+            purchaseButton.textContent = 'Back';
         }
 
         // Select Amount and Display Prices
@@ -424,4 +419,10 @@
             const totalPrice = itemPrice + shippingPrice;
 
             document.getElementById('itemPriceDisplay').textContent = itemPrice + ' SEK';
-            document.getElementById('shippingPriceDisplay
+            document.getElementById('shippingPriceDisplay').textContent = shippingPrice + ' SEK';
+            document.getElementById('totalPriceDisplay').textContent = totalPrice + ' SEK';
+            document.getElementById('dynamicTotalPrice').textContent = totalPrice + ' SEK';
+
+            // Update hidden form fields
+            document.getElementById('selectedAmount').value = amount;
+           
