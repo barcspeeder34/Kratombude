@@ -290,9 +290,9 @@
         <div class="container">
             <h1><a href="index.html">Phenibut HCL Budet</a></h1>
             <nav>
-                <a href="index.html">Home</a>
-                <a href="kratom.html">Phenibut HCL</a>
-                <a href="contact.html">Contact</a>
+                <a href="index.html" class="animate-link">Home</a>
+                <a href="kratom.html" class="animate-link">Phenibut HCL</a>
+                <a href="contact.html" class="animate-link">Contact</a>
             </nav>
         </div>
     </header>
@@ -391,13 +391,8 @@
         function toggleSwishCheckout() {
             const checkoutSection = document.getElementById('swishCheckout');
             const purchaseButton = document.getElementById('purchaseButton');
-            if (checkoutSection.style.display === 'none' || checkoutSection.style.display === '') {
-                checkoutSection.style.display = 'block';
-                purchaseButton.textContent = 'Back';
-            } else {
-                checkoutSection.style.display = 'none';
-                purchaseButton.textContent = 'Purchase';
-            }
+            checkoutSection.style.display = checkoutSection.style.display === 'none' ? 'block' : 'none';
+            purchaseButton.textContent = checkoutSection.style.display === 'block' ? 'Back' : 'Purchase';
         }
 
         // Select Amount and Display Prices
@@ -458,4 +453,12 @@
         window.onload = function() {
             document.querySelectorAll('nav a').forEach((link, index) => {
                 setTimeout(() => {
-                    link.class
+                    link.classList.add('animate-link');
+                }, 300 + index * 100);
+            });
+            selectAmount(document.querySelector('.amount-option[data-amount="5 grams"]'), '5 grams');
+            generateOrderID();
+        };
+    </script>
+</body>
+</html>
