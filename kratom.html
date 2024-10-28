@@ -382,4 +382,35 @@
         // Generate Dynamic Order ID
         function generateOrderID() {
             const orderID = 'PH' + Math.floor(100000 + Math.random() * 900000);
-            document.getElementById('orderIDDisplay').text
+            document.getElementById('orderIDDisplay').textContent = orderID;
+            document.getElementById('orderID').value = orderID;
+            document.getElementById('orderIDInput').value = orderID;
+        }
+
+        // Toggle Checkout and Update Button Text
+        function toggleSwishCheckout() {
+            const checkoutSection = document.getElementById('swishCheckout');
+            const purchaseButton = document.getElementById('purchaseButton');
+            checkoutSection.style.display = checkoutSection.style.display === 'none' ? 'block' : 'none';
+            purchaseButton.textContent = checkoutSection.style.display === 'block' ? 'Back' : 'Purchase';
+        }
+
+        // Select Amount and Display Prices
+        const pricing = {
+            "5 grams": 99,
+            "30 grams": 371,
+            "60 grams": 599,
+            "150 grams": 1099,
+            shipping: 96
+        };
+
+        function selectAmount(element, amount) {
+            document.querySelectorAll('.amount-option').forEach(el => el.classList.remove('selected'));
+            element.classList.add('selected');
+
+            const itemPrice = pricing[amount];
+            const shippingPrice = pricing.shipping;
+            const totalPrice = itemPrice + shippingPrice;
+
+            document.getElementById('itemPriceDisplay').textContent = itemPrice + ' SEK';
+            document.getElementById('shipping
