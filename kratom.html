@@ -153,7 +153,7 @@
 
         /* Product Image */
         .product-image {
-            width: 150px;
+            width: 300px;
             height: auto;
             border-radius: 10px;
             margin-top: 1.5rem;
@@ -382,83 +382,4 @@
         // Generate Dynamic Order ID
         function generateOrderID() {
             const orderID = 'PH' + Math.floor(100000 + Math.random() * 900000);
-            document.getElementById('orderIDDisplay').textContent = orderID;
-            document.getElementById('orderID').value = orderID;
-            document.getElementById('orderIDInput').value = orderID;
-        }
-
-        // Toggle Checkout and Update Button Text
-        function toggleSwishCheckout() {
-            const checkoutSection = document.getElementById('swishCheckout');
-            const purchaseButton = document.getElementById('purchaseButton');
-            checkoutSection.style.display = checkoutSection.style.display === 'none' ? 'block' : 'none';
-            purchaseButton.textContent = checkoutSection.style.display === 'block' ? 'Back' : 'Purchase';
-        }
-
-        // Select Amount and Display Prices
-        const pricing = {
-            "5 grams": 99,
-            "30 grams": 371,
-            "60 grams": 599,
-            "150 grams": 1099,
-            shipping: 96
-        };
-
-        function selectAmount(element, amount) {
-            document.querySelectorAll('.amount-option').forEach(el => el.classList.remove('selected'));
-            element.classList.add('selected');
-
-            const itemPrice = pricing[amount];
-            const shippingPrice = pricing.shipping;
-            const totalPrice = itemPrice + shippingPrice;
-
-            document.getElementById('itemPriceDisplay').textContent = ${itemPrice} SEK;
-            document.getElementById('shippingPriceDisplay').textContent = ${shippingPrice} SEK;
-            document.getElementById('totalPriceDisplay').textContent = ${totalPrice} SEK;
-            document.getElementById('dynamicTotalPrice').textContent = ${totalPrice} SEK;
-
-            // Update hidden form fields
-            document.getElementById('selectedAmount').value = amount;
-            document.getElementById('totalPrice').value = ${totalPrice} SEK;
-            document.getElementById('amountInput').value = amount;
-            document.getElementById('totalPriceInput').value = ${totalPrice} SEK;
-        }
-
-        // Redirect to Thank You Page on Form Submission
-        document.getElementById("contactForm").addEventListener("submit", function(event) {
-            event.preventDefault(); // Prevent default form submission
-
-            // Fetch form data
-            const formData = new FormData(event.target);
-
-            // Send data to Formspree
-            fetch(event.target.action, {
-                method: "POST",
-                body: formData,
-                headers: {
-                    'Accept': 'application/json'
-                }
-            }).then(response => {
-                if (response.ok) {
-                    window.location.href = "thankyou.html"; // Redirect on success
-                } else {
-                    alert("There was an issue submitting the form. Please try again.");
-                }
-            }).catch(error => {
-                alert("Oops! There was a problem submitting your form.");
-            });
-        });
-
-        // Initialize Default Amount and Order ID
-        window.onload = function() {
-            document.querySelectorAll('nav a').forEach((link, index) => {
-                setTimeout(() => {
-                    link.classList.add('animate-link');
-                }, 300 + index * 100);
-            });
-            selectAmount(document.querySelector('.amount-option[data-amount="5 grams"]'), '5 grams');
-            generateOrderID();
-        };
-    </script>
-</body>
-</html>
+            document.getElementById('orderIDDisplay').text
