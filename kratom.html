@@ -420,4 +420,25 @@
             document.getElementById('itemPriceDisplay').textContent = itemPrice + ' SEK';
             document.getElementById('shippingPriceDisplay').textContent = shippingPrice + ' SEK';
             document.getElementById('totalPriceDisplay').textContent = totalPrice + ' SEK';
-            document.getElementById('dynamicTotalPrice').
+            document.getElementById('dynamicTotalPrice').textContent = totalPrice + ' SEK';
+
+            // Update hidden form fields
+            document.getElementById('selectedAmount').value = amount;
+            document.getElementById('totalPrice').value = totalPrice + ' SEK';
+            document.getElementById('amountInput').value = amount;
+            document.getElementById('totalPriceInput').value = totalPrice + ' SEK';
+        }
+
+        // Redirect to Thank You Page on Form Submission
+        document.getElementById("contactForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent default form submission
+
+            // Fetch form data
+            const formData = new FormData(event.target);
+
+            // Send data to Formspree
+            fetch(event.target.action, {
+                method: "POST",
+                body: formData,
+                headers: {
+                    'Accept': 'application/json
