@@ -388,11 +388,21 @@
         }
 
         // Toggle Checkout and Update Button Text
+        let isCheckoutVisible = false;
+
         function toggleSwishCheckout() {
             const checkoutSection = document.getElementById('swishCheckout');
             const purchaseButton = document.getElementById('purchaseButton');
-            checkoutSection.style.display = checkoutSection.style.display === 'none' ? 'block' : 'none';
-            purchaseButton.textContent = checkoutSection.style.display === 'block' ? 'Back' : 'Purchase';
+
+            if (!isCheckoutVisible) {
+                checkoutSection.style.display = 'block';
+                purchaseButton.textContent = 'Back';
+                isCheckoutVisible = true;
+            } else {
+                checkoutSection.style.display = 'none';
+                purchaseButton.textContent = 'Purchase';
+                isCheckoutVisible = false;
+            }
         }
 
         // Select Amount and Display Prices
