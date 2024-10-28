@@ -20,7 +20,7 @@
             margin: 0;
         }
 
-        /* Header Styling */
+        /* Header Styling with Drop-in/Fade and Green Flash on Load */
         header {
             background-color: #333;
             color: #fff;
@@ -31,6 +31,7 @@
         header .container {
             display: flex;
             flex-direction: column;
+            justify-content: center;
             align-items: center;
             max-width: 1200px;
             margin: auto;
@@ -44,16 +45,13 @@
             }
         }
 
-        /* Header Title Link with Green Flash and Hover Effect */
+        /* Header Title Link */
         header h1 a {
             font-size: 1.5rem;
             font-weight: bold;
             letter-spacing: 1px;
             color: #f5f5f5;
             text-decoration: none;
-            opacity: 0;
-            transform: translateY(-20px);
-            animation: fadeInFlashText 0.8s forwards 0.3s;
             transition: color 0.3s ease;
         }
 
@@ -63,12 +61,7 @@
             }
         }
 
-        /* Letters Only Turn Green on Hover */
-        header h1 a:hover {
-            color: #2e8b57;
-        }
-
-        /* Main Menu Links with Green Hover and Fade/Drop-in Animation */
+        /* Drop-in and Flash Animation for Main Menu */
         nav {
             margin-top: 1rem;
         }
@@ -88,8 +81,7 @@
             border-radius: 25px;
             opacity: 0;
             transform: translateY(-20px);
-            animation: fadeInFlashText 0.5s forwards;
-            transition: color 0.3s ease, background-color 0.3s ease;
+            transition: color 0.3s ease, background-color 0.3s ease, transform 0.5s ease, opacity 0.5s ease;
         }
 
         @media (min-width: 768px) {
@@ -98,20 +90,17 @@
             }
         }
 
-        nav a:nth-child(1) { animation-delay: 0.4s; }
-        nav a:nth-child(2) { animation-delay: 0.5s; }
-        nav a:nth-child(3) { animation-delay: 0.6s; }
-
+        /* Make Header Menu Buttons Turn Green on Hover */
         nav a:hover {
             background-color: #2e8b57;
             color: #fff;
         }
 
-        /* Fade-in Flash Green Animation for Header and Menu Buttons */
-        @keyframes fadeInFlashText {
-            0% { opacity: 0; transform: translateY(-20px); color: #f5f5f5; }
-            70% { opacity: 1; transform: translateY(0); color: #2e8b57; }
-            100% { opacity: 1; transform: translateY(0); color: #f5f5f5; }
+        /* Drop-in and Green Flash Animation */
+        .animate-link {
+            opacity: 1;
+            transform: translateY(0);
+            transition-delay: 0.3s;
         }
 
         /* Main Content Styling */
@@ -119,57 +108,20 @@
             background-image: url('ggg.jpg');
             background-size: cover;
             background-position: center;
-            min-height: 100vh;
+            height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             color: #2e2e2e;
             text-align: center;
-            padding: 1.5rem;
+            padding: 1rem;
         }
 
         @media (min-width: 768px) {
             .front-page {
                 height: calc(100vh - 80px);
-                padding: 1rem;
             }
-        }
-
-        /* Center Text with Green Flash, Hover Effect, and Transparent Oval Outline */
-        .front-page a.center-link {
-            font-size: 2.5rem;
-            font-weight: bold;
-            color: #fff;
-            padding: 0.8rem 1.5rem;
-            border: 5px solid #2e8b57;
-            border-radius: 50px;
-            text-decoration: none;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInFlashText 0.8s forwards 0.8s;
-            transition: color 0.3s ease, transform 0.3s ease, background-color 0.3s ease;
-        }
-
-        @media (min-width: 768px) {
-            .front-page a.center-link {
-                font-size: 4rem;
-                padding: 1rem 2rem;
-            }
-        }
-
-        /* Whole Button Turns Green on Hover */
-        .front-page a.center-link:hover {
-            color: #fff;
-            background-color: #2e8b57;
-            transform: scale(1.05);
-        }
-
-        /* Flash Green Animation for Center Text */
-        @keyframes fadeInFlashText {
-            0% { opacity: 0; transform: translateY(20px); color: #2e2e2e; }
-            70% { opacity: 1; transform: translateY(0); color: #2e8b57; }
-            100% { opacity: 1; transform: translateY(0); color: #fff; }
         }
 
         /* Floating Symbols Styling */
@@ -182,15 +134,15 @@
             transition: color 0.3s ease, transform 0.3s ease;
         }
 
+        .symbol:hover {
+            color: #2e8b57;
+            transform: scale(1.1);
+        }
+
         @media (min-width: 768px) {
             .symbol {
                 font-size: 2rem;
             }
-        }
-
-        .symbol:hover {
-            color: #2e8b57;
-            transform: scale(1.1);
         }
 
         @keyframes float {
@@ -199,17 +151,137 @@
             100% { transform: translateY(0); opacity: 0.7; }
         }
 
-        /* Positioning for Multiple Floating Symbols */
-        .symbol:nth-child(1) { left: 10%; top: 20%; animation-delay: 1s; }
-        .symbol:nth-child(2) { left: 30%; top: 60%; animation-delay: 2s; }
-        .symbol:nth-child(3) { left: 50%; top: 40%; animation-delay: 3s; }
-        .symbol:nth-child(4) { left: 70%; top: 30%; animation-delay: 1.5s; }
-        .symbol:nth-child(5) { left: 80%; top: 70%; animation-delay: 2.5s; }
-        .symbol:nth-child(6) { left: 40%; top: 10%; animation-delay: 2s; }
-        .symbol:nth-child(7) { left: 20%; top: 80%; animation-delay: 3s; }
-        .symbol:nth-child(8) { left: 60%; top: 20%; animation-delay: 4s; }
-        .symbol:nth-child(9) { left: 90%; top: 50%; animation-delay: 1.2s; }
-        .symbol:nth-child(10) { left: 15%; top: 40%; animation-delay: 2.8s; }
+        /* Product Image */
+        .product-image {
+            width: 150px;
+            height: auto;
+            border-radius: 10px;
+            margin-top: 1.5rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        @media (min-width: 768px) {
+            .product-image {
+                width: 200px;
+            }
+        }
+
+        /* Amount Option Buttons */
+        .amount-toggle {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 1.5rem 0;
+            gap: 10px;
+        }
+
+        @media (min-width: 768px) {
+            .amount-toggle {
+                flex-direction: row;
+                justify-content: center;
+            }
+        }
+
+        .amount-option {
+            padding: 0.5rem 1rem;
+            font-size: 1rem;
+            font-weight: bold;
+            color: #2e8b57;
+            background: transparent;
+            border: 2px solid #2e8b57;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+        }
+
+        @media (min-width: 768px) {
+            .amount-option {
+                padding: 0.5rem 1.5rem;
+                font-size: 1.1rem;
+            }
+        }
+
+        .amount-option.selected {
+            background-color: #2e8b57;
+            color: #fff;
+        }
+
+        .amount-option:hover {
+            background-color: #2e8b57;
+            color: #fff;
+            transform: scale(1.05);
+        }
+
+        /* Purchase Button */
+        .purchase-button, .back-button {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            margin: 1rem 0;
+            background-color: transparent;
+            color: #2e8b57;
+            font-size: 1rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            border: 2px solid #2e8b57;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+        }
+
+        @media (min-width: 768px) {
+            .purchase-button, .back-button {
+                padding: 1rem 2rem;
+                font-size: 1.2rem;
+            }
+        }
+
+        .purchase-button:hover, .back-button:hover {
+            background-color: #2e8b57;
+            color: #fff;
+            transform: scale(1.05);
+        }
+
+        /* Swish Checkout */
+        .swish-checkout {
+            display: none;
+            margin-top: 2rem;
+            padding: 1.5rem;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+            width: 90%;
+            max-width: 600px;
+        }
+
+        .swish-checkout img {
+            width: 100%;
+            max-width: 150px;
+            height: auto;
+            margin-bottom: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Form Layout */
+        .form-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+
+        @media (min-width: 768px) {
+            .form-container {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .swish-checkout input[type="text"] {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
     </style>
 </head>
 <body>
@@ -225,27 +297,168 @@
         </div>
     </header>
 
-    <!-- Main Content with Background Image and Floating Symbols -->
+    <!-- Main Content -->
     <main class="front-page">
-        <!-- Center Text with Link to Product Page -->
-        <a href="kratom.html" class="center-link">Phenibut HCL</a>
+        <h1>Phenibut HCL</h1>
 
-        <!-- Floating Symbols -->
-        <div class="symbol">H</div>
-        <div class="symbol">C</div>
-        <div class="symbol">O</div>
-        <div class="symbol">N</div>
-        <div class="symbol">Na</div>
-        <div class="symbol">Cl</div>
-        <div class="symbol">Fe</div>
-        <div class="symbol">Mg</div>
-        <div class="symbol">K</div>
-        <div class="symbol">S</div>
+        <!-- Product Image -->
+        <img src="pp.jpg" alt="Phenibut HCL Product Image" class="product-image">
+
+        <!-- Amount Selection -->
+        <div class="amount-toggle">
+            <div class="amount-option" data-amount="5 grams" onclick="selectAmount(this, '5 grams')">5 Gram Sample</div>
+            <div class="amount-option" data-amount="30 grams" onclick="selectAmount(this, '30 grams')">30 grams</div>
+            <div class="amount-option" data-amount="60 grams" onclick="selectAmount(this, '60 grams')">60 grams</div>
+            <div class="amount-option" data-amount="150 grams" onclick="selectAmount(this, '150 grams')">150 grams</div>
+        </div>
+
+        <!-- Price Display -->
+        <div class="price-breakdown">
+            <p>Item Price: <span id="itemPriceDisplay"></span></p>
+            <p>Shipping Price: <span id="shippingPriceDisplay"></span></p>
+            <p>Total: <span id="totalPriceDisplay"></span></p>
+        </div>
+
+        <!-- Purchase Button -->
+        <button id="purchaseButton" class="purchase-button" onclick="toggleSwishCheckout()">Purchase</button>
+
+        <!-- Swish Checkout -->
+        <div class="swish-checkout" id="swishCheckout">
+            <h3>Swish Payment Instructions</h3>
+            <p>#1: Scan the QR code and Swish the Total Payment.</p>
+            <p>#2: Put Your Order ID in the message on your Swish payment.</p>
+            <p><strong>Your Order ID:</strong> <span id="orderIDDisplay"></span></p>
+            <p><strong>Total Price to Swish:</strong> <span id="dynamicTotalPrice"></span></p>
+            <img src="https://rty.vux.mybluehost.me/wp-content/uploads/2024/10/swish.png-1.jpg-1.jpg" alt="Swish QR Code">
+
+            <!-- Formspree Form -->
+            <form id="contactForm" action="https://formspree.io/f/mrbgeqaw" method="POST" class="form-container">
+                <input type="hidden" id="orderID" name="orderID">
+                <input type="hidden" id="selectedAmount" name="selectedAmount">
+                <input type="hidden" id="totalPrice" name="totalPrice">
+
+                <!-- Customer Inputs -->
+                <label for="orderIDInput">Order ID</label>
+                <input type="text" id="orderIDInput" name="orderIDInput" readonly>
+
+                <label for="amountInput">Amount (grams)</label>
+                <input type="text" id="amountInput" name="amountInput" readonly>
+
+                <label for="totalPriceInput">Total Price</label>
+                <input type="text" id="totalPriceInput" name="totalPriceInput" readonly>
+
+                <label for="name">Full Name</label>
+                <input type="text" id="name" name="name" required>
+                
+                <label for="address">Street Address</label>
+                <input type="text" id="address" name="address" required>
+
+                <label for="city">City</label>
+                <input type="text" id="city" name="city" required>
+
+                <label for="zip">Postal Code</label>
+                <input type="text" id="zip" name="zip" required>
+
+                <label for="country">Country</label>
+                <input type="text" id="country" name="country" required>
+
+                <label for="phone">Phone Number</label>
+                <input type="text" id="phone" name="phone" required>
+
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+                
+                <button type="submit" class="purchase-button">I have Sent the Swish Payment</button>
+            </form>
+        </div>
     </main>
 
     <!-- Footer -->
     <footer>
         <p>&copy; 2024 Phenibut HCL Budet. All rights reserved.</p>
     </footer>
+
+    <script>
+        // Generate Dynamic Order ID
+        function generateOrderID() {
+            const orderID = 'PH' + Math.floor(100000 + Math.random() * 900000);
+            document.getElementById('orderIDDisplay').textContent = orderID;
+            document.getElementById('orderID').value = orderID;
+            document.getElementById('orderIDInput').value = orderID;
+        }
+
+        // Toggle Checkout and Update Button Text
+        function toggleSwishCheckout() {
+            const checkoutSection = document.getElementById('swishCheckout');
+            const purchaseButton = document.getElementById('purchaseButton');
+            checkoutSection.style.display = checkoutSection.style.display === 'none' ? 'block' : 'none';
+            purchaseButton.textContent = checkoutSection.style.display === 'block' ? 'Back' : 'Purchase';
+        }
+
+        // Select Amount and Display Prices
+        const pricing = {
+            "5 grams": 99,
+            "30 grams": 371,
+            "60 grams": 599,
+            "150 grams": 1099,
+            shipping: 96
+        };
+
+        function selectAmount(element, amount) {
+            document.querySelectorAll('.amount-option').forEach(el => el.classList.remove('selected'));
+            element.classList.add('selected');
+
+            const itemPrice = pricing[amount];
+            const shippingPrice = pricing.shipping;
+            const totalPrice = itemPrice + shippingPrice;
+
+            document.getElementById('itemPriceDisplay').textContent = ${itemPrice} SEK;
+            document.getElementById('shippingPriceDisplay').textContent = ${shippingPrice} SEK;
+            document.getElementById('totalPriceDisplay').textContent = ${totalPrice} SEK;
+            document.getElementById('dynamicTotalPrice').textContent = ${totalPrice} SEK;
+
+            // Update hidden form fields
+            document.getElementById('selectedAmount').value = amount;
+            document.getElementById('totalPrice').value = ${totalPrice} SEK;
+            document.getElementById('amountInput').value = amount;
+            document.getElementById('totalPriceInput').value = ${totalPrice} SEK;
+        }
+
+        // Redirect to Thank You Page on Form Submission
+        document.getElementById("contactForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent default form submission
+
+            // Fetch form data
+            const formData = new FormData(event.target);
+
+            // Send data to Formspree
+            fetch(event.target.action, {
+                method: "POST",
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            }).then(response => {
+                if (response.ok) {
+                    window.location.href = "thankyou.html"; // Redirect on success
+                } else {
+                    alert("There was an issue submitting the form. Please try again.");
+                }
+            }).catch(error => {
+                alert("Oops! There was a problem submitting your form.");
+            });
+        });
+
+        // Initialize Default Amount and Order ID
+        window.onload = function() {
+            document.querySelectorAll('nav a').forEach((link, index) => {
+                setTimeout(() => {
+                    link.classList.add('animate-link');
+                }, 300 + index * 100);
+            });
+            selectAmount(document.querySelector('.amount-option[data-amount="5 grams"]'), '5 grams');
+            generateOrderID();
+        };
+    </script>
 </body>
 </html>
