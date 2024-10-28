@@ -30,16 +30,24 @@
 
         header .container {
             display: flex;
-            justify-content: space-between;
+            flex-direction: column;
+            justify-content: center;
             align-items: center;
             max-width: 1200px;
             margin: auto;
             padding: 0 1.5rem;
         }
 
+        @media (min-width: 768px) {
+            header .container {
+                flex-direction: row;
+                justify-content: space-between;
+            }
+        }
+
         /* Header Title Link */
         header h1 a {
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             font-weight: bold;
             letter-spacing: 1px;
             color: #f5f5f5;
@@ -47,23 +55,40 @@
             transition: color 0.3s ease;
         }
 
+        @media (min-width: 768px) {
+            header h1 a {
+                font-size: 1.8rem;
+            }
+        }
+
         /* Drop-in and Flash Animation for Main Menu */
+        nav {
+            margin-top: 1rem;
+        }
+
+        @media (min-width: 768px) {
+            nav {
+                margin-top: 0;
+            }
+        }
+
         nav a {
             color: #f0f0f0;
             text-decoration: none;
             font-weight: 500;
-            margin: 0 1rem;
+            margin: 0.5rem;
             padding: 0.5rem 1rem;
             border-radius: 25px;
             opacity: 0;
             transform: translateY(-20px);
-            animation: fadeInFlash 0.5s forwards;
-            transition: color 0.3s ease, background-color 0.3s ease;
+            transition: color 0.3s ease, background-color 0.3s ease, transform 0.5s ease, opacity 0.5s ease;
         }
 
-        nav a:nth-child(1) { animation-delay: 0.3s; }
-        nav a:nth-child(2) { animation-delay: 0.4s; }
-        nav a:nth-child(3) { animation-delay: 0.5s; }
+        @media (min-width: 768px) {
+            nav a {
+                margin: 0 1rem;
+            }
+        }
 
         /* Make Header Menu Buttons Turn Green on Hover */
         nav a:hover {
@@ -72,10 +97,10 @@
         }
 
         /* Drop-in and Green Flash Animation */
-        @keyframes fadeInFlash {
-            0% { opacity: 0; transform: translateY(-20px); }
-            70% { opacity: 1; transform: translateY(0); background-color: #2e8b57; color: #fff; }
-            100% { opacity: 1; transform: translateY(0); background-color: transparent; color: inherit; }
+        .animate-link {
+            opacity: 1;
+            transform: translateY(0);
+            transition-delay: 0.3s;
         }
 
         /* Main Content Styling */
@@ -90,13 +115,19 @@
             align-items: center;
             color: #2e2e2e;
             text-align: center;
-            position: relative;
+            padding: 1rem;
+        }
+
+        @media (min-width: 768px) {
+            .front-page {
+                height: calc(100vh - 80px);
+            }
         }
 
         /* Floating Symbols Styling */
         .symbol {
             position: absolute;
-            font-size: 2rem;
+            font-size: 1.5rem;
             color: rgba(0, 0, 0, 0.35);
             font-weight: bold;
             animation: float 8s ease-in-out infinite;
@@ -108,45 +139,52 @@
             transform: scale(1.1);
         }
 
+        @media (min-width: 768px) {
+            .symbol {
+                font-size: 2rem;
+            }
+        }
+
         @keyframes float {
             0% { transform: translateY(0); opacity: 0.7; }
             50% { transform: translateY(-30px); opacity: 1; }
             100% { transform: translateY(0); opacity: 0.7; }
         }
 
-        /* Positioning for Multiple Floating Symbols */
-        .symbol:nth-child(1) { left: 10%; top: 20%; animation-delay: 1s; }
-        .symbol:nth-child(2) { left: 60%; top: 60%; animation-delay: 2s; } /* Moved C to the right */
-        .symbol:nth-child(3) { left: 50%; top: 40%; animation-delay: 3s; }
-        .symbol:nth-child(4) { left: 70%; top: 30%; animation-delay: 1.5s; }
-        .symbol:nth-child(5) { left: 80%; top: 70%; animation-delay: 2.5s; }
-        .symbol:nth-child(6) { left: 40%; top: 10%; animation-delay: 2s; }
-        .symbol:nth-child(7) { left: 15%; top: 80%; animation-delay: 3s; } /* Moved S to the left */
-        .symbol:nth-child(8) { left: 60%; top: 20%; animation-delay: 4s; }
-        .symbol:nth-child(9) { left: 90%; top: 50%; animation-delay: 1.2s; }
-        .symbol:nth-child(10) { left: 15%; top: 40%; animation-delay: 2.8s; }
-
         /* Product Image */
         .product-image {
-            width: 200px;
+            width: 300px;
             height: auto;
             border-radius: 10px;
             margin-top: 1.5rem;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
-        /* Horizontal Toggle for Amount Selection */
+        @media (min-width: 768px) {
+            .product-image {
+                width: 200px;
+            }
+        }
+
+        /* Amount Option Buttons */
         .amount-toggle {
             display: flex;
-            justify-content: center;
+            flex-direction: column;
+            align-items: center;
             margin: 1.5rem 0;
             gap: 10px;
         }
 
-        /* Amount Option Buttons - Solid Green When Selected */
+        @media (min-width: 768px) {
+            .amount-toggle {
+                flex-direction: row;
+                justify-content: center;
+            }
+        }
+
         .amount-option {
-            padding: 0.5rem 1.5rem;
-            font-size: 1.1rem;
+            padding: 0.5rem 1rem;
+            font-size: 1rem;
             font-weight: bold;
             color: #2e8b57;
             background: transparent;
@@ -154,6 +192,13 @@
             border-radius: 20px;
             cursor: pointer;
             transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+        }
+
+        @media (min-width: 768px) {
+            .amount-option {
+                padding: 0.5rem 1.5rem;
+                font-size: 1.1rem;
+            }
         }
 
         .amount-option.selected {
@@ -167,14 +212,14 @@
             transform: scale(1.05);
         }
 
-        /* Purchase Button Styling with Flash Effect */
+        /* Purchase Button */
         .purchase-button, .back-button {
             display: inline-block;
-            padding: 1rem 2rem;
+            padding: 0.8rem 1.5rem;
             margin: 1rem 0;
             background-color: transparent;
             color: #2e8b57;
-            font-size: 1.2rem;
+            font-size: 1rem;
             font-weight: bold;
             text-transform: uppercase;
             border: 2px solid #2e8b57;
@@ -183,33 +228,20 @@
             transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
         }
 
+        @media (min-width: 768px) {
+            .purchase-button, .back-button {
+                padding: 1rem 2rem;
+                font-size: 1.2rem;
+            }
+        }
+
         .purchase-button:hover, .back-button:hover {
             background-color: #2e8b57;
             color: #fff;
             transform: scale(1.05);
         }
 
-        /* Price Breakdown Display */
-        .price-breakdown {
-            font-size: 1.5rem;
-            color: #333;
-            margin: 1.5rem 0;
-        }
-
-        .price-breakdown span {
-            font-weight: bold;
-        }
-
-        /* Footer Styling */
-        footer {
-            background-color: #333;
-            color: #fff;
-            text-align: center;
-            padding: 1.5rem;
-            font-size: 0.9rem;
-        }
-
-        /* Swish Checkout and Shipping Form */
+        /* Swish Checkout */
         .swish-checkout {
             display: none;
             margin-top: 2rem;
@@ -217,155 +249,39 @@
             border: 1px solid #ddd;
             border-radius: 10px;
             background-color: #f9f9f9;
-            text-align: left;
+            width: 90%;
+            max-width: 600px;
         }
 
         .swish-checkout img {
-            width: 150px;
+            width: 100%;
+            max-width: 150px;
             height: auto;
             margin-bottom: 1.5rem;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
-        /* Two-column form layout */
+        /* Form Layout */
         .form-container {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 1fr;
             gap: 1rem;
         }
 
-        .swish-checkout label {
-            font-weight: bold;
-            color: #333;
-            margin-top: 1rem;
+        @media (min-width: 768px) {
+            .form-container {
+                grid-template-columns: 1fr 1fr;
+            }
         }
 
-        .swish-checkout input[type="text"],
-        .swish-checkout input[type="email"],
-        .swish-checkout textarea {
+        .swish-checkout input[type="text"] {
             width: 100%;
             padding: 0.8rem;
-            margin-top: 0.5rem;
             border: 1px solid #ddd;
             border-radius: 5px;
             font-size: 1rem;
         }
-
-        .swish-checkout textarea {
-            resize: vertical;
-        }
-
-        .swish-checkout button {
-            grid-column: span 2;
-            width: 100%;
-            padding: 1rem;
-            background-color: #2e8b57;
-            color: #fff;
-            font-size: 1.2rem;
-            font-weight: bold;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            margin-top: 1rem;
-        }
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <div class="container">
-            <h1><a href="index.html">Phenibut HCL Budet</a></h1>
-            <nav>
-                <a href="index.html">Home</a>
-                <a href="kratom.html">Phenibut HCL</a>
-                <a href="contact.html">Contact</a>
-            </nav>
-        </div>
-    </header>
-
-    <!-- Main Content with Background Image and Floating Symbols -->
-    <main class="front-page">
-        <h1>Phenibut HCL</h1>
-
-        <!-- Floating Symbols -->
-        <div class="symbol">H</div>
-        <div class="symbol">C</div>
-        <div class="symbol">O</div>
-        <div class="symbol">N</div>
-        <div class="symbol">Na</div>
-        <div class="symbol">Cl</div>
-        <div class="symbol">Fe</div>
-        <div class="symbol">Mg</div>
-        <div class="symbol">K</div>
-        <div class="symbol">S</div>
-
-        <!-- Product Image -->
-        <img src="pp.jpg" alt="Phenibut HCL Product Image" class="product-image">
-
-        <!-- Fancy Toggle for Amount Selection -->
-        <div class="amount-toggle">
-            <div class="amount-option" data-amount="5 grams" onclick="selectAmount(this, '5 grams')">5 Gram Sample</div>
-            <div class="amount-option" data-amount="30 grams" onclick="selectAmount(this, '30 grams')">30 grams</div>
-            <div class="amount-option" data-amount="60 grams" onclick="selectAmount(this, '60 grams')">60 grams</div>
-            <div class="amount-option" data-amount="150 grams" onclick="selectAmount(this, '150 grams')">150 grams</div>
-        </div>
-
-        <!-- Price Breakdown Display -->
-        <div class="price-breakdown">
-            <p>Item Price: <span id="itemPriceDisplay"></span></p>
-            <p>Shipping Price: <span id="shippingPriceDisplay"></span></p>
-            <p>Total: <span id="totalPriceDisplay"></span></p>
-        </div>
-
-        <!-- Purchase and Back Button -->
-        <button id="purchaseButton" class="purchase-button" onclick="toggleSwishCheckout()">Purchase</button>
-        <button id="backButton" class="back-button" style="display: none;" onclick="toggleSwishCheckout()">Back</button>
-
-        <!-- Swish Checkout and Shipping Form -->
-        <div class="swish-checkout" id="swishCheckout">
-            <h3>Swish Payment Instructions</h3>
-            <p>#1: Scan the QR code and Swish the Total Payment.</p>
-            <p>#2: Put Your Order ID in the message on your Swish payment.</p>
-            <p><strong>Total Price to Swish:</strong> <span id="dynamicTotalPrice"></span></p>
-            <p><strong>Your Order ID:</strong> <span id="orderIDText"></span></p>
-            <img src="https://rty.vux.mybluehost.me/wp-content/uploads/2024/10/swish.png-1.jpg-1.jpg" alt="Swish QR Code">
-
-            <!-- Shipping Information Form with Two-column Layout -->
-            <h3>Shipping Information</h3>
-            <form action="https://formspree.io/f/mrbgeqaw" method="POST" class="form-container">
-                <input type="hidden" id="orderID" name="orderID">
-                <label for="orderIDInput">Order ID</label>
-                <input type="text" id="orderIDInput" name="orderIDInput" readonly>
-                <label for="selectedAmount">Selected Amount</label>
-                <input type="text" id="selectedAmount" name="selectedAmount" readonly>
-                <label for="totalPrice">Total Price</label>
-                <input type="text" id="totalPrice" name="totalPrice" readonly>
-                <label for="name">Full Name</label>
-                <input type="text" id="name" name="name" required>
-                <label for="address">Street Address</label>
-                <input type="text" id="address" name="address" required>
-                <label for="city">City</label>
-                <input type="text" id="city" name="city" required>
-                <label for="zip">Postal Code</label>
-                <input type="text" id="zip" name="zip" required>
-                <label for="country">Country</label>
-                <input type="text" id="country" name="country" required>
-                <label for="phone">Phone Number</label>
-                <input type="text" id="phone" name="phone" required>
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" required>
-                <label for="message">Additional Message (Optional)</label>
-                <textarea id="message" name="message" rows="4"></textarea>
-                <button type="submit" class="purchase-button">I have Sent the Swish Payment</button>
-            </form>
-        </div>
-    </main>
-
-    <!-- Footer -->
-    <footer>
-        <p>&copy; 2024 Phenibut HCL Budet. All rights reserved.</p>
-    </footer>
-</body>
-</html>
