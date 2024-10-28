@@ -46,7 +46,10 @@
         }
 
         /* Header Title Link */
-        header h1 a {
+        
+    opacity: 0;
+    transform: translateY(-20px);
+    animation: fadeInFlashText 0.8s forwards 0.3s;
             font-size: 1.5rem;
             font-weight: bold;
             letter-spacing: 1px;
@@ -72,7 +75,10 @@
             }
         }
 
-        nav a {
+        
+    opacity: 0;
+    transform: translateY(-20px);
+    animation: fadeInFlashText 0.5s forwards;
             color: #f0f0f0;
             text-decoration: none;
             font-weight: 500;
@@ -84,14 +90,14 @@
             transition: color 0.3s ease, background-color 0.3s ease, transform 0.5s ease, opacity 0.5s ease;
         }
 
-        @media (min-width: 768px) {
-            nav a {
-                margin: 0 1rem;
-            }
+        @media (min-width: 768px) {
+    transition: color 0.3s ease, background-color 0.3s ease;
         }
 
         /* Make Header Menu Buttons Turn Green on Hover */
-        nav a:hover {
+        
+    background-color: #2e8b57;
+    color: #fff;
             background-color: #2e8b57;
             color: #fff;
         }
@@ -282,7 +288,14 @@
             border-radius: 5px;
             font-size: 1rem;
         }
-    </style>
+    
+        /* Fade-in Flash Green Animation for Header and Menu Buttons */
+        @keyframes fadeInFlashText {
+            0% { opacity: 0; transform: translateY(-20px); color: #f5f5f5; }
+            70% { opacity: 1; transform: translateY(0); color: #2e8b57; }
+            100% { opacity: 1; transform: translateY(0); color: #f5f5f5; }
+        }
+
 </head>
 <body>
     <!-- Header -->
