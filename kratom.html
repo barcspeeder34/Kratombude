@@ -14,10 +14,11 @@
         }
 
         /* Body Styling */
-        
-    background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
-    color: #f8f9fa;
-    font-family: 'Orbitron', sans-serif;
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+        }
 
         /* Header Styling with Drop-in/Fade and Green Flash on Load */
         header {
@@ -29,97 +30,53 @@
 
         header .container {
             display: flex;
-            flex-direction: column;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
             max-width: 1200px;
             margin: auto;
             padding: 0 1.5rem;
         }
 
-        @media (min-width: 768px) {
-            header .container {
-                flex-direction: row;
-                justify-content: space-between;
-            }
-        }
-
         /* Header Title Link */
         header h1 a {
-    font-size: 1.5rem;
-    font-weight: bold;
-    letter-spacing: 1px;
-    color: #f5f5f5;
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-
-@media (min-width: 768px) {
-    header h1 a {
-        font-size: 1.8rem;
-    }
-}
-
-        @media (min-width: 768px) {
-            header h1 a {
-                font-size: 1.8rem;
-            }
+            font-size: 1.8rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+            color: #f5f5f5;
+            text-decoration: none;
+            transition: color 0.3s ease;
         }
 
         /* Drop-in and Flash Animation for Main Menu */
-        nav {
-            margin-top: 1rem;
-        }
-
-        @media (min-width: 768px) {
-            nav {
-                margin-top: 0;
-            }
-        }
-
-        color: #00bcd4; text-shadow: 0 0 10px #1de9b6;
+        nav a {
+            color: #f0f0f0;
             text-decoration: none;
             font-weight: 500;
-            margin: 0.5rem;
+            margin: 0 1rem;
             padding: 0.5rem 1rem;
             border-radius: 25px;
             opacity: 0;
             transform: translateY(-20px);
-            transition: color 0.3s ease, background-color 0.3s ease, transform 0.5s ease, opacity 0.5s ease;
+            animation: fadeInFlash 0.5s forwards;
+            transition: color 0.3s ease, background-color 0.3s ease;
         }
 
-        @media (min-width: 768px) {
-            nav a {
-    color: #f0f0f0;
-    text-decoration: none;
-    font-weight: 500;
-    margin: 0.5rem;
-    padding: 0.5rem 1rem;
-    border-radius: 25px;
-    opacity: 0;
-    transform: translateY(-20px);
-    transition: color 0.3s ease, background-color 0.3s ease, transform 0.5s ease, opacity 0.5s ease;
-}
-
-@media (min-width: 768px) {
-    nav a {
-        margin: 0 1rem;
-    }
-}
-        }
+        nav a:nth-child(1) { animation-delay: 0.3s; }
+        nav a:nth-child(2) { animation-delay: 0.4s; }
+        nav a:nth-child(3) { animation-delay: 0.5s; }
 
         /* Make Header Menu Buttons Turn Green on Hover */
         nav a:hover {
-    background-color: #2e8b57;
-    color: #fff;
-}
+            background-color: #2e8b57;
+            color: #fff;
+        }
 
         /* Drop-in and Green Flash Animation */
-        .animate-link {
-    opacity: 1;
-    transform: translateY(0);
-    transition-delay: 0.3s;
-}
+        @keyframes fadeInFlash {
+            0% { opacity: 0; transform: translateY(-20px); }
+            70% { opacity: 1; transform: translateY(0); background-color: #2e8b57; color: #fff; }
+            100% { opacity: 1; transform: translateY(0); background-color: transparent; color: inherit; }
+        }
 
         /* Main Content Styling */
         .front-page {
@@ -133,17 +90,13 @@
             align-items: center;
             color: #2e2e2e;
             text-align: center;
-            padding: 1rem;
-        }
-
-        @media (min-width: 768px) {
-            .front-page {
-                height: calc(100vh - 80px);
-            }
+            position: relative;
         }
 
         /* Floating Symbols Styling */
-        font-size: 2rem; color: #00bcd4; text-shadow: 0 0 10px #1de9b6;
+        .symbol {
+            position: absolute;
+            font-size: 2rem;
             color: rgba(0, 0, 0, 0.35);
             font-weight: bold;
             animation: float 8s ease-in-out infinite;
@@ -155,86 +108,79 @@
             transform: scale(1.1);
         }
 
-        @media (min-width: 768px) {
-            .symbol {
-                font-size: 2rem;
-            }
-        }
-
         @keyframes float {
             0% { transform: translateY(0); opacity: 0.7; }
             50% { transform: translateY(-30px); opacity: 1; }
             100% { transform: translateY(0); opacity: 0.7; }
         }
 
+        /* Positioning for Multiple Floating Symbols */
+        .symbol:nth-child(1) { left: 10%; top: 20%; animation-delay: 1s; }
+        .symbol:nth-child(2) { left: 60%; top: 60%; animation-delay: 2s; } /* Moved C to the right */
+        .symbol:nth-child(3) { left: 50%; top: 40%; animation-delay: 3s; }
+        .symbol:nth-child(4) { left: 70%; top: 30%; animation-delay: 1.5s; }
+        .symbol:nth-child(5) { left: 80%; top: 70%; animation-delay: 2.5s; }
+        .symbol:nth-child(6) { left: 40%; top: 10%; animation-delay: 2s; }
+        .symbol:nth-child(7) { left: 15%; top: 80%; animation-delay: 3s; } /* Moved S to the left */
+        .symbol:nth-child(8) { left: 60%; top: 20%; animation-delay: 4s; }
+        .symbol:nth-child(9) { left: 90%; top: 50%; animation-delay: 1.2s; }
+        .symbol:nth-child(10) { left: 15%; top: 40%; animation-delay: 2.8s; }
+
         /* Product Image */
         .product-image {
-            width: 150px;
+            width: 200px;
             height: auto;
             border-radius: 10px;
             margin-top: 1.5rem;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
-        @media (min-width: 768px) {
-            .product-image {
-                width: 200px;
-            }
-        }
-
-        /* Amount Option Buttons */
+        /* Horizontal Toggle for Amount Selection */
         .amount-toggle {
             display: flex;
-            flex-direction: column;
-            align-items: center;
+            justify-content: center;
             margin: 1.5rem 0;
             gap: 10px;
         }
 
-        @media (min-width: 768px) {
-            .amount-toggle {
-                flex-direction: row;
-                justify-content: center;
-            }
-        }
-
-        border: 3px solid #1de9b6; background: rgba(13, 71, 161, 0.2);
+        /* Amount Option Buttons - Solid Green When Selected */
+        .amount-option {
+            padding: 0.5rem 1.5rem;
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #2e8b57;
+            background: transparent;
+            border: 2px solid #2e8b57;
             border-radius: 20px;
             cursor: pointer;
             transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
         }
 
-        @media (min-width: 768px) {
-            .amount-option {
-                padding: 0.5rem 1.5rem;
-                font-size: 1.1rem;
-            }
-        }
-
-        background: linear-gradient(45deg, #1de9b6, #00e676); box-shadow: 0 0 15px #00e676;
+        .amount-option.selected {
+            background-color: #2e8b57;
             color: #fff;
         }
 
-        background: linear-gradient(45deg, #00e676, #00bcd4); box-shadow: 0 0 10px #00e676;
+        .amount-option:hover {
+            background-color: #2e8b57;
             color: #fff;
             transform: scale(1.05);
         }
 
-        /* Purchase Button */
-        
-    background: linear-gradient(45deg, #00bcd4, #1de9b6);
-    border: 3px solid #00bcd4;
-    box-shadow: 0 0 15px #1de9b6;
+        /* Purchase Button Styling with Flash Effect */
+        .purchase-button, .back-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            margin: 1rem 0;
+            background-color: transparent;
+            color: #2e8b57;
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            border: 2px solid #2e8b57;
             border-radius: 8px;
             cursor: pointer;
             transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
-        }
-
-        @media (min-width: 768px) {
-            .purchase-button, .back-button {
-                padding: 1rem 2rem;
-                font-size: 1.2rem;
-            }
         }
 
         .purchase-button:hover, .back-button:hover {
@@ -243,7 +189,27 @@
             transform: scale(1.05);
         }
 
-        /* Swish Checkout */
+        /* Price Breakdown Display */
+        .price-breakdown {
+            font-size: 1.5rem;
+            color: #333;
+            margin: 1.5rem 0;
+        }
+
+        .price-breakdown span {
+            font-weight: bold;
+        }
+
+        /* Footer Styling */
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 1.5rem;
+            font-size: 0.9rem;
+        }
+
+        /* Swish Checkout and Shipping Form */
         .swish-checkout {
             display: none;
             margin-top: 2rem;
@@ -251,38 +217,58 @@
             border: 1px solid #ddd;
             border-radius: 10px;
             background-color: #f9f9f9;
-            width: 90%;
-            max-width: 600px;
+            text-align: left;
         }
 
         .swish-checkout img {
-            width: 100%;
-            max-width: 150px;
+            width: 150px;
             height: auto;
             margin-bottom: 1.5rem;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
-        /* Form Layout */
+        /* Two-column form layout */
         .form-container {
             display: grid;
-            grid-template-columns: 1fr;
+            grid-template-columns: 1fr 1fr;
             gap: 1rem;
         }
 
-        @media (min-width: 768px) {
-            .form-container {
-                grid-template-columns: 1fr 1fr;
-            }
+        .swish-checkout label {
+            font-weight: bold;
+            color: #333;
+            margin-top: 1rem;
         }
 
-        .swish-checkout input[type="text"] {
+        .swish-checkout input[type="text"],
+        .swish-checkout input[type="email"],
+        .swish-checkout textarea {
             width: 100%;
             padding: 0.8rem;
+            margin-top: 0.5rem;
             border: 1px solid #ddd;
             border-radius: 5px;
             font-size: 1rem;
+        }
+
+        .swish-checkout textarea {
+            resize: vertical;
+        }
+
+        .swish-checkout button {
+            grid-column: span 2;
+            width: 100%;
+            padding: 1rem;
+            background-color: #2e8b57;
+            color: #fff;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 1rem;
         }
     </style>
 </head>
@@ -299,14 +285,26 @@
         </div>
     </header>
 
-    <!-- Main Content -->
+    <!-- Main Content with Background Image and Floating Symbols -->
     <main class="front-page">
-        <h1 style="font-family: 'Orbitron', sans-serif; font-size: 3rem; color: #1de9b6; text-shadow: 0 0 20px #00e676;">Phenibut HCL</h1>
+        <h1>Phenibut HCL</h1>
+
+        <!-- Floating Symbols -->
+        <div class="symbol">H</div>
+        <div class="symbol">C</div>
+        <div class="symbol">O</div>
+        <div class="symbol">N</div>
+        <div class="symbol">Na</div>
+        <div class="symbol">Cl</div>
+        <div class="symbol">Fe</div>
+        <div class="symbol">Mg</div>
+        <div class="symbol">K</div>
+        <div class="symbol">S</div>
 
         <!-- Product Image -->
         <img src="pp.jpg" alt="Phenibut HCL Product Image" class="product-image">
 
-        <!-- Amount Selection -->
+        <!-- Fancy Toggle for Amount Selection -->
         <div class="amount-toggle">
             <div class="amount-option" data-amount="5 grams" onclick="selectAmount(this, '5 grams')">5 Gram Sample</div>
             <div class="amount-option" data-amount="30 grams" onclick="selectAmount(this, '30 grams')">30 grams</div>
@@ -314,62 +312,52 @@
             <div class="amount-option" data-amount="150 grams" onclick="selectAmount(this, '150 grams')">150 grams</div>
         </div>
 
-        <!-- Price Display -->
+        <!-- Price Breakdown Display -->
         <div class="price-breakdown">
             <p>Item Price: <span id="itemPriceDisplay"></span></p>
             <p>Shipping Price: <span id="shippingPriceDisplay"></span></p>
             <p>Total: <span id="totalPriceDisplay"></span></p>
         </div>
 
-        <!-- Purchase Button -->
+        <!-- Purchase and Back Button -->
         <button id="purchaseButton" class="purchase-button" onclick="toggleSwishCheckout()">Purchase</button>
+        <button id="backButton" class="back-button" style="display: none;" onclick="toggleSwishCheckout()">Back</button>
 
-        <!-- Swish Checkout -->
+        <!-- Swish Checkout and Shipping Form -->
         <div class="swish-checkout" id="swishCheckout">
             <h3>Swish Payment Instructions</h3>
             <p>#1: Scan the QR code and Swish the Total Payment.</p>
             <p>#2: Put Your Order ID in the message on your Swish payment.</p>
-            <p><strong>Your Order ID:</strong> <span id="orderIDDisplay"></span></p>
             <p><strong>Total Price to Swish:</strong> <span id="dynamicTotalPrice"></span></p>
+            <p><strong>Your Order ID:</strong> <span id="orderIDText"></span></p>
             <img src="https://rty.vux.mybluehost.me/wp-content/uploads/2024/10/swish.png-1.jpg-1.jpg" alt="Swish QR Code">
 
-            <!-- Formspree Form -->
-            <form id="contactForm" action="https://formspree.io/f/mrbgeqaw" method="POST" class="form-container">
+            <!-- Shipping Information Form with Two-column Layout -->
+            <h3>Shipping Information</h3>
+            <form action="https://formspree.io/f/mrbgeqaw" method="POST" class="form-container">
                 <input type="hidden" id="orderID" name="orderID">
-                <input type="hidden" id="selectedAmount" name="selectedAmount">
-                <input type="hidden" id="totalPrice" name="totalPrice">
-
-                <!-- Customer Inputs -->
                 <label for="orderIDInput">Order ID</label>
                 <input type="text" id="orderIDInput" name="orderIDInput" readonly>
-
-                <label for="amountInput">Amount (grams)</label>
-                <input type="text" id="amountInput" name="amountInput" readonly>
-
-                <label for="totalPriceInput">Total Price</label>
-                <input type="text" id="totalPriceInput" name="totalPriceInput" readonly>
-
+                <label for="selectedAmount">Selected Amount</label>
+                <input type="text" id="selectedAmount" name="selectedAmount" readonly>
+                <label for="totalPrice">Total Price</label>
+                <input type="text" id="totalPrice" name="totalPrice" readonly>
                 <label for="name">Full Name</label>
                 <input type="text" id="name" name="name" required>
-                
                 <label for="address">Street Address</label>
                 <input type="text" id="address" name="address" required>
-
                 <label for="city">City</label>
                 <input type="text" id="city" name="city" required>
-
                 <label for="zip">Postal Code</label>
                 <input type="text" id="zip" name="zip" required>
-
                 <label for="country">Country</label>
                 <input type="text" id="country" name="country" required>
-
                 <label for="phone">Phone Number</label>
                 <input type="text" id="phone" name="phone" required>
-
                 <label for="email">Email</label>
                 <input type="email" id="email" name="email" required>
-                
+                <label for="message">Additional Message (Optional)</label>
+                <textarea id="message" name="message" rows="4"></textarea>
                 <button type="submit" class="purchase-button">I have Sent the Swish Payment</button>
             </form>
         </div>
@@ -379,88 +367,5 @@
     <footer>
         <p>&copy; 2024 Phenibut HCL Budet. All rights reserved.</p>
     </footer>
-
-    <script>
-        // Generate Dynamic Order ID
-        function generateOrderID() {
-            const orderID = 'PH' + Math.floor(100000 + Math.random() * 900000);
-            document.getElementById('orderIDDisplay').textContent = orderID;
-            document.getElementById('orderID').value = orderID;
-            document.getElementById('orderIDInput').value = orderID;
-        }
-
-        // Toggle Checkout and Update Button Text
-        function toggleSwishCheckout() {
-            const checkoutSection = document.getElementById('swishCheckout');
-            const purchaseButton = document.getElementById('purchaseButton');
-            checkoutSection.style.display = checkoutSection.style.display === 'none' ? 'block' : 'none';
-            purchaseButton.textContent = checkoutSection.style.display === 'block' ? 'Back' : 'Purchase';
-        }
-
-        // Select Amount and Display Prices
-        const pricing = {
-            "5 grams": 99,
-            "30 grams": 371,
-            "60 grams": 599,
-            "150 grams": 1099,
-            shipping: 96
-        };
-
-        function selectAmount(element, amount) {
-            document.querySelectorAll('.amount-option').forEach(el => el.classList.remove('selected'));
-            element.classList.add('selected');
-
-            const itemPrice = pricing[amount];
-            const shippingPrice = pricing.shipping;
-            const totalPrice = itemPrice + shippingPrice;
-
-            document.getElementById('itemPriceDisplay').textContent = `${itemPrice} SEK`;
-            document.getElementById('shippingPriceDisplay').textContent = `${shippingPrice} SEK`;
-            document.getElementById('totalPriceDisplay').textContent = `${totalPrice} SEK`;
-            document.getElementById('dynamicTotalPrice').textContent = `${totalPrice} SEK`;
-
-            // Update hidden form fields
-            document.getElementById('selectedAmount').value = amount;
-            document.getElementById('totalPrice').value = `${totalPrice} SEK`;
-            document.getElementById('amountInput').value = amount;
-            document.getElementById('totalPriceInput').value = `${totalPrice} SEK`;
-        }
-
-        // Redirect to Thank You Page on Form Submission
-        document.getElementById("contactForm").addEventListener("submit", function(event) {
-            event.preventDefault(); // Prevent default form submission
-
-            // Fetch form data
-            const formData = new FormData(event.target);
-
-            // Send data to Formspree
-            fetch(event.target.action, {
-                method: "POST",
-                body: formData,
-                headers: {
-                    'Accept': 'application/json'
-                }
-            }).then(response => {
-                if (response.ok) {
-                    window.location.href = "thankyou.html"; // Redirect on success
-                } else {
-                    alert("There was an issue submitting the form. Please try again.");
-                }
-            }).catch(error => {
-                alert("Oops! There was a problem submitting your form.");
-            });
-        });
-
-        // Initialize Default Amount and Order ID
-        window.onload = function() {
-            document.querySelectorAll('nav a').forEach((link, index) => {
-                setTimeout(() => {
-                    link.classList.add('animate-link');
-                }, 300 + index * 100);
-            });
-            selectAmount(document.querySelector('.amount-option[data-amount="5 grams"]'), '5 grams');
-            generateOrderID();
-        };
-    </script>
 </body>
 </html>
