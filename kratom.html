@@ -212,34 +212,58 @@
             transform: scale(1.05);
         }
 
-        /* Purchase Button */
-        .purchase-button, .back-button {
-            display: inline-block;
-            padding: 0.8rem 1.5rem;
-            margin: 1rem 0;
-            background-color: transparent;
-            color: #2e8b57;
-            font-size: 1rem;
-            font-weight: bold;
-            text-transform: uppercase;
-            border: 2px solid #2e8b57;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
-        }
+/* Purchase Button */
+.purchase-button, .back-button {
+    display: inline-block;
+    padding: 0.8rem 1.5rem;
+    margin: 1rem 0;
+    background-color: #2e8b57; /* Solid green background */
+    color: #fff; /* White text */
+    font-size: 1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    border: none; /* Remove border */
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
 
-        @media (min-width: 768px) {
-            .purchase-button, .back-button {
-                padding: 1rem 2rem;
-                font-size: 1.2rem;
-            }
-        }
+@media (min-width: 768px) {
+    .purchase-button, .back-button {
+        padding: 1rem 2rem;
+        font-size: 1.2rem;
+    }
+}
 
-        .purchase-button:hover, .back-button:hover {
-            background-color: #2e8b57;
-            color: #fff;
-            transform: scale(1.05);
-        }
+/* Hover Effect */
+.purchase-button:hover, .back-button:hover {
+    background-color: #248f4d; /* Darker green on hover */
+    transform: scale(1.1) rotate(3deg); /* Slight rotation and scaling */
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3); /* Shadow effect */
+}
+
+/* Inner Glow Effect */
+.purchase-button::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300%;
+    height: 300%;
+    background-color: rgba(255, 255, 255, 0.2); /* Light glow */
+    transform: translate(-50%, -50%) rotate(45deg);
+    transition: width 0.4s ease, height 0.4s ease;
+    border-radius: 50%;
+}
+
+/* Expand Glow on Hover */
+.purchase-button:hover::before {
+    width: 120%;
+    height: 120%;
+    background-color: rgba(255, 255, 255, 0.1);
+}
 
         /* Swish Checkout */
         .swish-checkout {
