@@ -46,13 +46,19 @@
 
         /* Header Title Link */
         header h1 a {
-            font-size: 1.5rem;
-            font-weight: bold;
-            letter-spacing: 1px;
-            color: #f5f5f5;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
+    font-size: 1.5rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    color: #f5f5f5;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+@media (min-width: 768px) {
+    header h1 a {
+        font-size: 1.8rem;
+    }
+}
 
         @media (min-width: 768px) {
             header h1 a {
@@ -84,22 +90,36 @@
 
         @media (min-width: 768px) {
             nav a {
-                margin: 0 1rem;
-            }
+    color: #f0f0f0;
+    text-decoration: none;
+    font-weight: 500;
+    margin: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 25px;
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: color 0.3s ease, background-color 0.3s ease, transform 0.5s ease, opacity 0.5s ease;
+}
+
+@media (min-width: 768px) {
+    nav a {
+        margin: 0 1rem;
+    }
+}
         }
 
         /* Make Header Menu Buttons Turn Green on Hover */
         nav a:hover {
-            background-color: #2e8b57;
-            color: #fff;
-        }
+    background-color: #2e8b57;
+    color: #fff;
+}
 
         /* Drop-in and Green Flash Animation */
         .animate-link {
-            opacity: 1;
-            transform: translateY(0);
-            transition-delay: 0.3s;
-        }
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.3s;
+}
 
         /* Main Content Styling */
         .front-page {
