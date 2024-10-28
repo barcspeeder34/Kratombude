@@ -14,11 +14,10 @@
         }
 
         /* Body Styling */
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f8f9fa;
-            margin: 0;
-        }
+        
+    background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+    color: #f8f9fa;
+    font-family: 'Orbitron', sans-serif;
 
         /* Header Styling with Drop-in/Fade and Green Flash on Load */
         header {
@@ -46,10 +45,7 @@
         }
 
         /* Header Title Link */
-        
-    opacity: 0;
-    transform: translateY(-20px);
-    animation: fadeInFlashText 0.8s forwards 0.3s;
+        header h1 a {
             font-size: 1.5rem;
             font-weight: bold;
             letter-spacing: 1px;
@@ -75,11 +71,7 @@
             }
         }
 
-        
-    opacity: 0;
-    transform: translateY(-20px);
-    animation: fadeInFlashText 0.5s forwards;
-            color: #f0f0f0;
+        color: #00bcd4; text-shadow: 0 0 10px #1de9b6;
             text-decoration: none;
             font-weight: 500;
             margin: 0.5rem;
@@ -90,14 +82,14 @@
             transition: color 0.3s ease, background-color 0.3s ease, transform 0.5s ease, opacity 0.5s ease;
         }
 
-        @media (min-width: 768px) {
-    transition: color 0.3s ease, background-color 0.3s ease;
+        @media (min-width: 768px) {
+            nav a {
+                margin: 0 1rem;
+            }
         }
 
         /* Make Header Menu Buttons Turn Green on Hover */
-        
-    background-color: #2e8b57;
-    color: #fff;
+        nav a:hover {
             background-color: #2e8b57;
             color: #fff;
         }
@@ -131,9 +123,7 @@
         }
 
         /* Floating Symbols Styling */
-        .symbol {
-            position: absolute;
-            font-size: 1.5rem;
+        font-size: 2rem; color: #00bcd4; text-shadow: 0 0 10px #1de9b6;
             color: rgba(0, 0, 0, 0.35);
             font-weight: bold;
             animation: float 8s ease-in-out infinite;
@@ -188,13 +178,7 @@
             }
         }
 
-        .amount-option {
-            padding: 0.5rem 1rem;
-            font-size: 1rem;
-            font-weight: bold;
-            color: #2e8b57;
-            background: transparent;
-            border: 2px solid #2e8b57;
+        border: 3px solid #1de9b6; background: rgba(13, 71, 161, 0.2);
             border-radius: 20px;
             cursor: pointer;
             transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
@@ -207,28 +191,20 @@
             }
         }
 
-        .amount-option.selected {
-            background-color: #2e8b57;
+        background: linear-gradient(45deg, #1de9b6, #00e676); box-shadow: 0 0 15px #00e676;
             color: #fff;
         }
 
-        .amount-option:hover {
-            background-color: #2e8b57;
+        background: linear-gradient(45deg, #00e676, #00bcd4); box-shadow: 0 0 10px #00e676;
             color: #fff;
             transform: scale(1.05);
         }
 
         /* Purchase Button */
-        .purchase-button, .back-button {
-            display: inline-block;
-            padding: 0.8rem 1.5rem;
-            margin: 1rem 0;
-            background-color: transparent;
-            color: #2e8b57;
-            font-size: 1rem;
-            font-weight: bold;
-            text-transform: uppercase;
-            border: 2px solid #2e8b57;
+        
+    background: linear-gradient(45deg, #00bcd4, #1de9b6);
+    border: 3px solid #00bcd4;
+    box-shadow: 0 0 15px #1de9b6;
             border-radius: 8px;
             cursor: pointer;
             transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
@@ -288,14 +264,7 @@
             border-radius: 5px;
             font-size: 1rem;
         }
-    
-        /* Fade-in Flash Green Animation for Header and Menu Buttons */
-        @keyframes fadeInFlashText {
-            0% { opacity: 0; transform: translateY(-20px); color: #f5f5f5; }
-            70% { opacity: 1; transform: translateY(0); color: #2e8b57; }
-            100% { opacity: 1; transform: translateY(0); color: #f5f5f5; }
-        }
-
+    </style>
 </head>
 <body>
     <!-- Header -->
@@ -312,7 +281,7 @@
 
     <!-- Main Content -->
     <main class="front-page">
-        <h1>Phenibut HCL</h1>
+        <h1 style="font-family: 'Orbitron', sans-serif; font-size: 3rem; color: #1de9b6; text-shadow: 0 0 20px #00e676;">Phenibut HCL</h1>
 
         <!-- Product Image -->
         <img src="pp.jpg" alt="Phenibut HCL Product Image" class="product-image">
