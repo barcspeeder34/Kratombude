@@ -61,23 +61,229 @@
             }
         }
 
-        /* Parallax Rotation Effect for Product Image */
+        /* Navigation Menu with Green Background and Hover Animation */
+        nav {
+            margin-top: 1rem;
+        }
+
+        @media (min-width: 768px) {
+            nav {
+                margin-top: 0;
+            }
+        }
+
+        nav a {
+            color: #fff;
+            background-color: #2e8b57;
+            text-decoration: none;
+            font-weight: 500;
+            margin: 0.5rem;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            opacity: 0;
+            transform: translateY(-20px);
+            transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        /* Hover Effect: Slight Scale, Glow, and White Text */
+        nav a:hover, .amount-option:hover, .purchase-button:hover {
+            background-color: #2e8b57;
+            color: #fff;
+            transform: scale(1.05); /* Slight size increase */
+            box-shadow: 0 0 10px #2e8b57; /* Green glow */
+        }
+
+        /* Drop-in and Green Flash Animation */
+        .animate-link, .amount-option, .purchase-button, nav a {
+            opacity: 0;
+            transform: translateY(-20px);
+            animation: dropIn 0.6s forwards, greenFlash 1.2s 0.5s forwards;
+        }
+
+        @keyframes dropIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes greenFlash {
+            0%, 100% {
+                background-color: transparent;
+            }
+            50% {
+                background-color: #2e8b57;
+                color: #fff;
+            }
+        }
+
+        /* Main Content Styling */
+        .front-page {
+            background-image: url('ggg.jpg');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #2e2e2e;
+            text-align: center;
+            padding: 1rem;
+        }
+
+        @media (min-width: 768px) {
+            .front-page {
+                height: calc(100vh - 80px);
+            }
+        }
+
+        /* Floating Symbols Styling */
+        .symbol {
+            position: absolute;
+            font-size: 1.5rem;
+            color: rgba(0, 0, 0, 0.35);
+            font-weight: bold;
+            animation: float 8s ease-in-out infinite;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        .symbol:hover {
+            color: #2e8b57;
+            transform: scale(1.1);
+        }
+
+        @media (min-width: 768px) {
+            .symbol {
+                font-size: 2rem;
+            }
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0); opacity: 0.7; }
+            50% { transform: translateY(-30px); opacity: 1; }
+            100% { transform: translateY(0); opacity: 0.7; }
+        }
+
+        /* Product Image */
         .product-image {
             width: 300px;
             height: auto;
             border-radius: 10px;
             margin-top: 1.5rem;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            transition: transform 0.1s ease;
-            transform-style: preserve-3d;
         }
 
-        /* Scale on Hover */
-        .product-image:hover {
-            transform: scale(1.02);
+        @media (min-width: 768px) {
+            .product-image {
+                width: 200px;
+            }
         }
 
-        /* Other styling here, such as for nav links, buttons, etc. */
+        /* Amount Option Buttons */
+        .amount-toggle {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 1.5rem 0;
+            gap: 10px;
+        }
+
+        @media (min-width: 768px) {
+            .amount-toggle {
+                flex-direction: row;
+                justify-content: center;
+            }
+        }
+
+        .amount-option {
+            padding: 0.5rem 1rem;
+            font-size: 1rem;
+            font-weight: bold;
+            color: #2e8b57;
+            background: transparent;
+            border: 2px solid #2e8b57;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        @media (min-width: 768px) {
+            .amount-option {
+                padding: 0.5rem 1.5rem;
+                font-size: 1.1rem;
+            }
+        }
+
+        .amount-option.selected {
+            background-color: #2e8b57;
+            color: #fff;
+        }
+
+        /* Purchase Button */
+        .purchase-button, .back-button {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            margin: 1rem 0;
+            background-color: transparent;
+            color: #2e8b57;
+            font-size: 1rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            border: 2px solid #2e8b57;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        @media (min-width: 768px) {
+            .purchase-button, .back-button {
+                padding: 1rem 2rem;
+                font-size: 1.2rem;
+            }
+        }
+
+        /* Swish Checkout */
+        .swish-checkout {
+            display: none;
+            margin-top: 2rem;
+            padding: 1.5rem;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+            width: 90%;
+            max-width: 600px;
+        }
+
+        .swish-checkout img {
+            width: 100%;
+            max-width: 150px;
+            height: auto;
+            margin-bottom: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Form Layout */
+        .form-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+
+        @media (min-width: 768px) {
+            .form-container {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .swish-checkout input[type="text"] {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
     </style>
 </head>
 <body>
@@ -97,11 +303,10 @@
     <main class="front-page">
         <h1>Phenibut HCL</h1>
 
-        <!-- Product Image with Interactive Tilt -->
-        <img src="pp.jpg" alt="Phenibut HCL Product Image" class="product-image" id="productImage">
+        <!-- Product Image -->
+        <img src="pp.jpg" alt="Phenibut HCL Product Image" class="product-image">
 
-        <!-- Other content: Amount Selection, Price Display, Purchase Button, Swish Checkout, etc. -->
-
+        <!-- Amount Selection -->
         <div class="amount-toggle">
             <div class="amount-option" data-amount="5 grams" onclick="selectAmount(this, '5 grams')">5 Gram Sample</div>
             <div class="amount-option" data-amount="30 grams" onclick="selectAmount(this, '30 grams')">30 grams</div>
@@ -109,14 +314,17 @@
             <div class="amount-option" data-amount="150 grams" onclick="selectAmount(this, '150 grams')">150 grams</div>
         </div>
 
+        <!-- Price Display -->
         <div class="price-breakdown">
             <p>Item Price: <span id="itemPriceDisplay"></span></p>
             <p>Shipping Price: <span id="shippingPriceDisplay"></span></p>
             <p>Total: <span id="totalPriceDisplay"></span></p>
         </div>
 
+        <!-- Purchase Button -->
         <button id="purchaseButton" class="purchase-button" onclick="toggleSwishCheckout()">Purchase</button>
 
+        <!-- Swish Checkout -->
         <div class="swish-checkout" id="swishCheckout">
             <h3>Swish Payment Instructions</h3>
             <p>#1: Scan the QR code and Swish the Total Payment.</p>
@@ -131,6 +339,7 @@
                 <input type="hidden" id="selectedAmount" name="selectedAmount">
                 <input type="hidden" id="totalPrice" name="totalPrice">
 
+                <!-- Customer Inputs -->
                 <label for="orderIDInput">Order ID</label>
                 <input type="text" id="orderIDInput" name="orderIDInput" readonly>
 
@@ -262,27 +471,6 @@
             selectAmount(document.querySelector('.amount-option[data-amount="5 grams"]'), '5 grams');
             generateOrderID();
         };
-
-        // Interactive Tilt Effect for Product Image
-        const productImage = document.getElementById('productImage');
-
-        productImage.addEventListener('mousemove', (e) => {
-            const rect = productImage.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-
-            const centerX = rect.width / 2;
-            const centerY = rect.height / 2;
-
-            const rotateX = (y - centerY) / 20;
-            const rotateY = (centerX - x) / 20;
-
-            productImage.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-        });
-
-        productImage.addEventListener('mouseleave', () => {
-            productImage.style.transform = 'rotateX(0) rotateY(0)';
-        });
     </script>
 </body>
 </html>
