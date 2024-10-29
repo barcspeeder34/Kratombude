@@ -75,6 +75,9 @@
             margin: 0.5rem;
             padding: 0.5rem 1rem;
             border-radius: 25px;
+            opacity: 0;
+            transform: translateY(-20px);
+            animation: buttonFadeIn 0.8s forwards;
             transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
         }
 
@@ -88,7 +91,7 @@
             background-image: url('ggg.jpg');
             background-size: cover;
             background-position: center;
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -107,12 +110,14 @@
             margin-bottom: 1rem;
         }
 
-        .product-image {
-            width: 300px;
-            height: auto;
-            border-radius: 10px;
-            margin-top: 1.5rem;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        /* Product Description */
+        .product-description {
+            font-size: 1.2rem;
+            color: #2e2e2e;
+            text-align: center;
+            max-width: 800px;
+            margin-top: 1rem;
+            line-height: 1.6;
         }
 
         /* Amount Option Buttons Styled Like Purchase Button */
@@ -140,6 +145,9 @@
             border: 2px solid #2e8b57;
             border-radius: 20px;
             cursor: pointer;
+            opacity: 0;
+            transform: translateY(-20px);
+            animation: buttonFadeIn 0.8s forwards;
             transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
         }
 
@@ -147,11 +155,6 @@
             background-color: #2e8b57;
             color: #fff;
             transform: scale(1.05);
-        }
-
-        .amount-option.selected {
-            background-color: #2e8b57;
-            color: #fff;
         }
 
         /* Purchase Button */
@@ -167,6 +170,9 @@
             border: 2px solid #2e8b57;
             border-radius: 8px;
             cursor: pointer;
+            opacity: 0;
+            transform: translateY(-20px);
+            animation: buttonFadeIn 0.8s forwards;
             transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
         }
 
@@ -229,8 +235,17 @@
 
         /* Desktop Only QR Code */
         @media (min-width: 768px) {
-            #mobileSwishButton, #swishPhoneNumber, #orderDetails {
+            #mobileSwishButton, #swishPhoneNumber {
                 display: none;
+            }
+
+            #swishQRCode {
+                display: block;
+                max-width: 150px;
+                height: auto;
+                margin-bottom: 1rem;
+                border-radius: 8px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             }
         }
 
@@ -263,6 +278,12 @@
         .price-breakdown p {
             font-weight: bold;
         }
+
+        /* Button Load-in Animation */
+        @keyframes buttonFadeIn {
+            0% { opacity: 0; transform: translateY(-20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
     </style>
 </head>
 <body>
@@ -281,6 +302,7 @@
     <!-- Main Content -->
     <main class="front-page">
         <h1>Phenibut HCL</h1>
+        <p class="product-description">PhenibutBudet is Sweden's #1 provider of pure Phenibut HCL as a raw material.<br>We provide next-day shipping to our Swedish customers.<br>Phenibut is sold strictly as a raw material and is not intended for human consumption.</p>
         <img src="pp.jpg" alt="Phenibut HCL Product Image" class="product-image" id="productImage">
 
         <!-- Amount Selection -->
@@ -303,10 +325,9 @@
         <!-- Swish Checkout -->
         <div class="swish-checkout" id="swishCheckout">
             <h3>Swish Payment Instructions</h3>
-            <a href="swish://payment?phone=0735515463" id="mobileSwishButton" class="purchase-button" style="display: none;">Open Swish App</a>
-
-            <!-- Swish Phone Number -->
+            <a href="swish://payment?phone=0735515463" id="mobileSwishButton" class="purchase-button">Open Swish App</a>
             <p id="swishPhoneNumber">0735515463</p>
+            <img src="https://rty.vux.mybluehost.me/wp-content/uploads/2024/10/swish.png-1.jpg-1.jpg" alt="Swish QR Code" id="swishQRCode">
 
             <!-- Order Details for Mobile Only -->
             <div id="orderDetails">
@@ -428,19 +449,8 @@
 
         // Initialize Default Amount and Order ID
         window.onload = function() {
-            document.querySelectorAll('nav a').forEach((link, index) => {
-                setTimeout(() => {
-                    link.classList.add('animate-link');
-                }, 300 + index * 100);
-            });
             selectAmount(document.querySelector('.amount-option[data-amount="5 grams"]'), '5 grams');
             generateOrderID();
-
-            // Show mobile-only Swish button on mobile devices
-            if (/Mobi|Android/i.test(navigator.userAgent)) {
-                const mobileSwishButton = document.getElementById('mobileSwishButton');
-                mobileSwishButton.style.display = 'block';
-            }
         };
     </script>
 </body>
