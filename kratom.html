@@ -72,32 +72,24 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
-        /* Updated Purchase Button with Bold Green Outline and Text */
+        /* Purchase Button */
         .purchase-button, .back-button {
             display: inline-block;
             padding: 0.8rem 1.5rem;
             margin: 1rem 0;
-            background-color: transparent; /* Transparent background */
-            color: #2e8b57; /* Green text */
+            background-color: #2e8b57;
+            color: #fff;
             font-size: 1rem;
             font-weight: bold;
             text-transform: uppercase;
-            border: 3px solid #2e8b57; /* Thicker green outline */
+            border: none;
             border-radius: 8px;
             cursor: pointer;
-            transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
-        }
-
-        @media (min-width: 768px) {
-            .purchase-button, .back-button {
-                padding: 1rem 2rem;
-                font-size: 1.2rem;
-            }
+            transition: transform 0.3s ease, background-color 0.3s ease;
         }
 
         .purchase-button:hover, .back-button:hover {
-            background-color: #2e8b57; /* Solid green background on hover */
-            color: #fff; /* White text on hover */
+            background-color: #248f4d;
             transform: scale(1.05);
         }
 
