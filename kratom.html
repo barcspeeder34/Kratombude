@@ -67,10 +67,6 @@
         }
 
         /* Navigation Menu */
-        nav {
-            margin-top: 1rem;
-        }
-
         nav a {
             color: #fff;
             background-color: #2e8b57;
@@ -228,6 +224,13 @@
             #orderDetails {
                 margin-bottom: 1rem;
                 font-size: 1rem;
+            }
+        }
+
+        /* Desktop Only QR Code */
+        @media (min-width: 768px) {
+            #mobileSwishButton, #swishPhoneNumber, #orderDetails {
+                display: none;
             }
         }
 
