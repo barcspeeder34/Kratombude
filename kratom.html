@@ -97,10 +97,27 @@
         }
 
         /* Drop-in and Green Flash Animation */
-        .animate-link {
-            opacity: 1;
-            transform: translateY(0);
-            transition-delay: 0.3s;
+        .animate-link, .amount-option, .purchase-button, nav a {
+            opacity: 0;
+            transform: translateY(-20px);
+            animation: dropIn 0.6s forwards, greenFlash 1.2s 0.5s forwards;
+        }
+
+        @keyframes dropIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes greenFlash {
+            0%, 100% {
+                background-color: transparent;
+            }
+            50% {
+                background-color: #2e8b57;
+                color: #fff;
+            }
         }
 
         /* Main Content Styling */
