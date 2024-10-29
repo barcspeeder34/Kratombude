@@ -226,7 +226,7 @@
         <img src="pp.jpg" alt="Phenibut HCL Product Image" class="product-image">
 
         <!-- Amount Selection -->
-        <div class="amount-toggle">
+        <div class="amount-toggle" id="amountToggle">
             <div class="amount-option" data-amount="5 grams" onclick="selectAmount(this, '5 grams')">5 Gram Sample</div>
             <div class="amount-option" data-amount="30 grams" onclick="selectAmount(this, '30 grams')">30 grams</div>
             <div class="amount-option" data-amount="60 grams" onclick="selectAmount(this, '60 grams')">60 grams</div>
@@ -252,6 +252,12 @@
 
             <!-- Swish QR Code -->
             <img src="https://rty.vux.mybluehost.me/wp-content/uploads/2024/10/swish.png-1.jpg-1.jpg" alt="Swish QR Code">
+
+            <!-- Payment Instructions -->
+            <p>#1: Scan the QR code and Swish the Total Payment.</p>
+            <p>#2: Put Your Order ID in the message on your Swish payment.</p>
+            <p><strong>Your Order ID:</strong> <span id="orderIDDisplay"></span></p>
+            <p><strong>Total Price to Swish:</strong> <span id="dynamicTotalPrice"></span></p>
 
             <!-- Formspree Form -->
             <form id="contactForm" action="https://formspree.io/f/mrbgeqaw" method="POST" class="form-container">
@@ -304,20 +310,23 @@
             document.getElementById('orderIDInput').value = orderID;
         }
 
-        // Toggle Checkout and Update Button Text
+        // Toggle Checkout, Hide Amount Buttons, and Update Button Text
         let isCheckoutVisible = false;
 
         function toggleSwishCheckout() {
             const checkoutSection = document.getElementById('swishCheckout');
             const purchaseButton = document.getElementById('purchaseButton');
+            const amountToggle = document.getElementById('amountToggle'); // Amount selection
 
             if (!isCheckoutVisible) {
                 checkoutSection.style.display = 'block';
                 purchaseButton.textContent = 'Back';
+                amountToggle.style.display = 'none'; // Hide amount options
                 isCheckoutVisible = true;
             } else {
                 checkoutSection.style.display = 'none';
                 purchaseButton.textContent = 'Purchase';
+                amountToggle.style.display = 'flex'; // Show amount options
                 isCheckoutVisible = false;
             }
         }
