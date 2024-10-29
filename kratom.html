@@ -45,13 +45,19 @@
             }
         }
 
+        /* Header Title with Same Style as Nav Buttons */
         header h1 a {
             font-size: 1.5rem;
             font-weight: bold;
             letter-spacing: 1px;
-            color: #f5f5f5;
+            color: #2e8b57;
             text-decoration: none;
-            transition: color 0.3s ease;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        header h1 a:hover {
+            color: #226b43;
+            transform: scale(1.05);
         }
 
         @media (min-width: 768px) {
@@ -73,7 +79,7 @@
             margin: 0.5rem;
             padding: 0.5rem 1rem;
             border-radius: 25px;
-            transition: background-color 0.3s ease, color 0.3s ease;
+            transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
         }
 
         nav a:hover {
@@ -96,6 +102,15 @@
             padding: 1rem;
         }
 
+        /* Fancy Styling for "Phenibut HCL" Main Heading */
+        .front-page h1 {
+            font-size: 3rem;
+            color: #2e8b57;
+            font-weight: bold;
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
+            margin-bottom: 1rem;
+        }
+
         .product-image {
             width: 300px;
             height: auto;
@@ -104,7 +119,7 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
-        /* Amount Option Buttons */
+        /* Amount Option Buttons Styled Like Purchase Button */
         .amount-toggle {
             display: flex;
             flex-direction: column;
@@ -130,6 +145,12 @@
             border-radius: 20px;
             cursor: pointer;
             transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+        }
+
+        .amount-option:hover {
+            background-color: #2e8b57;
+            color: #fff;
+            transform: scale(1.05);
         }
 
         .amount-option.selected {
@@ -171,15 +192,6 @@
             max-width: 600px;
         }
 
-        .swish-checkout img {
-            width: 100%;
-            max-width: 150px;
-            height: auto;
-            margin-bottom: 1.5rem;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
         /* Mobile-Only Swish Button and Phone Text */
         @media (max-width: 768px) {
             #mobileSwishButton {
@@ -201,7 +213,6 @@
                 transform: scale(1.05);
             }
 
-            /* Replace QR code with bold Swish phone text on mobile */
             .swish-checkout img {
                 display: none;
             }
@@ -214,7 +225,6 @@
                 margin-bottom: 0.5rem;
             }
 
-            /* Move Order ID and Total Price to below phone number */
             #orderDetails {
                 margin-bottom: 1rem;
                 font-size: 1rem;
