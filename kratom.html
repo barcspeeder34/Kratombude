@@ -93,30 +93,6 @@
             box-shadow: 0 0 10px #2e8b57; /* Green glow */
         }
 
-        /* Drop-in and Green Flash Animation */
-        .animate-link, .amount-option, .purchase-button, nav a {
-            opacity: 0;
-            transform: translateY(-20px);
-            animation: dropIn 0.6s forwards, greenFlash 1.2s 0.5s forwards;
-        }
-
-        @keyframes dropIn {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes greenFlash {
-            0%, 100% {
-                background-color: transparent;
-            }
-            50% {
-                background-color: #2e8b57;
-                color: #fff;
-            }
-        }
-
         /* Main Content Styling */
         .front-page {
             background-image: url('ggg.jpg');
@@ -132,39 +108,6 @@
             padding: 1rem;
         }
 
-        @media (min-width: 768px) {
-            .front-page {
-                height: calc(100vh - 80px);
-            }
-        }
-
-        /* Floating Symbols Styling */
-        .symbol {
-            position: absolute;
-            font-size: 1.5rem;
-            color: rgba(0, 0, 0, 0.35);
-            font-weight: bold;
-            animation: float 8s ease-in-out infinite;
-            transition: color 0.3s ease, transform 0.3s ease;
-        }
-
-        .symbol:hover {
-            color: #2e8b57;
-            transform: scale(1.1);
-        }
-
-        @media (min-width: 768px) {
-            .symbol {
-                font-size: 2rem;
-            }
-        }
-
-        @keyframes float {
-            0% { transform: translateY(0); opacity: 0.7; }
-            50% { transform: translateY(-30px); opacity: 1; }
-            100% { transform: translateY(0); opacity: 0.7; }
-        }
-
         /* Product Image */
         .product-image {
             width: 300px;
@@ -172,12 +115,6 @@
             border-radius: 10px;
             margin-top: 1.5rem;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        @media (min-width: 768px) {
-            .product-image {
-                width: 200px;
-            }
         }
 
         /* Amount Option Buttons */
@@ -208,18 +145,6 @@
             transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        @media (min-width: 768px) {
-            .amount-option {
-                padding: 0.5rem 1.5rem;
-                font-size: 1.1rem;
-            }
-        }
-
-        .amount-option.selected {
-            background-color: #2e8b57;
-            color: #fff;
-        }
-
         /* Purchase Button */
         .purchase-button, .back-button {
             display: inline-block;
@@ -234,13 +159,6 @@
             border-radius: 8px;
             cursor: pointer;
             transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        @media (min-width: 768px) {
-            .purchase-button, .back-button {
-                padding: 1rem 2rem;
-                font-size: 1.2rem;
-            }
         }
 
         /* Swish Checkout */
@@ -264,25 +182,26 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
-        /* Form Layout */
-        .form-container {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 1rem;
-        }
-
-        @media (min-width: 768px) {
-            .form-container {
-                grid-template-columns: 1fr 1fr;
+        /* Mobile-Only Swish Button */
+        @media (max-width: 768px) {
+            #mobileSwishButton {
+                display: block;
+                margin-bottom: 1rem;
+                background-color: #2e8b57;
+                color: #fff;
+                text-align: center;
+                padding: 0.8rem;
+                border-radius: 8px;
+                text-decoration: none;
+                font-weight: bold;
+                font-size: 1rem;
+                transition: background-color 0.3s ease, transform 0.3s ease;
             }
-        }
 
-        .swish-checkout input[type="text"] {
-            width: 100%;
-            padding: 0.8rem;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 1rem;
+            #mobileSwishButton:hover {
+                background-color: #226b43;
+                transform: scale(1.05);
+            }
         }
     </style>
 </head>
@@ -327,6 +246,10 @@
         <!-- Swish Checkout -->
         <div class="swish-checkout" id="swishCheckout">
             <h3>Swish Payment Instructions</h3>
+
+            <!-- Mobile-only Swish Button -->
+            <a href="#" id="mobileSwishButton" class="purchase-button" style="display: none;">Open Swish App</a>
+
             <p>#1: Scan the QR code and Swish the Total Payment.</p>
             <p>#2: Put Your Order ID in the message on your Swish payment.</p>
             <p><strong>Your Order ID:</strong> <span id="orderIDDisplay"></span></p>
@@ -374,11 +297,6 @@
             </form>
         </div>
     </main>
-
-    <!-- Footer -->
-    <footer>
-        <p>&copy; 2024 Phenibut HCL Budet. All rights reserved.</p>
-    </footer>
 
     <script>
         // Generate Dynamic Order ID
@@ -436,31 +354,6 @@
             document.getElementById('totalPriceInput').value = totalPrice + ' SEK';
         }
 
-        // Redirect to Thank You Page on Form Submission
-        document.getElementById("contactForm").addEventListener("submit", function(event) {
-            event.preventDefault(); // Prevent default form submission
-
-            // Fetch form data
-            const formData = new FormData(event.target);
-
-            // Send data to Formspree
-            fetch(event.target.action, {
-                method: "POST",
-                body: formData,
-                headers: {
-                    'Accept': 'application/json'
-                }
-            }).then(response => {
-                if (response.ok) {
-                    window.location.href = "thankyou.html"; // Redirect on success
-                } else {
-                    alert("There was an issue submitting the form. Please try again.");
-                }
-            }).catch(error => {
-                alert("Oops! There was a problem submitting your form.");
-            });
-        });
-
         // Initialize Default Amount and Order ID
         window.onload = function() {
             document.querySelectorAll('nav a').forEach((link, index) => {
@@ -471,6 +364,18 @@
             selectAmount(document.querySelector('.amount-option[data-amount="5 grams"]'), '5 grams');
             generateOrderID();
         };
+
+        // Mobile-only Swish Button URL
+        const mobileSwishButton = document.getElementById('mobileSwishButton');
+        mobileSwishButton.addEventListener('click', function () {
+            const phoneNumber = '0735515463';
+            const orderID = document.getElementById('orderIDDisplay').textContent;
+            const amount = document.getElementById('dynamicTotalPrice').textContent.split(' ')[0]; // Extracts amount in SEK
+
+            // Create the Swish URL (assuming swish:// URL scheme is supported)
+            const swishURL = `swish://payment?phone=${phoneNumber}&amount=${amount}&message=${orderID}`;
+            mobileSwishButton.href = swishURL;
+        });
     </script>
 </body>
 </html>
