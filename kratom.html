@@ -180,7 +180,7 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
-        /* Mobile-Only Swish Button */
+        /* Mobile-Only Swish Button and Phone Text */
         @media (max-width: 768px) {
             #mobileSwishButton {
                 display: block;
@@ -199,6 +199,19 @@
             #mobileSwishButton:hover {
                 background-color: #226b43;
                 transform: scale(1.05);
+            }
+
+            /* Replace QR code with bold Swish phone text on mobile */
+            .swish-checkout img {
+                display: none;
+            }
+
+            #swishPhoneNumber {
+                display: block;
+                font-size: 1.2rem;
+                font-weight: bold;
+                color: #2e8b57;
+                margin-bottom: 1rem;
             }
         }
 
@@ -226,6 +239,11 @@
             grid-column: 1 / -1;
             margin-top: 1rem;
         }
+
+        /* Bolded Price Breakdown */
+        .price-breakdown p {
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
@@ -244,7 +262,7 @@
     <!-- Main Content -->
     <main class="front-page">
         <h1>Phenibut HCL</h1>
-        <img src="pp.jpg" alt="Phenibut HCL Product Image" class="product-image">
+        <img src="pp.jpg" alt="Phenibut HCL Product Image" class="product-image" id="productImage">
 
         <!-- Amount Selection -->
         <div class="amount-toggle" id="amountToggle">
@@ -254,10 +272,10 @@
             <div class="amount-option" data-amount="150 grams" onclick="selectAmount(this, '150 grams')">150 grams</div>
         </div>
 
-        <div class="price-breakdown">
-            <p>Item Price: <span id="itemPriceDisplay"></span></p>
-            <p>Shipping Price: <span id="shippingPriceDisplay"></span></p>
-            <p>Total: <span id="totalPriceDisplay"></span></p>
+        <div class="price-breakdown" id="priceBreakdown">
+            <p>Item Price: <span id="itemPriceDisplay"></span> SEK</p>
+            <p>Shipping Price: <span id="shippingPriceDisplay"></span> SEK</p>
+            <p>Total: <span id="totalPriceDisplay"></span> SEK</p>
         </div>
 
         <!-- Purchase Button -->
@@ -268,12 +286,13 @@
             <h3>Swish Payment Instructions</h3>
             <a href="swish://payment?phone=0735515463" id="mobileSwishButton" class="purchase-button" style="display: none;">Open Swish App</a>
 
-            <!-- Swish QR Code -->
-            <img src="https://rty.vux.mybluehost.me/wp-content/uploads/2024/10/swish.png-1.jpg-1.jpg" alt="Swish QR Code">
+            <!-- Swish Phone Number -->
+            <p id="swishPhoneNumber">0735515463</p>
 
             <!-- Instructions -->
-            <p>#1: Scan the QR code and Swish the Total Payment.</p>
+            <p>#1: Swish the Total Amount.</p>
             <p>#2: Put Your Order ID in the message on your Swish payment.</p>
+            <p>#3: Input your delivery information in the form.</p>
             <p><strong>Your Order ID:</strong> <span id="orderIDDisplay"></span></p>
             <p><strong>Total Price to Swish:</strong> <span id="dynamicTotalPrice"></span></p>
 
@@ -328,23 +347,29 @@
             document.getElementById('orderIDInput').value = orderID;
         }
 
-        // Toggle Checkout, Hide Amount Buttons, and Update Button Text
+        // Toggle Checkout, Hide Amount Buttons, Product Image, and Price Breakdown
         let isCheckoutVisible = false;
 
         function toggleSwishCheckout() {
             const checkoutSection = document.getElementById('swishCheckout');
             const purchaseButton = document.getElementById('purchaseButton');
-            const amountToggle = document.getElementById('amountToggle'); // Amount selection
+            const amountToggle = document.getElementById('amountToggle');
+            const productImage = document.getElementById('productImage');
+            const priceBreakdown = document.getElementById('priceBreakdown');
 
             if (!isCheckoutVisible) {
                 checkoutSection.style.display = 'block';
                 purchaseButton.textContent = 'Back';
-                amountToggle.style.display = 'none'; // Hide amount options
+                amountToggle.style.display = 'none';
+                productImage.style.display = 'none';
+                priceBreakdown.style.display = 'none';
                 isCheckoutVisible = true;
             } else {
                 checkoutSection.style.display = 'none';
                 purchaseButton.textContent = 'Purchase';
-                amountToggle.style.display = 'flex'; // Show amount options
+                amountToggle.style.display = 'flex';
+                productImage.style.display = 'block';
+                priceBreakdown.style.display = 'block';
                 isCheckoutVisible = false;
             }
         }
@@ -366,9 +391,9 @@
             const shippingPrice = pricing.shipping;
             const totalPrice = itemPrice + shippingPrice;
 
-            document.getElementById('itemPriceDisplay').textContent = itemPrice + ' SEK';
-            document.getElementById('shippingPriceDisplay').textContent = shippingPrice + ' SEK';
-            document.getElementById('totalPriceDisplay').textContent = totalPrice + ' SEK';
+            document.getElementById('itemPriceDisplay').textContent = itemPrice;
+            document.getElementById('shippingPriceDisplay').textContent = shippingPrice;
+            document.getElementById('totalPriceDisplay').textContent = totalPrice;
             document.getElementById('dynamicTotalPrice').textContent = totalPrice + ' SEK';
 
             // Update hidden form fields
