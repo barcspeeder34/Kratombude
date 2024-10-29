@@ -60,15 +60,9 @@
             }
         }
 
-        /* Navigation Menu with Green Background and Hover Animation */
+        /* Navigation Menu */
         nav {
             margin-top: 1rem;
-        }
-
-        @media (min-width: 768px) {
-            nav {
-                margin-top: 0;
-            }
         }
 
         nav a {
@@ -79,9 +73,7 @@
             margin: 0.5rem;
             padding: 0.5rem 1rem;
             border-radius: 25px;
-            opacity: 0;
-            transform: translateY(-20px);
-            transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
         nav a:hover {
@@ -137,10 +129,16 @@
             border: 2px solid #2e8b57;
             border-radius: 20px;
             cursor: pointer;
-            transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+            transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
         }
 
-        .purchase-button, .back-button {
+        .amount-option.selected {
+            background-color: #2e8b57;
+            color: #fff;
+        }
+
+        /* Purchase Button */
+        .purchase-button {
             display: inline-block;
             padding: 0.8rem 1.5rem;
             margin: 1rem 0;
@@ -152,7 +150,13 @@
             border: 2px solid #2e8b57;
             border-radius: 8px;
             cursor: pointer;
-            transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+            transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+        }
+
+        .purchase-button:hover {
+            background-color: #2e8b57;
+            color: #fff;
+            transform: scale(1.05);
         }
 
         /* Swish Checkout */
@@ -262,8 +266,7 @@
         <!-- Swish Checkout -->
         <div class="swish-checkout" id="swishCheckout">
             <h3>Swish Payment Instructions</h3>
-            <!-- Mobile-only Swish Button -->
-            <a href="swish://payment?data=<?php echo urlencode('0735515463'); ?>" id="mobileSwishButton" class="purchase-button" style="display: none;">Open Swish App</a>
+            <a href="swish://payment?phone=0735515463" id="mobileSwishButton" class="purchase-button" style="display: none;">Open Swish App</a>
 
             <!-- Swish QR Code -->
             <img src="https://rty.vux.mybluehost.me/wp-content/uploads/2024/10/swish.png-1.jpg-1.jpg" alt="Swish QR Code">
@@ -271,4 +274,126 @@
             <!-- Instructions -->
             <p>#1: Scan the QR code and Swish the Total Payment.</p>
             <p>#2: Put Your Order ID in the message on your Swish payment.</p>
-            <p><strong>Your Order ID:</
+            <p><strong>Your Order ID:</strong> <span id="orderIDDisplay"></span></p>
+            <p><strong>Total Price to Swish:</strong> <span id="dynamicTotalPrice"></span></p>
+
+            <!-- Formspree Form -->
+            <form id="contactForm" action="https://formspree.io/f/mrbgeqaw" method="POST" class="form-container">
+                <input type="hidden" id="orderID" name="orderID">
+                <input type="hidden" id="selectedAmount" name="selectedAmount">
+                <input type="hidden" id="totalPrice" name="totalPrice">
+
+                <!-- Customer Inputs -->
+                <label for="orderIDInput">Order ID</label>
+                <input type="text" id="orderIDInput" name="orderIDInput" readonly>
+
+                <label for="amountInput">Amount (grams)</label>
+                <input type="text" id="amountInput" name="amountInput" readonly>
+
+                <label for="totalPriceInput">Total Price</label>
+                <input type="text" id="totalPriceInput" name="totalPriceInput" readonly>
+
+                <label for="name">Full Name</label>
+                <input type="text" id="name" name="name" required>
+                
+                <label for="address">Street Address</label>
+                <input type="text" id="address" name="address" required>
+
+                <label for="city">City</label>
+                <input type="text" id="city" name="city" required>
+
+                <label for="zip">Postal Code</label>
+                <input type="text" id="zip" name="zip" required>
+
+                <label for="country">Country</label>
+                <input type="text" id="country" name="country" required>
+
+                <label for="phone">Phone Number</label>
+                <input type="text" id="phone" name="phone" required>
+
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+                
+                <button type="submit" class="purchase-button">I have Sent the Swish Payment</button>
+            </form>
+        </div>
+    </main>
+
+    <script>
+        // Generate Dynamic Order ID
+        function generateOrderID() {
+            const orderID = 'PH' + Math.floor(100000 + Math.random() * 900000);
+            document.getElementById('orderIDDisplay').textContent = orderID;
+            document.getElementById('orderID').value = orderID;
+            document.getElementById('orderIDInput').value = orderID;
+        }
+
+        // Toggle Checkout, Hide Amount Buttons, and Update Button Text
+        let isCheckoutVisible = false;
+
+        function toggleSwishCheckout() {
+            const checkoutSection = document.getElementById('swishCheckout');
+            const purchaseButton = document.getElementById('purchaseButton');
+            const amountToggle = document.getElementById('amountToggle'); // Amount selection
+
+            if (!isCheckoutVisible) {
+                checkoutSection.style.display = 'block';
+                purchaseButton.textContent = 'Back';
+                amountToggle.style.display = 'none'; // Hide amount options
+                isCheckoutVisible = true;
+            } else {
+                checkoutSection.style.display = 'none';
+                purchaseButton.textContent = 'Purchase';
+                amountToggle.style.display = 'flex'; // Show amount options
+                isCheckoutVisible = false;
+            }
+        }
+
+        // Select Amount and Display Prices
+        const pricing = {
+            "5 grams": 99,
+            "30 grams": 371,
+            "60 grams": 599,
+            "150 grams": 1099,
+            shipping: 96
+        };
+
+        function selectAmount(element, amount) {
+            document.querySelectorAll('.amount-option').forEach(el => el.classList.remove('selected'));
+            element.classList.add('selected');
+
+            const itemPrice = pricing[amount];
+            const shippingPrice = pricing.shipping;
+            const totalPrice = itemPrice + shippingPrice;
+
+            document.getElementById('itemPriceDisplay').textContent = itemPrice + ' SEK';
+            document.getElementById('shippingPriceDisplay').textContent = shippingPrice + ' SEK';
+            document.getElementById('totalPriceDisplay').textContent = totalPrice + ' SEK';
+            document.getElementById('dynamicTotalPrice').textContent = totalPrice + ' SEK';
+
+            // Update hidden form fields
+            document.getElementById('selectedAmount').value = amount;
+            document.getElementById('totalPrice').value = totalPrice + ' SEK';
+            document.getElementById('amountInput').value = amount;
+            document.getElementById('totalPriceInput').value = totalPrice + ' SEK';
+        }
+
+        // Initialize Default Amount and Order ID
+        window.onload = function() {
+            document.querySelectorAll('nav a').forEach((link, index) => {
+                setTimeout(() => {
+                    link.classList.add('animate-link');
+                }, 300 + index * 100);
+            });
+            selectAmount(document.querySelector('.amount-option[data-amount="5 grams"]'), '5 grams');
+            generateOrderID();
+
+            // Show mobile-only Swish button on mobile devices
+            if (/Mobi|Android/i.test(navigator.userAgent)) {
+                const mobileSwishButton = document.getElementById('mobileSwishButton');
+                mobileSwishButton.style.display = 'block';
+            }
+        };
+    </script>
+</body>
+</html>
