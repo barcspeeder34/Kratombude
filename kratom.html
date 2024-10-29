@@ -188,26 +188,6 @@
             max-width: 600px;
         }
 
-        /* Product Description Section */
-        .product-description-section {
-            background-color: #eef5f1;
-            border: 2px solid #2e8b57;
-            border-radius: 10px;
-            padding: 1.5rem;
-            margin-top: 2rem;
-            width: 90%;
-            max-width: 800px;
-            text-align: center;
-            font-size: 1.2rem;
-            color: #2e2e2e;
-            line-height: 1.6;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .product-description-section p {
-            margin: 0;
-        }
-
         /* Mobile-Only Swish Button and Phone Text */
         @media (max-width: 768px) {
             #mobileSwishButton {
@@ -229,6 +209,7 @@
                 transform: scale(1.05);
             }
 
+            /* Hide QR Code on Mobile */
             .swish-checkout img {
                 display: none;
             }
@@ -252,6 +233,42 @@
             #mobileSwishButton, #swishPhoneNumber, #orderDetails {
                 display: none;
             }
+            .swish-checkout img {
+                display: block;
+                margin-top: 1rem;
+                max-width: 150px;
+                border-radius: 10px;
+            }
+        }
+
+        /* Form Styling */
+        .form-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .form-container label {
+            font-weight: bold;
+        }
+
+        .form-container input[type="text"], 
+        .form-container input[type="email"] {
+            width: 100%;
+            padding: 0.6rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .form-container button[type="submit"] {
+            grid-column: 1 / -1;
+            margin-top: 1rem;
+        }
+
+        /* Bolded Price Breakdown */
+        .price-breakdown p {
+            font-weight: bold;
         }
     </style>
 </head>
@@ -290,13 +307,6 @@
         <!-- Purchase Button -->
         <button id="purchaseButton" class="purchase-button" onclick="toggleSwishCheckout()">Purchase</button>
 
-        <!-- Product Description Section -->
-        <div class="product-description-section">
-            <p>PhenibutBudet is Sweden's #1 provider of pure Phenibut HCL as a raw material.</p>
-            <p>We provide next-day shipping to our Swedish customers.</p>
-            <p>Phenibut is sold strictly as a raw material and is not intended for human consumption.</p>
-        </div>
-
         <!-- Swish Checkout -->
         <div class="swish-checkout" id="swishCheckout">
             <h3>Swish Payment Instructions</h3>
@@ -320,5 +330,88 @@
             <img src="https://rty.vux.mybluehost.me/wp-content/uploads/2024/10/swish.png-1.jpg-1.jpg" alt="Swish QR Code" class="swish-qr-code">
         </div>
     </main>
+
+    <script>
+        // Generate Dynamic Order ID
+        function generateOrderID() {
+            const orderID = 'PH' + Math.floor(100000 + Math.random() * 900000);
+            document.getElementById('orderIDDisplay').textContent = orderID;
+            document.getElementById('orderID').value = orderID;
+            document.getElementById('orderIDInput').value = orderID;
+        }
+
+        // Toggle Checkout, Hide Amount Buttons, Product Image, and Price Breakdown
+        let isCheckoutVisible = false;
+
+        function toggleSwishCheckout() {
+            const checkoutSection = document.getElementById('swishCheckout');
+            const purchaseButton = document.getElementById('purchaseButton');
+            const amountToggle = document.getElementById('amountToggle');
+            const productImage = document.getElementById('productImage');
+            const priceBreakdown = document.getElementById('priceBreakdown');
+
+            if (!isCheckoutVisible) {
+                checkoutSection.style.display = 'block';
+                purchaseButton.textContent = 'Back';
+                amountToggle.style.display = 'none';
+                productImage.style.display = 'none';
+                priceBreakdown.style.display = 'none';
+                isCheckoutVisible = true;
+            } else {
+                checkoutSection.style.display = 'none';
+                purchaseButton.textContent = 'Purchase';
+                amountToggle.style.display = 'flex';
+                productImage.style.display = 'block';
+                priceBreakdown.style.display = 'block';
+                isCheckoutVisible = false;
+            }
+        }
+
+        // Select Amount and Display Prices
+        const pricing = {
+            "5 grams": 99,
+            "30 grams": 371,
+            "60 grams": 599,
+            "150 grams": 1099,
+            shipping: 96
+        };
+
+        function selectAmount(element, amount) {
+            document.querySelectorAll('.amount-option').forEach(el => el.classList.remove('selected'));
+            element.classList.add('selected');
+
+            const itemPrice = pricing[amount];
+            const shippingPrice = pricing.shipping;
+            const totalPrice = itemPrice + shippingPrice;
+
+            document.getElementById('itemPriceDisplay').textContent = itemPrice;
+            document.getElementById('shippingPriceDisplay').textContent = shippingPrice;
+            document.getElementById('totalPriceDisplay').textContent = totalPrice;
+            document.getElementById('dynamicTotalPrice').textContent = totalPrice + ' SEK';
+
+            // Update hidden form fields
+            document.getElementById('selectedAmount').value = amount;
+            document.getElementById('totalPrice').value = totalPrice + ' SEK';
+            document.getElementById('amountInput').value = amount;
+            document.getElementById('totalPriceInput').value = totalPrice + ' SEK';
+        }
+
+        // Initialize Default Amount and Order ID
+        window.onload = function() {
+            document.querySelectorAll('nav a').forEach((link, index) => {
+                setTimeout(() => {
+                    link.classList.add('animate-link');
+                }, 300 + index * 100);
+            });
+            selectAmount(document.querySelector('.amount-option[data-amount="5 grams"]'), '5 grams');
+            generateOrderID();
+
+            // Show mobile-only Swish button on mobile devices
+            if (/Mobi|Android/i.test(navigator.userAgent)) {
+                const mobileSwishButton = document.getElementById('mobileSwishButton');
+                mobileSwishButton.style.display = 'block';
+            }
+        };
+    </script>
 </body>
 </html>
