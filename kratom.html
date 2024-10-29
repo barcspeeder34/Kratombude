@@ -20,7 +20,7 @@
             margin: 0;
         }
 
-        /* Header Styling with Drop-in/Fade and Green Flash on Load */
+        /* Header Styling */
         header {
             background-color: #333;
             color: #fff;
@@ -61,7 +61,7 @@
             }
         }
 
-        /* Drop-in and Flash Animation for Main Menu */
+        /* Navigation Menu with Green Background and Hover Animation */
         nav {
             margin-top: 1rem;
         }
@@ -73,7 +73,8 @@
         }
 
         nav a {
-            color: #f0f0f0;
+            color: #fff;
+            background-color: #2e8b57; /* Solid green background */
             text-decoration: none;
             font-weight: 500;
             margin: 0.5rem;
@@ -81,19 +82,15 @@
             border-radius: 25px;
             opacity: 0;
             transform: translateY(-20px);
-            transition: color 0.3s ease, background-color 0.3s ease, transform 0.5s ease, opacity 0.5s ease;
+            transition: background-color 0.3s ease, color 0.3s ease, transform 0.5s ease, opacity 0.5s ease;
         }
 
-        @media (min-width: 768px) {
-            nav a {
-                margin: 0 1rem;
-            }
-        }
-
-        /* Make Header Menu Buttons Turn Green on Hover */
+        /* Hover Effect: Slight Scale and Shadow */
         nav a:hover {
             background-color: #2e8b57;
             color: #fff;
+            transform: scale(1.05); /* Slight scale effect */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow effect */
         }
 
         /* Drop-in and Green Flash Animation */
