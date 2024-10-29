@@ -363,19 +363,25 @@
             });
             selectAmount(document.querySelector('.amount-option[data-amount="5 grams"]'), '5 grams');
             generateOrderID();
+
+            // Show mobile-only Swish button on mobile devices
+            if (/Mobi|Android/i.test(navigator.userAgent)) {
+                const mobileSwishButton = document.getElementById('mobileSwishButton');
+                mobileSwishButton.style.display = 'block';
+
+                // Set up Swish URL with phone number, order ID, and amount
+                mobileSwishButton.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const phoneNumber = '0735515463';
+                    const orderID = document.getElementById('orderIDDisplay').textContent;
+                    const amount = document.getElementById('dynamicTotalPrice').textContent.split(' ')[0];
+
+                    // Construct Swish URL
+                    const swishURL = `swish://payment?phone=${phoneNumber}&amount=${amount}&message=${orderID}`;
+                    window.location.href = swishURL;
+                });
+            }
         };
-
-        // Mobile-only Swish Button URL
-        const mobileSwishButton = document.getElementById('mobileSwishButton');
-        mobileSwishButton.addEventListener('click', function () {
-            const phoneNumber = '0735515463';
-            const orderID = document.getElementById('orderIDDisplay').textContent;
-            const amount = document.getElementById('dynamicTotalPrice').textContent.split(' ')[0]; // Extracts amount in SEK
-
-            // Create the Swish URL (assuming swish:// URL scheme is supported)
-            const swishURL = `swish://payment?phone=${phoneNumber}&amount=${amount}&message=${orderID}`;
-            mobileSwishButton.href = swishURL;
-        });
     </script>
 </body>
 </html>
