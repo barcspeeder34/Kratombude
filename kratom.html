@@ -247,13 +247,10 @@
         <div class="swish-checkout" id="swishCheckout">
             <h3>Swish Payment Instructions</h3>
 
-            <!-- Mobile-only Swish Button -->
-            <a href="#" id="mobileSwishButton" class="purchase-button" style="display: none;">Open Swish App</a>
+            <!-- Mobile-only Swish Button, positioned above the QR code -->
+            <a href="swish://payment?phone=0735515463" id="mobileSwishButton" class="purchase-button" style="display: none;">Open Swish App</a>
 
-            <p>#1: Scan the QR code and Swish the Total Payment.</p>
-            <p>#2: Put Your Order ID in the message on your Swish payment.</p>
-            <p><strong>Your Order ID:</strong> <span id="orderIDDisplay"></span></p>
-            <p><strong>Total Price to Swish:</strong> <span id="dynamicTotalPrice"></span></p>
+            <!-- Swish QR Code -->
             <img src="https://rty.vux.mybluehost.me/wp-content/uploads/2024/10/swish.png-1.jpg-1.jpg" alt="Swish QR Code">
 
             <!-- Formspree Form -->
@@ -368,18 +365,6 @@
             if (/Mobi|Android/i.test(navigator.userAgent)) {
                 const mobileSwishButton = document.getElementById('mobileSwishButton');
                 mobileSwishButton.style.display = 'block';
-
-                // Set up Swish URL with phone number, order ID, and amount
-                mobileSwishButton.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    const phoneNumber = '0735515463';
-                    const orderID = document.getElementById('orderIDDisplay').textContent;
-                    const amount = document.getElementById('dynamicTotalPrice').textContent.split(' ')[0];
-
-                    // Construct Swish URL
-                    const swishURL = `swish://payment?phone=${phoneNumber}&amount=${amount}&message=${orderID}`;
-                    window.location.href = swishURL;
-                });
             }
         };
     </script>
