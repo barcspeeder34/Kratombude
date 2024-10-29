@@ -74,7 +74,7 @@
 
         nav a {
             color: #fff;
-            background-color: #2e8b57; /* Solid green background */
+            background-color: #2e8b57;
             text-decoration: none;
             font-weight: 500;
             margin: 0.5rem;
@@ -82,15 +82,15 @@
             border-radius: 25px;
             opacity: 0;
             transform: translateY(-20px);
-            transition: background-color 0.3s ease, color 0.3s ease, transform 0.5s ease, opacity 0.5s ease;
+            transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        /* Hover Effect: Slight Scale and Shadow */
-        nav a:hover {
+        /* Hover Effect: Slight Scale, Glow, and White Text */
+        nav a:hover, .amount-option:hover, .purchase-button:hover {
             background-color: #2e8b57;
             color: #fff;
-            transform: scale(1.05); /* Slight scale effect */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow effect */
+            transform: scale(1.05); /* Slight size increase */
+            box-shadow: 0 0 10px #2e8b57; /* Green glow */
         }
 
         /* Drop-in and Green Flash Animation */
@@ -205,7 +205,7 @@
             border: 2px solid #2e8b57;
             border-radius: 20px;
             cursor: pointer;
-            transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+            transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
         }
 
         @media (min-width: 768px) {
@@ -218,12 +218,6 @@
         .amount-option.selected {
             background-color: #2e8b57;
             color: #fff;
-        }
-
-        .amount-option:hover {
-            background-color: #2e8b57;
-            color: #fff;
-            transform: scale(1.05);
         }
 
         /* Purchase Button */
@@ -239,7 +233,7 @@
             border: 2px solid #2e8b57;
             border-radius: 8px;
             cursor: pointer;
-            transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+            transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
         }
 
         @media (min-width: 768px) {
@@ -247,12 +241,6 @@
                 padding: 1rem 2rem;
                 font-size: 1.2rem;
             }
-        }
-
-        .purchase-button:hover, .back-button:hover {
-            background-color: #2e8b57;
-            color: #fff;
-            transform: scale(1.05);
         }
 
         /* Swish Checkout */
