@@ -211,7 +211,13 @@
                 font-size: 1.2rem;
                 font-weight: bold;
                 color: #2e8b57;
+                margin-bottom: 0.5rem;
+            }
+
+            /* Move Order ID and Total Price to below phone number */
+            #orderDetails {
                 margin-bottom: 1rem;
+                font-size: 1rem;
             }
         }
 
@@ -289,12 +295,16 @@
             <!-- Swish Phone Number -->
             <p id="swishPhoneNumber">0735515463</p>
 
+            <!-- Order Details for Mobile Only -->
+            <div id="orderDetails">
+                <p><strong>Your Order ID:</strong> <span id="orderIDDisplay"></span></p>
+                <p><strong>Total Price to Swish:</strong> <span id="dynamicTotalPrice"></span></p>
+            </div>
+
             <!-- Instructions -->
             <p>#1: Swish the Total Amount.</p>
             <p>#2: Put Your Order ID in the message on your Swish payment.</p>
             <p>#3: Input your delivery information in the form.</p>
-            <p><strong>Your Order ID:</strong> <span id="orderIDDisplay"></span></p>
-            <p><strong>Total Price to Swish:</strong> <span id="dynamicTotalPrice"></span></p>
 
             <!-- Formspree Form -->
             <form id="contactForm" action="https://formspree.io/f/mrbgeqaw" method="POST" class="form-container">
