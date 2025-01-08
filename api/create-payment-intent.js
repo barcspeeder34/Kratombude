@@ -1,4 +1,4 @@
-const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY1);
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 
 export default async function handler(req, res) {
@@ -7,8 +7,8 @@ export default async function handler(req, res) {
 
         try {
             const paymentIntent = await stripe.paymentIntents.create({
-                amount: amount * 100, // Convert to smallest currency unit
-                currency: currency || 'usd',
+                amount: amount * 10000, // Convert to smallest currency unit
+                currency: currency || 'sek',
             });
 
             res.status(200).json({ clientSecret: paymentIntent.client_secret });
