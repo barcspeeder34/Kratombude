@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Welcome to Phenibut HCL Budet</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://js.stripe.com/v3/"></script>
     <style>
         /* General Reset */
         * {
@@ -197,6 +198,10 @@
         .price-breakdown p {
             font-weight: bold;
         }
+
+        .stripe-card {
+            margin: 1rem 0;
+        }
     </style>
 </head>
 <body>
@@ -231,8 +236,8 @@
             <p>Total: <span id="totalPriceDisplay"></span> SEK</p>
         </div>
 
-        <!-- Checkout Form -->
-        <form id="checkoutForm" action="https://hook.eu2.make.com/5lg2v8qngc89alvlre9zi76meuybwr2d" method="POST" class="form-container">
+        <!-- Stripe Elements Form -->
+        <form id="payment-form" class="form-container">
             <input type="hidden" id="orderID" name="orderID">
             <input type="hidden" id="selectedAmount" name="selectedAmount">
             <input type="hidden" id="totalPrice" name="totalPrice">
@@ -240,36 +245,53 @@
             <label for="name">Full Name</label>
             <input type="text" id="name" name="name" required>
 
-            <label for="address">Street Address</label>
-            <input type="text" id="address" name="address" required>
-
-            <label for="city">City</label>
-            <input type="text" id="city" name="city" required>
-
-            <label for="zip">Postal Code</label>
-            <input type="text" id="zip" name="zip" required>
-
-            <label for="country">Country</label>
-            <input type="text" id="country" name="country" required>
-
-            <label for="phone">Phone Number</label>
-            <input type="text" id="phone" name="phone" required>
-
             <label for="email">Email</label>
             <input type="email" id="email" name="email" required>
 
-            <button type="submit" class="purchase-button">Submit Order</button>
+            <label>Card Details</label>
+            <div id="card-element" class="stripe-card"></div>
+
+            <div id="card-errors" role="alert" style="color: red;"></div>
+
+            <button type="submit" class="purchase-button">Submit Payment</button>
         </form>
     </main>
 
     <script>
-        // Generate Dynamic Order ID
+        const stripe = Stripe('YOUR_PUBLIC_KEY'); // Replace with your Stripe public key
+        const elements = stripe.elements();
+        const card = elements.create('card');
+        card.mount('#card-element');
+
+        const form = document.getElementById('payment-form');
+
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            const { paymentIntent, error } = await stripe.confirmCardPayment('YOUR_CLIENT_SECRET', {
+                payment_method: {
+                    card: card,
+                    billing_details: {
+                        name: document.getElementById('name').value,
+                        email: document.getElementById('email').value
+                    }
+                }
+            });
+
+            if (error) {
+                document.getElementById('card-errors').textContent = error.message;
+            } else {
+                alert('Payment successful!');
+                form.reset();
+            }
+        });
+
+        // Initialize Default Amount and Order ID
         function generateOrderID() {
             const orderID = 'PH' + Math.floor(100000 + Math.random() * 900000);
             document.getElementById('orderID').value = orderID;
         }
 
-        // Select Amount and Display Prices
         const pricing = {
             "5 grams": 99,
             "30 grams": 371,
@@ -294,7 +316,6 @@
             document.getElementById('totalPrice').value = totalPrice;
         }
 
-        // Initialize Default Amount and Order ID
         window.onload = function() {
             selectAmount(document.querySelector('.amount-option[data-amount="5 grams"]'), '5 grams');
             generateOrderID();
