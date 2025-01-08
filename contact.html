@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome to Phenibut HCL Budet</title>
+    <title>Phenibut HCL Budget</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://js.stripe.com/v3/"></script>
     <style>
@@ -13,244 +13,164 @@
             padding: 0;
             box-sizing: border-box;
         }
-
-        /* Body Styling */
         body {
             font-family: Arial, sans-serif;
             background-color: #f8f9fa;
             margin: 0;
         }
-
-        /* Header Styling */
         header {
             background-color: #333;
             color: #fff;
             padding: 1rem 0;
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-        }
-
-        header .container {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            max-width: 1200px;
-            margin: auto;
-            padding: 0 1.5rem;
-        }
-
-        @media (min-width: 768px) {
-            header .container {
-                flex-direction: row;
-                justify-content: space-between;
-            }
-        }
-
-        header h1 a {
-            font-size: 1.5rem;
-            font-weight: bold;
-            letter-spacing: 1px;
-            color: #2e8b57;
-            text-decoration: none;
-            transition: color 0.3s ease, transform 0.3s ease;
-        }
-
-        header h1 a:hover {
-            color: #226b43;
-            transform: scale(1.05);
-        }
-
-        @media (min-width: 768px) {
-            header h1 a {
-                font-size: 1.8rem;
-            }
-        }
-
-        nav a {
-            color: #fff;
-            background-color: #2e8b57;
-            text-decoration: none;
-            font-weight: 500;
-            margin: 0.5rem;
-            padding: 0.5rem 1rem;
-            border-radius: 25px;
-            transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
-        }
-
-        nav a:hover {
-            background-color: #226b43;
-            transform: scale(1.05);
-        }
-
-        .front-page {
-            background-image: url('ggg.jpg');
-            background-size: cover;
-            background-position: center;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            color: #2e2e2e;
             text-align: center;
-            padding: 1rem;
         }
-
-        .front-page h1 {
-            font-size: 3rem;
-            color: #2e8b57;
-            font-weight: bold;
-            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
-            margin-bottom: 1rem;
+        header h1 {
+            font-size: 1.8rem;
         }
-
+        main {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 2rem;
+        }
         .product-image {
             width: 300px;
-            height: auto;
             border-radius: 10px;
-            margin-top: 1.5rem;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 1.5rem;
         }
-
         .amount-toggle {
             display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin: 1.5rem 0;
             gap: 10px;
+            margin: 1rem 0;
         }
-
-        @media (min-width: 768px) {
-            .amount-toggle {
-                flex-direction: row;
-                justify-content: center;
-            }
-        }
-
         .amount-option {
             padding: 0.5rem 1rem;
             font-size: 1rem;
-            font-weight: bold;
-            color: #2e8b57;
-            background: transparent;
             border: 2px solid #2e8b57;
-            border-radius: 20px;
-            cursor: pointer;
-            transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
-        }
-
-        .amount-option:hover {
-            background-color: #2e8b57;
-            color: #fff;
-            transform: scale(1.05);
-        }
-
-        .amount-option.selected {
-            background-color: #2e8b57;
-            color: #fff;
-        }
-
-        .purchase-button {
-            display: inline-block;
-            padding: 0.8rem 1.5rem;
-            margin: 1rem 0;
-            background-color: transparent;
-            color: #2e8b57;
-            font-size: 1rem;
-            font-weight: bold;
-            text-transform: uppercase;
-            border: 2px solid #2e8b57;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
-        }
-
-        .purchase-button:hover {
-            background-color: #2e8b57;
-            color: #fff;
-            transform: scale(1.05);
-        }
-
-        .form-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-        }
-
-        .form-container label {
-            font-weight: bold;
-        }
-
-        .form-container input[type="text"], 
-        .form-container input[type="email"] {
-            width: 100%;
-            padding: 0.6rem;
-            border: 1px solid #ddd;
             border-radius: 5px;
-            font-size: 1rem;
+            cursor: pointer;
+            transition: 0.3s;
         }
-
-        .form-container button[type="submit"] {
-            grid-column: 1 / -1;
-            margin-top: 1rem;
+        .amount-option:hover, .amount-option.selected {
+            background-color: #2e8b57;
+            color: #fff;
         }
-
-        .price-breakdown p {
+        .price-display {
+            margin: 1rem 0;
+            font-size: 1.2rem;
             font-weight: bold;
         }
-
-        .stripe-card {
-            margin: 1rem 0;
+        form {
+            max-width: 400px;
+            width: 100%;
+        }
+        form input, form button {
+            width: 100%;
+            padding: 0.8rem;
+            margin: 0.5rem 0;
+            font-size: 1rem;
+        }
+        form button {
+            background-color: #2e8b57;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        form button:hover {
+            background-color: #226b43;
+        }
+        #card-element {
+            border: 1px solid #ddd;
+            padding: 0.8rem;
+            border-radius: 5px;
+        }
+        #card-errors {
+            color: red;
+            margin-top: 1rem;
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
     <header>
-        <div class="container">
-            <h1><a href="index.html">Phenibut HCL Budet</a></h1>
-            <nav>
-                <a href="index.html" class="animate-link">Home</a>
-                <a href="kratom.html" class="animate-link">Phenibut HCL</a>
-                <a href="contact.html" class="animate-link">Contact</a>
-            </nav>
-        </div>
+        <h1>Phenibut HCL Budget</h1>
     </header>
-
-    <!-- Main Content -->
-    <main class="front-page">
-        <h1>Phenibut HCL</h1>
-        <img src="pp.jpg" alt="Phenibut HCL Product Image" class="product-image" id="productImage">
-
-        <!-- Amount Selection -->
+    <main>
+        <img src="product.jpg" alt="Phenibut HCL" class="product-image">
         <div class="amount-toggle" id="amountToggle">
-            <div class="amount-option" data-amount="5 grams" onclick="selectAmount(this, '5 grams')">5 Gram Sample</div>
-            <div class="amount-option" data-amount="30 grams" onclick="selectAmount(this, '30 grams')">30 grams</div>
-            <div class="amount-option" data-amount="60 grams" onclick="selectAmount(this, '60 grams')">60 grams</div>
-            <div class="amount-option" data-amount="150 grams" onclick="selectAmount(this, '150 grams')">150 grams</div>
+            <div class="amount-option" data-price="50" data-label="5 grams">5 grams</div>
+            <div class="amount-option" data-price="250" data-label="30 grams">30 grams</div>
+            <div class="amount-option" data-price="400" data-label="60 grams">60 grams</div>
+            <div class="amount-option" data-price="900" data-label="150 grams">150 grams</div>
         </div>
+        <p class="price-display">Total: <span id="totalPrice">0</span> SEK</p>
+        <form id="paymentForm">
+            <input type="text" id="name" name="name" placeholder="Full Name" required>
+            <input type="email" id="email" name="email" placeholder="Email" required>
+            <div id="card-element"></div>
+            <div id="card-errors" role="alert"></div>
+            <button type="submit">Submit Payment</button>
+        </form>
+    </main>
+    <script>
+        // Initialize Stripe
+        const stripe = Stripe('pk_live_51OCTJVC4Mt94PQPK9yPemQaUffFF2q5YRzlmGpTLNWCShCYzQVyCWQseFpTrMhEoOoro36KabUbVbnGy9igOA48w00CUChkzLc');
+        const elements = stripe.elements();
+        const cardElement = elements.create('card');
+        cardElement.mount('#card-element');
 
-        <div class="price-breakdown" id="priceBreakdown">
-            <p>Item Price: <span id="itemPriceDisplay"></span> SEK</p>
-            <p>Shipping Price: <span id="shippingPriceDisplay"></span> SEK</p>
-            <p>Total: <span id="totalPriceDisplay"></span> SEK</p>
-        </div>
+        // Pricing logic
+        let selectedPrice = 0;
+        const totalPrice = document.getElementById('totalPrice');
+        const amountOptions = document.querySelectorAll('.amount-option');
+        amountOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                // Highlight selected option
+                amountOptions.forEach(opt => opt.classList.remove('selected'));
+                option.classList.add('selected');
+                
+                // Update price
+                selectedPrice = parseInt(option.getAttribute('data-price'));
+                totalPrice.textContent = selectedPrice;
+            });
+        });
 
-        <!-- Stripe Elements Form -->
-        <form id="payment-form" class="form-container">
-            <input type="hidden" id="orderID" name="orderID">
-            <input type="hidden" id="selectedAmount" name="selectedAmount">
-            <input type="hidden" id="totalPrice" name="totalPrice">
-
-            <label for="name">Full Name</label>
-            <input type="text" id="name" name="name" required>
-
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" required>
-
-            <label>Card Details</label>
-            <div id="card-element" class="stripe-card"></div>
-
-            <div id="card-errors" role="alert" style="color: red;"></div>
-
-            <button type="submit" class="purchase-button">Submit Payment</button>
+        // Handle payment
+        const paymentForm = document.getElementById('paymentForm');
+        paymentForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            // Create PaymentIntent via Vercel API
+            const response = await fetch('/api/create-payment-intent', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    amount: selectedPrice * 100, // Convert to cents
+                    name: document.getElementById('name').value,
+                    email: document.getElementById('email').value
+                })
+            });
+            const { clientSecret } = await response.json();
+            
+            // Confirm Card Payment
+            const { error, paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
+                payment_method: {
+                    card: cardElement,
+                    billing_details: {
+                        name: document.getElementById('name').value,
+                        email: document.getElementById('email').value
+                    }
+                }
+            });
+            if (error) {
+                document.getElementById('card-errors').textContent = error.message;
+            } else {
+                alert('Payment successful!');
+                window.location.href = "https://hook.eu2.make.com/5lg2v8qngc89alvlre9zi76meuybwr2d"; // Redirect to Make webhook
+            }
+        });
+    </script>
+</body>
+</html>
