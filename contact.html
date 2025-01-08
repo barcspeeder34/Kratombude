@@ -6,19 +6,86 @@
     <title>Phenibut HCL Budget</title>
     <script src="https://js.stripe.com/v3/"></script>
     <style>
-        /* Basic styles (abbreviated for brevity) */
-        body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f8f9fa; }
-        header { background: #333; color: #fff; padding: 1rem; text-align: center; }
-        main { padding: 1rem; }
-        .product-image { max-width: 300px; display: block; margin: auto; }
-        .amount-toggle { display: flex; justify-content: center; margin: 1rem 0; gap: 10px; }
-        .amount-option { padding: 0.5rem 1rem; border: 2px solid #2e8b57; cursor: pointer; }
-        .amount-option:hover, .amount-option.selected { background: #2e8b57; color: white; }
-        .price-display { text-align: center; margin: 1rem; font-size: 1.2rem; font-weight: bold; }
-        form { max-width: 400px; margin: auto; padding: 1rem; background: #fff; border: 1px solid #ddd; }
-        form input, form button { display: block; width: 100%; padding: 0.8rem; margin: 0.5rem 0; }
-        #card-element { padding: 0.8rem; border: 1px solid #ddd; border-radius: 5px; }
-        #card-errors { color: red; margin-top: 1rem; }
+        /* Basic styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background: #f8f9fa;
+        }
+        header {
+            background: #333;
+            color: #fff;
+            text-align: center;
+            padding: 1rem;
+        }
+        header h1 {
+            margin: 0;
+        }
+        main {
+            padding: 1rem;
+            max-width: 600px;
+            margin: 2rem auto;
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+        }
+        .product-image {
+            display: block;
+            max-width: 100%;
+            margin: 0 auto 1rem;
+        }
+        .amount-toggle {
+            display: flex;
+            justify-content: space-around;
+            margin: 1rem 0;
+        }
+        .amount-option {
+            padding: 0.5rem 1rem;
+            border: 2px solid #2e8b57;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+        }
+        .amount-option:hover,
+        .amount-option.selected {
+            background: #2e8b57;
+            color: #fff;
+        }
+        .price-display {
+            text-align: center;
+            margin: 1rem 0;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+        form {
+            margin-top: 1rem;
+        }
+        form input,
+        form button {
+            width: 100%;
+            padding: 0.8rem;
+            margin: 0.5rem 0;
+            font-size: 1rem;
+        }
+        form button {
+            background: #2e8b57;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        form button:hover {
+            background: #226b43;
+        }
+        #card-element {
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        #card-errors {
+            color: red;
+            margin-top: 1rem;
+        }
     </style>
 </head>
 <body>
@@ -43,7 +110,8 @@
         </form>
     </main>
     <script>
-        const stripe = Stripe('pk_live_51OCTJVC4Mt94PQPK9yPemQaUffFF2q5YRzlmGpTLNWCShCYzQVyCWQseFpTrMhEoOoro36KabUbVbnGy9igOA48w00CUChkzLc'); // Only publishable key!
+        // Initialize Stripe
+        const stripe = Stripe('pk_live_51OCTJVC4Mt94PQPK9yPemQaUffFF2q5YRzlmGpTLNWCShCYzQVyCWQseFpTrMhEoOoro36KabUbVbnGy9igOA48w00CUChkzLc'); // Replace with your Stripe publishable key
         const elements = stripe.elements();
         const cardElement = elements.create('card');
         cardElement.mount('#card-element');
@@ -67,26 +135,28 @@
         paymentForm.addEventListener('submit', async (event) => {
             event.preventDefault();
 
-            // Fetch PaymentIntent client secret from backend
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+
+            // Create a PaymentIntent via Vercel API
             const response = await fetch('/api/create-payment-intent', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    amount: selectedPrice * 100, // Convert to cents
-                    name: document.getElementById('name').value,
-                    email: document.getElementById('email').value
+                    amount: selectedPrice, // Send price in whole currency units
+                    currency: 'sek' // Change to 'usd' or another currency as needed
                 })
             });
 
             const { clientSecret } = await response.json();
 
-            // Confirm Card Payment
+            // Confirm the payment with Stripe
             const { error } = await stripe.confirmCardPayment(clientSecret, {
                 payment_method: {
                     card: cardElement,
                     billing_details: {
-                        name: document.getElementById('name').value,
-                        email: document.getElementById('email').value
+                        name,
+                        email
                     }
                 }
             });
@@ -95,7 +165,8 @@
                 document.getElementById('card-errors').textContent = error.message;
             } else {
                 alert('Payment successful!');
-                window.location.href = "https://hook.eu2.make.com/5lg2v8qngc89alvlre9zi76meuybwr2d"; // Redirect to Make
+                // Optionally redirect to the Make webhook
+                window.location.href = "https://hook.eu2.make.com/5lg2v8qngc89alvlre9zi76meuybwr2d";
             }
         });
     </script>
