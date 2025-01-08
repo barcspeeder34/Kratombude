@@ -4,91 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Phenibut HCL Budget</title>
-    <link rel="stylesheet" href="style.css">
     <script src="https://js.stripe.com/v3/"></script>
     <style>
-        /* General Reset */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f8f9fa;
-            margin: 0;
-        }
-        header {
-            background-color: #333;
-            color: #fff;
-            padding: 1rem 0;
-            text-align: center;
-        }
-        header h1 {
-            font-size: 1.8rem;
-        }
-        main {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin: 2rem;
-        }
-        .product-image {
-            width: 300px;
-            border-radius: 10px;
-            margin-bottom: 1.5rem;
-        }
-        .amount-toggle {
-            display: flex;
-            gap: 10px;
-            margin: 1rem 0;
-        }
-        .amount-option {
-            padding: 0.5rem 1rem;
-            font-size: 1rem;
-            border: 2px solid #2e8b57;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-        .amount-option:hover, .amount-option.selected {
-            background-color: #2e8b57;
-            color: #fff;
-        }
-        .price-display {
-            margin: 1rem 0;
-            font-size: 1.2rem;
-            font-weight: bold;
-        }
-        form {
-            max-width: 400px;
-            width: 100%;
-        }
-        form input, form button {
-            width: 100%;
-            padding: 0.8rem;
-            margin: 0.5rem 0;
-            font-size: 1rem;
-        }
-        form button {
-            background-color: #2e8b57;
-            color: #fff;
-            border: none;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-        form button:hover {
-            background-color: #226b43;
-        }
-        #card-element {
-            border: 1px solid #ddd;
-            padding: 0.8rem;
-            border-radius: 5px;
-        }
-        #card-errors {
-            color: red;
-            margin-top: 1rem;
-        }
+        /* Basic styles (abbreviated for brevity) */
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f8f9fa; }
+        header { background: #333; color: #fff; padding: 1rem; text-align: center; }
+        main { padding: 1rem; }
+        .product-image { max-width: 300px; display: block; margin: auto; }
+        .amount-toggle { display: flex; justify-content: center; margin: 1rem 0; gap: 10px; }
+        .amount-option { padding: 0.5rem 1rem; border: 2px solid #2e8b57; cursor: pointer; }
+        .amount-option:hover, .amount-option.selected { background: #2e8b57; color: white; }
+        .price-display { text-align: center; margin: 1rem; font-size: 1.2rem; font-weight: bold; }
+        form { max-width: 400px; margin: auto; padding: 1rem; background: #fff; border: 1px solid #ddd; }
+        form input, form button { display: block; width: 100%; padding: 0.8rem; margin: 0.5rem 0; }
+        #card-element { padding: 0.8rem; border: 1px solid #ddd; border-radius: 5px; }
+        #card-errors { color: red; margin-top: 1rem; }
     </style>
 </head>
 <body>
@@ -113,49 +43,45 @@
         </form>
     </main>
     <script>
-        // Initialize Stripe
-        const stripe = Stripe('pk_live_51OCTJVC4Mt94PQPK9yPemQaUffFF2q5YRzlmGpTLNWCShCYzQVyCWQseFpTrMhEoOoro36KabUbVbnGy9igOA48w00CUChkzLc');
+        const stripe = Stripe('pk_live_51OCTJVC4Mt94PQPK9yPemQaUffFF2q5YRzlmGpTLNWCShCYzQVyCWQseFpTrMhEoOoro36KabUbVbnGy9igOA48w00CUChkzLc'); // Only publishable key!
         const elements = stripe.elements();
         const cardElement = elements.create('card');
         cardElement.mount('#card-element');
 
-        // Pricing logic
         let selectedPrice = 0;
         const totalPrice = document.getElementById('totalPrice');
         const amountOptions = document.querySelectorAll('.amount-option');
+
+        // Handle amount selection
         amountOptions.forEach(option => {
             option.addEventListener('click', () => {
-                // Highlight selected option
                 amountOptions.forEach(opt => opt.classList.remove('selected'));
                 option.classList.add('selected');
-                
-                // Update price
                 selectedPrice = parseInt(option.getAttribute('data-price'));
                 totalPrice.textContent = selectedPrice;
             });
         });
 
-        // Handle payment
+        // Handle form submission
         const paymentForm = document.getElementById('paymentForm');
-        paymentForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            
-            // Create PaymentIntent via Vercel API
+        paymentForm.addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            // Fetch PaymentIntent client secret from backend
             const response = await fetch('/api/create-payment-intent', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     amount: selectedPrice * 100, // Convert to cents
                     name: document.getElementById('name').value,
                     email: document.getElementById('email').value
                 })
             });
+
             const { clientSecret } = await response.json();
-            
+
             // Confirm Card Payment
-            const { error, paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
+            const { error } = await stripe.confirmCardPayment(clientSecret, {
                 payment_method: {
                     card: cardElement,
                     billing_details: {
@@ -164,11 +90,12 @@
                     }
                 }
             });
+
             if (error) {
                 document.getElementById('card-errors').textContent = error.message;
             } else {
                 alert('Payment successful!');
-                window.location.href = "https://hook.eu2.make.com/5lg2v8qngc89alvlre9zi76meuybwr2d"; // Redirect to Make webhook
+                window.location.href = "https://hook.eu2.make.com/5lg2v8qngc89alvlre9zi76meuybwr2d"; // Redirect to Make
             }
         });
     </script>
