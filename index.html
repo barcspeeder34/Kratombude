@@ -3,249 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome to Phenibut HCL Budet</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Phenibut HCL Budget</title>
+    <script src="https://js.stripe.com/v3/"></script>
     <style>
-        /* General Reset */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        /* Body Styling */
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f8f9fa;
-            margin: 0;
-        }
-
-        /* Header Styling */
-        header {
-            background-color: #333;
-            color: #fff;
-            padding: 1rem 0;
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-        }
-
-        header .container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            max-width: 1200px;
-            margin: auto;
-            padding: 0 1.5rem;
-        }
-
-        @media (min-width: 768px) {
-            header .container {
-                flex-direction: row;
-                justify-content: space-between;
-            }
-        }
-
-        /* Header Title Link with Green Flash and Hover Effect */
-        header h1 a {
-            font-size: 1.5rem;
-            font-weight: bold;
-            letter-spacing: 1px;
-            color: #f5f5f5;
-            text-decoration: none;
-            opacity: 0;
-            transform: translateY(-20px);
-            animation: fadeInFlashText 0.8s forwards 0.3s;
-            transition: color 0.3s ease;
-        }
-
-        @media (min-width: 768px) {
-            header h1 a {
-                font-size: 1.8rem;
-            }
-        }
-
-        /* Letters Only Turn Green on Hover */
-        header h1 a:hover {
-            color: #2e8b57;
-        }
-
-        /* Main Menu Links with Green Hover and Fade/Drop-in Animation */
-        nav {
-            margin-top: 1rem;
-        }
-
-        @media (min-width: 768px) {
-            nav {
-                margin-top: 0;
-            }
-        }
-
-        nav a {
-            color: #f0f0f0;
-            text-decoration: none;
-            font-weight: 500;
-            margin: 0.5rem;
-            padding: 0.5rem 1rem;
-            border-radius: 25px;
-            opacity: 0;
-            transform: translateY(-20px);
-            animation: fadeInFlashText 0.5s forwards;
-            transition: color 0.3s ease, background-color 0.3s ease;
-        }
-
-        @media (min-width: 768px) {
-            nav a {
-                margin: 0 1rem;
-            }
-        }
-
-        nav a:nth-child(1) { animation-delay: 0.4s; }
-        nav a:nth-child(2) { animation-delay: 0.5s; }
-        nav a:nth-child(3) { animation-delay: 0.6s; }
-
-        nav a:hover {
-            background-color: #2e8b57;
-            color: #fff;
-        }
-
-        /* Fade-in Flash Green Animation for Header and Menu Buttons */
-        @keyframes fadeInFlashText {
-            0% { opacity: 0; transform: translateY(-20px); color: #f5f5f5; }
-            70% { opacity: 1; transform: translateY(0); color: #2e8b57; }
-            100% { opacity: 1; transform: translateY(0); color: #f5f5f5; }
-        }
-
-        /* Main Content Styling */
-        .front-page {
-            background-image: url('ggg.jpg');
-            background-size: cover;
-            background-position: center;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            color: #2e2e2e;
-            text-align: center;
-            padding: 1.5rem;
-        }
-
-        @media (min-width: 768px) {
-            .front-page {
-                height: calc(100vh - 80px);
-                padding: 1rem;
-            }
-        }
-
-        /* Center Text with Green Flash, Hover Effect, and Transparent Oval Outline */
-        .front-page a.center-link {
-            font-size: 2.5rem;
-            font-weight: bold;
-            color: #fff;
-            padding: 0.8rem 1.5rem;
-            border: 5px solid #2e8b57;
-            border-radius: 50px;
-            text-decoration: none;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInFlashText 0.8s forwards 0.8s;
-            transition: color 0.3s ease, transform 0.3s ease, background-color 0.3s ease;
-        }
-
-        @media (min-width: 768px) {
-            .front-page a.center-link {
-                font-size: 4rem;
-                padding: 1rem 2rem;
-            }
-        }
-
-        /* Whole Button Turns Green on Hover */
-        .front-page a.center-link:hover {
-            color: #fff;
-            background-color: #2e8b57;
-            transform: scale(1.05);
-        }
-
-        /* Flash Green Animation for Center Text */
-        @keyframes fadeInFlashText {
-            0% { opacity: 0; transform: translateY(20px); color: #2e2e2e; }
-            70% { opacity: 1; transform: translateY(0); color: #2e8b57; }
-            100% { opacity: 1; transform: translateY(0); color: #fff; }
-        }
-
-        /* Floating Symbols Styling */
-        .symbol {
-            position: absolute;
-            font-size: 1.5rem;
-            color: rgba(0, 0, 0, 0.35);
-            font-weight: bold;
-            animation: float 8s ease-in-out infinite;
-            transition: color 0.3s ease, transform 0.3s ease;
-        }
-
-        @media (min-width: 768px) {
-            .symbol {
-                font-size: 2rem;
-            }
-        }
-
-        .symbol:hover {
-            color: #2e8b57;
-            transform: scale(1.1);
-        }
-
-        @keyframes float {
-            0% { transform: translateY(0); opacity: 0.7; }
-            50% { transform: translateY(-30px); opacity: 1; }
-            100% { transform: translateY(0); opacity: 0.7; }
-        }
-
-        /* Positioning for Multiple Floating Symbols */
-        .symbol:nth-child(1) { left: 10%; top: 20%; animation-delay: 1s; }
-        .symbol:nth-child(2) { left: 30%; top: 60%; animation-delay: 2s; }
-        .symbol:nth-child(3) { left: 50%; top: 40%; animation-delay: 3s; }
-        .symbol:nth-child(4) { left: 70%; top: 30%; animation-delay: 1.5s; }
-        .symbol:nth-child(5) { left: 80%; top: 70%; animation-delay: 2.5s; }
-        .symbol:nth-child(6) { left: 40%; top: 10%; animation-delay: 2s; }
-        .symbol:nth-child(7) { left: 20%; top: 80%; animation-delay: 3s; }
-        .symbol:nth-child(8) { left: 60%; top: 20%; animation-delay: 4s; }
-        .symbol:nth-child(9) { left: 90%; top: 50%; animation-delay: 1.2s; }
-        .symbol:nth-child(10) { left: 15%; top: 40%; animation-delay: 2.8s; }
+        body { font-family: Arial, sans-serif; background: #f8f9fa; color: #333; padding: 1rem; }
+        .product-image { max-width: 100%; margin: 0 auto; }
+        .amount-option { padding: 0.5rem; border: 2px solid #2e8b57; cursor: pointer; }
+        .amount-option.selected { background: #2e8b57; color: white; }
+        .price-display { text-align: center; font-size: 1.2rem; }
+        form input, form button { width: 100%; padding: 0.8rem; margin: 0.5rem 0; }
+        form button { background: #2e8b57; color: white; cursor: pointer; }
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <div class="container">
-            <h1><a href="index.html">Phenibut HCL Budet</a></h1>
-            <nav>
-                <a href="index.html">Home</a>
-                <a href="kratom.html">Phenibut HCL</a>
-                <a href="contact.html">Contact</a>
-            </nav>
-        </div>
-    </header>
-
-    <!-- Main Content with Background Image and Floating Symbols -->
-    <main class="front-page">
-        <!-- Center Text with Link to Product Page -->
-        <a href="kratom.html" class="center-link">Phenibut HCL</a>
-
-        <!-- Floating Symbols -->
-        <div class="symbol">H</div>
-        <div class="symbol">C</div>
-        <div class="symbol">O</div>
-        <div class="symbol">N</div>
-        <div class="symbol">Na</div>
-        <div class="symbol">Cl</div>
-        <div class="symbol">Fe</div>
-        <div class="symbol">Mg</div>
-        <div class="symbol">K</div>
-        <div class="symbol">S</div>
-    </main>
-
-    <!-- Footer -->
-    <footer>
-        <p>&copy; 2024 Phenibut HCL Budet. All rights reserved.</p>
-    </footer>
+    <h1>Phenibut HCL Budget</h1>
+    <img src="product.jpg" alt="Phenibut HCL" class="product-image">
+    <div class="amount-toggle">
+        <div class="amount-option" data-price="50">5 grams</div>
+        <div class="amount-option" data-price="250">30 grams</div>
+        <div class="amount-option" data-price="400">60 grams</div>
+        <div class="amount-option" data-price="900">150 grams</div>
+    </div>
+    <p class="price-display">Total: <span id="totalPrice">0</span> SEK</p>
+    <form id="paymentForm">
+        <input type="text" id="name" placeholder="Full Name" required>
+        <input type="email" id="email" placeholder="Email" required>
+        <button type="submit">Submit Payment</button>
+    </form>
+    <script>
+        const stripe = Stripe('pk_live_51OCTJVC4Mt94PQPK9yPemQaUffFF2q5YRzlmGpTLNWCShCYzQVyCWQseFpTrMhEoOoro36KabUbVbnGy9igOA48w00CUChkzLc'); // Replace with your Stripe publishable key
+        document.querySelectorAll('.amount-option').forEach(option => {
+            option.addEventListener('click', () => {
+                document.querySelectorAll('.amount-option').forEach(o => o.classList.remove('selected'));
+                option.classList.add('selected');
+                document.getElementById('totalPrice').textContent = option.getAttribute('data-price');
+            });
+        });
+        document.getElementById('paymentForm').addEventListener('submit', async e => {
+            e.preventDefault();
+            const { clientSecret } = await fetch('/api/create-payment-intent', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ amount: document.getElementById('totalPrice').textContent, currency: 'sek' })
+            }).then(res => res.json());
+            const { error } = await stripe.confirmCardPayment(clientSecret, {
+                payment_method: {
+                    card: stripe.elements().create('card'),
+                    billing_details: { name: document.getElementById('name').value, email: document.getElementById('email').value }
+                }
+            });
+            if (error) alert('Payment failed: ' + error.message);
+            else alert('Payment successful!');
+        });
+    </script>
 </body>
 </html>
