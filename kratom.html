@@ -68,13 +68,14 @@
             border-radius: 8px;
             cursor: pointer;
             text-align: center;
-            transition: transform 0.3s, background-color 0.3s;
+            transition: transform 0.3s, background-color 0.3s, box-shadow 0.3s;
         }
         .amount-option:hover,
         .amount-option.selected {
             background: #2e8b57;
             color: white;
             transform: scale(1.1);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
         .price-display {
             text-align: center;
@@ -105,6 +106,10 @@
         form button:hover {
             background: #226b43;
             transform: scale(1.05);
+        }
+        form button:disabled {
+            background: #bbb;
+            cursor: not-allowed;
         }
         #card-element {
             padding: 1rem;
@@ -143,38 +148,21 @@
             <input type="email" id="email" name="email" placeholder="Email" required>
             <div id="card-element"></div>
             <div id="card-errors" role="alert"></div>
-            <button type="submit">Submit Payment</button>
+            <button type="submit" id="submit-button">Submit Payment</button>
         </form>
     </main>
 
     <!-- JavaScript -->
     <script>
-        // Initialize Stripe
         const stripe = Stripe('pk_live_51OCTJVC4Mt94PQPK9yPemQaUffFF2q5YRzlmGpTLNWCShCYzQVyCWQseFpTrMhEoOoro36KabUbVbnGy9igOA48w00CUChkzLc'); // Replace with your Stripe publishable key
-        const elements = stripe.elements({
-            fonts: [{ cssSrc: 'https://fonts.googleapis.com/css?family=Roboto:400,500,700' }]
-        });
-
-        const cardStyle = {
-            base: {
-                color: "#32325d",
-                fontFamily: '"Roboto", sans-serif',
-                fontSmoothing: "antialiased",
-                fontSize: "16px",
-                "::placeholder": { color: "#aab7c4" }
-            },
-            invalid: {
-                color: "#fa755a",
-                iconColor: "#fa755a"
-            }
-        };
-
-        const cardElement = elements.create('card', { style: cardStyle });
+        const elements = stripe.elements();
+        const cardElement = elements.create('card');
         cardElement.mount('#card-element');
 
         let selectedPrice = 0;
         const totalPrice = document.getElementById('totalPrice');
         const amountOptions = document.querySelectorAll('.amount-option');
+        const submitButton = document.getElementById('submit-button');
 
         // Handle product selection
         amountOptions.forEach(option => {
@@ -190,6 +178,8 @@
         const paymentForm = document.getElementById('paymentForm');
         paymentForm.addEventListener('submit', async (event) => {
             event.preventDefault();
+            submitButton.disabled = true;
+            submitButton.textContent = "Processing...";
 
             const name = document.getElementById('name').value;
             const email = document.getElementById('email').value;
@@ -222,6 +212,9 @@
             } catch (err) {
                 document.getElementById('card-errors').textContent = "An error occurred. Please try again.";
                 console.error(err);
+            } finally {
+                submitButton.disabled = false;
+                submitButton.textContent = "Submit Payment";
             }
         });
     </script>
