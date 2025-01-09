@@ -4,15 +4,15 @@ export default async function handler(req, res) {
     if (req.method === 'POST') {
         const { amount, currency } = req.body;
 
-        // Validate the amount
+        // Validate the amount: Must be a positive number
         if (!amount || typeof amount !== 'number' || amount <= 0) {
             return res.status(400).json({ error: 'Invalid amount' });
         }
 
         try {
-            // Create a PaymentIntent with the correct amount
+            // Create a PaymentIntent
             const paymentIntent = await stripe.paymentIntents.create({
-                amount: Math.round(amount), // Assume amount is already in the smallest unit
+                amount: Math.round(amount), // Amount must be in the smallest unit (e.g., öre for SEK)
                 currency: currency || 'sek', // Default to SEK if not provided
             });
 
@@ -22,6 +22,7 @@ export default async function handler(req, res) {
             res.status(500).json({ error: error.message });
         }
     } else {
+        // Handle unsupported HTTP methods
         res.setHeader('Allow', 'POST');
         res.status(405).end('Method Not Allowed');
     }
