@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Phenibut HCL Budet - Kratom</title>
+    <title>Phenibut HCL Budget</title>
     <script src="https://js.stripe.com/v3/"></script>
     <style>
         /* General Reset */
@@ -14,122 +14,186 @@
         }
 
         body {
-            font-family: Arial, sans-serif;
-            background-image: url('/ggg.jpg'); /* Ensure the image is in the public folder */
-            background-size: cover;
-            background-position: center;
-            color: #2e2e2e;
+            font-family: 'Roboto', sans-serif;
+            color: #fff;
+            background: #1e1e1e;
+            overflow-x: hidden;
         }
 
-        header {
-            background-color: #333;
-            color: #fff;
-            padding: 1rem 0;
+        /* Parallax Section */
+        .parallax {
+            position: relative;
+            height: 100vh;
+            overflow: hidden;
+            background: linear-gradient(180deg, #000, #1e1e1e);
+        }
+
+        .parallax img {
+            position: absolute;
+            width: 120%;
+            height: auto;
+            top: -50px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: float 10s linear infinite;
+            opacity: 0.8;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translate(-50%, -5%);
+            }
+            50% {
+                transform: translate(-50%, 5%);
+            }
+            100% {
+                transform: translate(-50%, -5%);
+            }
+        }
+
+        .parallax-content {
+            position: relative;
+            z-index: 2;
             text-align: center;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            top: 50%;
+            transform: translateY(-50%);
+            color: #ffcc00;
         }
 
-        header h1 {
-            font-size: 1.8rem;
-            margin-bottom: 0.5rem;
-        }
-
-        nav {
-            margin-top: 0.5rem;
-        }
-
-        nav a {
-            color: #fff;
-            background-color: #2e8b57;
-            text-decoration: none;
+        .parallax-content h1 {
+            font-size: 3.5rem;
             font-weight: bold;
-            margin: 0.5rem;
-            padding: 0.5rem 1rem;
-            border-radius: 25px;
-            transition: background-color 0.3s, transform 0.3s;
+            text-transform: uppercase;
+            text-shadow: 2px 4px 10px rgba(0, 0, 0, 0.8);
         }
 
-        nav a:hover {
-            background-color: #226b43;
+        .parallax-content p {
+            font-size: 1.5rem;
+            margin-top: 1rem;
+            color: #e0e0e0;
+        }
+
+        .parallax-content button {
+            margin-top: 1.5rem;
+            padding: 0.8rem 1.5rem;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #000;
+            background: #ffcc00;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: transform 0.3s, background-color 0.3s;
+        }
+
+        .parallax-content button:hover {
             transform: scale(1.1);
+            background-color: #ffd633;
         }
 
+        /* Main Content */
         main {
-            max-width: 800px;
+            max-width: 1400px;
+            width: 90%;
             margin: 2rem auto;
-            background-color: #fff;
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+            padding: 3rem;
+            background: #f4f4f4;
+            color: #333;
+            border-radius: 20px;
+            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3);
+            transform: translateY(-50px);
         }
 
-        h2 {
-            text-align: center;
-            margin-bottom: 1rem;
+        .product-image {
+            display: block;
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            border-radius: 15px;
+            box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .product-image:hover {
+            transform: scale(1.05);
+            box-shadow: 0px 12px 25px rgba(75, 121, 161, 0.6);
         }
 
         .amount-toggle {
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
-            gap: 1rem;
-            margin: 1.5rem 0;
+            gap: 1.5rem;
+            margin: 2rem 0;
         }
 
         .amount-option {
-            padding: 0.5rem 1rem;
-            border: 2px solid #2e8b57;
-            border-radius: 8px;
+            padding: 1rem 1.5rem;
+            border: 2px solid #ffcc00;
+            border-radius: 20px;
             cursor: pointer;
-            text-align: center;
-            transition: background-color 0.3s, color 0.3s, transform 0.3s;
+            font-size: 1.2rem;
+            font-weight: bold;
+            background: #fff;
+            color: #ffcc00;
+            transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
         }
 
         .amount-option:hover,
         .amount-option.selected {
-            background-color: #2e8b57;
-            color: white;
+            background: #ffcc00;
+            color: #1e1e1e;
             transform: scale(1.1);
+            box-shadow: 0px 4px 15px rgba(255, 204, 0, 0.6);
         }
 
         .price-display {
             text-align: center;
-            margin: 1rem 0;
-            font-size: 1.4rem;
+            margin: 1.5rem 0;
+            font-size: 1.8rem;
             font-weight: bold;
-            color: #2e8b57;
+            color: #ffcc00;
         }
 
         form {
-            margin-top: 2rem;
+            max-width: 600px;
+            margin: 2rem auto;
         }
 
         form input,
         form button {
             width: 100%;
-            padding: 0.8rem;
-            margin: 0.5rem 0;
-            font-size: 1rem;
-            border: 2px solid #ddd;
+            padding: 1rem;
+            margin: 0.8rem 0;
+            font-size: 1.1rem;
             border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        form input {
+            background: #f9f9f9;
+            color: #333;
         }
 
         form button {
-            background-color: #2e8b57;
-            color: white;
+            background: #ffcc00;
+            color: #1e1e1e;
+            font-weight: bold;
             border: none;
             cursor: pointer;
-            transition: background-color 0.3s, transform 0.3s;
+            transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
         }
 
         form button:hover {
-            background-color: #226b43;
+            background: #ffd633;
             transform: scale(1.05);
+            box-shadow: 0px 6px 15px rgba(255, 204, 0, 0.6);
         }
 
         #card-element {
             padding: 1rem;
-            border: 1px solid #ddd;
+            background: #f9f9f9;
+            border: 1px solid #ccc;
             border-radius: 5px;
         }
 
@@ -139,33 +203,27 @@
         }
     </style>
 </head>
-<body onload="generateOrderID()">
-
-    <!-- Header -->
-    <header>
-        <h1>Phenibut HCL Budet - Kratom</h1>
-        <nav>
-            <a href="index.html">Home</a>
-            <a href="kratom.html">Kratom</a>
-            <a href="contact.html">Contact</a>
-        </nav>
-    </header>
+<body>
+    <!-- Parallax Header -->
+    <div class="parallax">
+        <img src="background.jpg" alt="Parallax Background">
+        <div class="parallax-content">
+            <h1>Phenibut HCL Budget</h1>
+            <p>High-quality products delivered to your doorstep.</p>
+            <button onclick="scrollToMain()">Explore Now</button>
+        </div>
+    </div>
 
     <!-- Main Content -->
-    <main>
-        <h2>Select Your Product</h2>
-
-        <!-- Product Selection -->
-        <div class="amount-toggle">
-            <div class="amount-option" data-price="100" onclick="selectAmount(this, '5 grams', 100)">5 grams</div>
-            <div class="amount-option" data-price="500" onclick="selectAmount(this, '30 grams', 500)">30 grams</div>
-            <div class="amount-option" data-price="800" onclick="selectAmount(this, '60 grams', 800)">60 grams</div>
-            <div class="amount-option" data-price="1200" onclick="selectAmount(this, '150 grams', 1200)">150 grams</div>
+    <main id="mainContent">
+        <img src="product.jpg" alt="Phenibut HCL" class="product-image">
+        <div class="amount-toggle" id="amountToggle">
+            <div class="amount-option" data-price="50" data-label="5 grams">5 grams</div>
+            <div class="amount-option" data-price="250" data-label="30 grams">30 grams</div>
+            <div class="amount-option" data-price="400" data-label="60 grams">60 grams</div>
+            <div class="amount-option" data-price="900" data-label="150 grams">150 grams</div>
         </div>
-
         <p class="price-display">Total: <span id="totalPrice">0</span> SEK</p>
-
-        <!-- Payment Form -->
         <form id="paymentForm">
             <input type="text" id="name" name="name" placeholder="Full Name" required>
             <input type="email" id="email" name="email" placeholder="Email" required>
@@ -177,59 +235,4 @@
 
     <!-- JavaScript -->
     <script>
-        const stripe = Stripe('pk_live_51OCTJVC4Mt94PQPK9yPemQaUffFF2q5YRzlmGpTLNWCShCYzQVyCWQseFpTrMhEoOoro36KabUbVbnGy9igOA48w00CUChkzLc'); // Replace with your publishable Stripe key
-
-        // Generate a unique Order ID
-        function generateOrderID() {
-            const orderID = 'PH' + Math.floor(100000 + Math.random() * 900000);
-            document.getElementById('orderID').value = orderID;
-        }
-
-        let selectedAmount = '5 grams';
-        let totalPrice = 100;
-
-        function selectAmount(element, amount, price) {
-            selectedAmount = amount;
-            totalPrice = price;
-
-            // Highlight the selected button
-            document.querySelectorAll('.amount-option').forEach(option => {
-                option.classList.remove('selected');
-            });
-            element.classList.add('selected');
-
-            // Update displayed and hidden values
-            document.getElementById('totalPrice').textContent = totalPrice;
-        }
-
-        document.getElementById('purchaseButton').addEventListener('click', async () => {
-            try {
-                const response = await fetch('/api/create-payment-intent', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ amount: totalPrice * 100, currency: 'sek' })
-                });
-
-                const { clientSecret } = await response.json();
-
-                const result = await stripe.confirmCardPayment(clientSecret, {
-                    payment_method: {
-                        card: elements.getElement('card'),
-                        billing_details: { name: document.getElementById('name').value }
-                    }
-                });
-
-                if (result.error) {
-                    alert('Payment failed: ' + result.error.message);
-                } else {
-                    alert('Payment successful!');
-                }
-            } catch (error) {
-                console.error('Error:', error);
-                alert('An error occurred during the payment process.');
-            }
-        });
-    </script>
-
-</body>
-</html>
+   
