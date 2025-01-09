@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Phenibut HCL Budget</title>
+    <title>Phenibut HCL Budet - Kratom</title>
     <script src="https://js.stripe.com/v3/"></script>
     <style>
         /* General Reset */
@@ -21,59 +21,121 @@
             color: #2e2e2e;
         }
 
-        h1, h2 {
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 1rem 0;
             text-align: center;
-            margin: 1rem 0;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
 
-        .product-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            margin: 2rem 0;
+        header h1 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        nav {
+            margin-top: 0.5rem;
+        }
+
+        nav a {
+            color: #fff;
+            background-color: #2e8b57;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 0.5rem;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        nav a:hover {
+            background-color: #226b43;
+            transform: scale(1.1);
+        }
+
+        main {
+            max-width: 800px;
+            margin: 2rem auto;
+            background-color: #fff;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 1rem;
         }
 
         .amount-toggle {
             display: flex;
-            flex-wrap: wrap;
             justify-content: center;
+            flex-wrap: wrap;
             gap: 1rem;
-            margin: 1rem 0;
+            margin: 1.5rem 0;
         }
 
         .amount-option {
             padding: 0.5rem 1rem;
             border: 2px solid #2e8b57;
-            border-radius: 20px;
+            border-radius: 8px;
             cursor: pointer;
-            transition: background-color 0.3s, color 0.3s;
+            text-align: center;
+            transition: background-color 0.3s, color 0.3s, transform 0.3s;
         }
 
-        .amount-option:hover {
-            background-color: #2e8b57;
-            color: #fff;
-        }
-
+        .amount-option:hover,
         .amount-option.selected {
             background-color: #2e8b57;
             color: white;
+            transform: scale(1.1);
         }
 
-        .purchase-button {
-            margin: 1rem;
-            padding: 0.8rem 1.5rem;
-            border: none;
-            background-color: #2e8b57;
-            color: #fff;
-            font-size: 1rem;
+        .price-display {
+            text-align: center;
+            margin: 1rem 0;
+            font-size: 1.4rem;
             font-weight: bold;
-            cursor: pointer;
-            transition: transform 0.3s ease;
+            color: #2e8b57;
         }
 
-        .purchase-button:hover {
+        form {
+            margin-top: 2rem;
+        }
+
+        form input,
+        form button {
+            width: 100%;
+            padding: 0.8rem;
+            margin: 0.5rem 0;
+            font-size: 1rem;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+        }
+
+        form button {
+            background-color: #2e8b57;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        form button:hover {
+            background-color: #226b43;
             transform: scale(1.05);
+        }
+
+        #card-element {
+            padding: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        #card-errors {
+            color: red;
+            margin-top: 1rem;
         }
     </style>
 </head>
@@ -81,11 +143,16 @@
 
     <!-- Header -->
     <header>
-        <h1>Phenibut HCL Budget</h1>
+        <h1>Phenibut HCL Budet - Kratom</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="kratom.html">Kratom</a>
+            <a href="contact.html">Contact</a>
+        </nav>
     </header>
 
     <!-- Main Content -->
-    <main class="product-container">
+    <main>
         <h2>Select Your Product</h2>
 
         <!-- Product Selection -->
@@ -96,17 +163,19 @@
             <div class="amount-option" data-price="1200" onclick="selectAmount(this, '150 grams', 1200)">150 grams</div>
         </div>
 
-        <!-- Purchase Button -->
-        <button id="purchaseButton" class="purchase-button">Purchase</button>
+        <p class="price-display">Total: <span id="totalPrice">0</span> SEK</p>
+
+        <!-- Payment Form -->
+        <form id="paymentForm">
+            <input type="text" id="name" name="name" placeholder="Full Name" required>
+            <input type="email" id="email" name="email" placeholder="Email" required>
+            <div id="card-element"></div>
+            <div id="card-errors" role="alert"></div>
+            <button type="submit">Submit Payment</button>
+        </form>
     </main>
 
-    <!-- Hidden Form -->
-    <form id="contactForm" action="https://formspree.io/f/mrbgeqaw" method="POST" style="display: none;">
-        <input type="hidden" id="selectedAmount" name="selectedAmount">
-        <input type="hidden" id="totalPrice" name="totalPrice">
-        <input type="hidden" id="orderID" name="orderID">
-    </form>
-
+    <!-- JavaScript -->
     <script>
         const stripe = Stripe('pk_live_51OCTJVC4Mt94PQPK9yPemQaUffFF2q5YRzlmGpTLNWCShCYzQVyCWQseFpTrMhEoOoro36KabUbVbnGy9igOA48w00CUChkzLc'); // Replace with your publishable Stripe key
 
@@ -116,7 +185,6 @@
             document.getElementById('orderID').value = orderID;
         }
 
-        // Store the selected product details
         let selectedAmount = '5 grams';
         let totalPrice = 100;
 
@@ -130,45 +198,31 @@
             });
             element.classList.add('selected');
 
-            // Update hidden form fields
-            document.getElementById('selectedAmount').value = selectedAmount;
-            document.getElementById('totalPrice').value = totalPrice;
+            // Update displayed and hidden values
+            document.getElementById('totalPrice').textContent = totalPrice;
         }
 
-        // Initialize default selection
-        window.onload = function () {
-            const defaultButton = document.querySelector('.amount-option[data-price="100"]');
-            selectAmount(defaultButton, '5 grams', 100);
-        };
-
-        // Handle Stripe Checkout
         document.getElementById('purchaseButton').addEventListener('click', async () => {
             try {
                 const response = await fetch('/api/create-payment-intent', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ amount: totalPrice * 100, currency: 'sek' }) // Multiply by 100 for smallest currency unit
+                    body: JSON.stringify({ amount: totalPrice * 100, currency: 'sek' })
                 });
 
                 const { clientSecret } = await response.json();
 
-                const result = await stripe.confirmCardPayment(clientSecret);
+                const result = await stripe.confirmCardPayment(clientSecret, {
+                    payment_method: {
+                        card: elements.getElement('card'),
+                        billing_details: { name: document.getElementById('name').value }
+                    }
+                });
+
                 if (result.error) {
                     alert('Payment failed: ' + result.error.message);
                 } else {
                     alert('Payment successful!');
-                    
-                    // Send data to webhook
-                    await fetch('https://hook.eu2.make.com/5lg2v8qngc89alvlre9zi76meuybwr2d', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({
-                            orderID: document.getElementById('orderID').value,
-                            amount: totalPrice,
-                        }),
-                    });
-
-                    document.getElementById('contactForm').submit();
                 }
             } catch (error) {
                 console.error('Error:', error);
