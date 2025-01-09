@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Phenibut HCL Budget</title>
-    <link rel="stylesheet" href="style.css">
     <script src="https://js.stripe.com/v3/"></script>
     <style>
         /* General Reset */
@@ -16,7 +15,7 @@
 
         body {
             font-family: Arial, sans-serif;
-            background-image: url('ggg.jpg');
+            background-image: url('/ggg.jpg'); /* Update this path if necessary */
             background-size: cover;
             background-position: center;
             color: #2e2e2e;
@@ -54,6 +53,11 @@
         .amount-option:hover {
             background-color: #2e8b57;
             color: #fff;
+        }
+
+        .amount-option.selected {
+            background-color: #2e8b57;
+            color: white;
         }
 
         .purchase-button {
@@ -96,14 +100,14 @@
         <button id="purchaseButton" class="purchase-button">Purchase</button>
     </main>
 
+    <!-- Hidden Form -->
     <form id="contactForm" action="https://formspree.io/f/mrbgeqaw" method="POST" style="display: none;">
-        <input type="hidden" id="orderID" name="orderID">
         <input type="hidden" id="selectedAmount" name="selectedAmount">
         <input type="hidden" id="totalPrice" name="totalPrice">
     </form>
 
     <script>
-        const stripe = Stripe('your-publishable-key'); // Replace with your publishable key from Stripe.
+        const stripe = Stripe('your-publishable-key'); // Replace with your publishable Stripe key
 
         // Generate a unique Order ID
         function generateOrderID() {
@@ -118,19 +122,31 @@
         function selectAmount(element, amount, price) {
             selectedAmount = amount;
             totalPrice = price;
-            document.querySelectorAll('.amount-option').forEach(option => option.classList.remove('selected'));
+
+            // Highlight the selected button
+            document.querySelectorAll('.amount-option').forEach(option => {
+                option.classList.remove('selected');
+            });
             element.classList.add('selected');
+
+            // Update hidden form fields
             document.getElementById('selectedAmount').value = selectedAmount;
             document.getElementById('totalPrice').value = totalPrice;
         }
 
-        // Stripe Checkout
+        // Initialize default selection
+        window.onload = function () {
+            const defaultButton = document.querySelector('.amount-option[data-price="100"]');
+            selectAmount(defaultButton, '5 grams', 100);
+        };
+
+        // Handle Stripe Checkout
         document.getElementById('purchaseButton').addEventListener('click', async () => {
             try {
                 const response = await fetch('/api/create-payment-intent', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ amount: totalPrice * 100, currency: 'sek' })
+                    body: JSON.stringify({ amount: totalPrice * 100, currency: 'sek' }) // Multiply by 100 for smallest currency unit
                 });
 
                 const { clientSecret } = await response.json();
