@@ -171,6 +171,7 @@
                 option.classList.add('selected');
                 selectedPrice = parseInt(option.getAttribute('data-price'));
                 totalPrice.textContent = selectedPrice;
+                console.log(`Selected Price: ${selectedPrice}`); // Debugging
             });
         });
 
