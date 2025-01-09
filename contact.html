@@ -12,84 +12,129 @@
             padding: 0;
             box-sizing: border-box;
         }
+
         body {
             font-family: Arial, sans-serif;
-            background: #f8f9fa;
-            color: #333;
+            background: linear-gradient(180deg, #1a1a2e, #16213e, #0f3460);
+            color: #f8f9fa;
             line-height: 1.5;
             padding: 0 1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
+
         header {
             background: #333;
             color: #fff;
             text-align: center;
+            width: 100%;
             padding: 1rem 0;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
         }
+
         header h1 {
             margin: 0;
+            font-size: 2rem;
+            letter-spacing: 1px;
         }
+
         main {
-            max-width: 600px;
+            max-width: 700px;
+            width: 90%;
             margin: 2rem auto;
-            background: #fff;
+            background: #1e1e2f;
             padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.5);
         }
+
         .product-image {
             display: block;
             max-width: 100%;
-            margin: 0 auto 1rem;
+            margin: 0 auto 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
         }
+
         .amount-toggle {
             display: flex;
             justify-content: space-around;
-            margin: 1rem 0;
+            margin: 1.5rem 0;
+            flex-wrap: wrap;
+            gap: 1rem;
         }
+
         .amount-option {
-            padding: 0.5rem 1rem;
-            border: 2px solid #2e8b57;
-            border-radius: 5px;
+            padding: 0.8rem 1.2rem;
+            border: 2px solid #e94560;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: bold;
             cursor: pointer;
-            text-align: center;
-            transition: 0.3s;
+            color: white;
+            background: transparent;
+            transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
         }
+
         .amount-option:hover,
         .amount-option.selected {
-            background: #2e8b57;
-            color: white;
+            background: #e94560;
+            color: #fff;
+            transform: scale(1.1);
+            box-shadow: 0 5px 15px rgba(233, 69, 96, 0.6);
         }
+
         .price-display {
             text-align: center;
-            margin: 1rem 0;
-            font-size: 1.2rem;
+            margin: 1.5rem 0;
+            font-size: 1.5rem;
             font-weight: bold;
+            color: #e94560;
         }
+
         form {
-            margin-top: 1rem;
+            margin-top: 1.5rem;
         }
+
         form input,
         form button {
             width: 100%;
-            padding: 0.8rem;
-            margin: 0.5rem 0;
+            padding: 0.9rem;
+            margin: 0.7rem 0;
             font-size: 1rem;
+            border-radius: 5px;
+            border: 2px solid #ddd;
         }
-        form button {
-            background: #2e8b57;
+
+        form input {
+            background: #1a1a2e;
             color: white;
+        }
+
+        form button {
+            background: #e94560;
+            color: white;
+            font-weight: bold;
             border: none;
             cursor: pointer;
-            transition: 0.3s;
+            transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
         }
+
         form button:hover {
-            background: #226b43;
+            background: #ff4a75;
+            transform: scale(1.05);
+            box-shadow: 0 6px 15px rgba(233, 69, 96, 0.6);
         }
+
         #card-element {
             padding: 0.8rem;
-            border: 1px solid #ddd;
             border-radius: 5px;
+            background: #1a1a2e;
+            border: 1px solid #ddd;
+            color: #fff;
         }
+
         #card-errors {
             color: red;
             margin-top: 1rem;
@@ -97,16 +142,19 @@
     </style>
 </head>
 <body>
+    <!-- Header -->
     <header>
         <h1>Phenibut HCL Budget</h1>
     </header>
+
+    <!-- Main Content -->
     <main>
         <img src="product.jpg" alt="Phenibut HCL" class="product-image">
         <div class="amount-toggle" id="amountToggle">
-            <div class="amount-option" data-price="50" data-label="5 grams">5 grams</div>
-            <div class="amount-option" data-price="250" data-label="30 grams">30 grams</div>
-            <div class="amount-option" data-price="400" data-label="60 grams">60 grams</div>
-            <div class="amount-option" data-price="900" data-label="150 grams">150 grams</div>
+            <div class="amount-option" data-price="50">5 grams</div>
+            <div class="amount-option" data-price="250">30 grams</div>
+            <div class="amount-option" data-price="400">60 grams</div>
+            <div class="amount-option" data-price="900">150 grams</div>
         </div>
         <p class="price-display">Total: <span id="totalPrice">0</span> SEK</p>
         <form id="paymentForm">
@@ -117,9 +165,10 @@
             <button type="submit">Submit Payment</button>
         </form>
     </main>
+
     <script>
         // Initialize Stripe
-        const stripe = Stripe('pk_live_51OCTJVC4Mt94PQPK9yPemQaUffFF2q5YRzlmGpTLNWCShCYzQVyCWQseFpTrMhEoOoro36KabUbVbnGy9igOA48w00CUChkzLc'); // Replace with your publishable key
+        const stripe = Stripe('pk_live_XXXXXXXXXXXXXXXXXXXXXXXXX'); // Replace with your key
         const elements = stripe.elements();
         const cardElement = elements.create('card');
         cardElement.mount('#card-element');
@@ -143,39 +192,4 @@
         paymentForm.addEventListener('submit', async (event) => {
             event.preventDefault();
 
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-
-            // Create PaymentIntent via backend
-            const response = await fetch('/api/create-payment-intent', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    amount: selectedPrice, // Send price in whole units (e.g., SEK)
-                    currency: 'sek'
-                })
-            });
-
-            const { clientSecret } = await response.json();
-
-            // Confirm the payment
-            const { error, paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
-                payment_method: {
-                    card: cardElement,
-                    billing_details: {
-                        name,
-                        email,
-                    }
-                }
-            });
-
-            if (error) {
-                document.getElementById('card-errors').textContent = error.message;
-            } else if (paymentIntent && paymentIntent.status === 'succeeded') {
-                alert('Payment successful!');
-                window.location.href = "https://hook.eu2.make.com/5lg2v8qngc89alvlre9zi76meuybwr2d";
-            }
-        });
-    </script>
-</body>
-</html>
+            const name = document.getElem
