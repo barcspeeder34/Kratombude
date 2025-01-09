@@ -6,118 +6,158 @@
     <title>Phenibut HCL Budget</title>
     <script src="https://js.stripe.com/v3/"></script>
     <style>
-        /* Basic Reset */
+        /* General Reset */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
+
         body {
-            font-family: Arial, sans-serif;
-            background: linear-gradient(180deg, #f8f9fa, #e8f5e9);
-            color: #333;
-            line-height: 1.5;
-            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(180deg, #1a1a2e, #16213e, #0f3460);
+            color: #f8f9fa;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
+
         header {
-            background: #333;
-            color: #fff;
-            text-align: center;
+            width: 100%;
+            background: #0f3460;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
             padding: 1rem 0;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            color: #f8f9fa;
         }
+
         header h1 {
-            margin: 0;
-            font-size: 2rem;
-            letter-spacing: 1px;
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
         }
+
         nav {
             margin-top: 0.5rem;
         }
+
         nav a {
-            color: #fff;
-            background: #2e8b57;
+            color: #f8f9fa;
+            background-color: #1a1a2e;
             text-decoration: none;
-            padding: 0.5rem 1rem;
-            margin: 0.5rem;
+            padding: 0.5rem 1.2rem;
+            margin: 0 0.5rem;
             border-radius: 5px;
-            transition: 0.3s;
+            font-weight: bold;
+            transition: transform 0.3s, background-color 0.3s;
         }
+
         nav a:hover {
-            background: #226b43;
+            background-color: #e94560;
             transform: scale(1.1);
         }
+
         main {
-            max-width: 800px;
+            max-width: 1200px;
+            width: 90%;
             margin: 2rem auto;
-            background: #fff;
+            background: #16213e;
             padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.5);
+            color: #f8f9fa;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
+
         .product-image {
-            display: block;
-            max-width: 100%;
-            margin: 0 auto 1rem;
-            border-radius: 10px;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            border-radius: 15px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+            margin-bottom: 1.5rem;
         }
+
         .amount-toggle {
             display: flex;
-            justify-content: center;
             flex-wrap: wrap;
+            justify-content: center;
             gap: 1rem;
             margin: 1.5rem 0;
         }
+
         .amount-option {
-            padding: 0.5rem 1rem;
-            border: 2px solid #2e8b57;
+            padding: 0.8rem 1.5rem;
+            border: 2px solid #e94560;
             border-radius: 8px;
             cursor: pointer;
+            font-size: 1.1rem;
             text-align: center;
             transition: background-color 0.3s, color 0.3s, transform 0.3s;
         }
+
         .amount-option:hover,
         .amount-option.selected {
-            background: #2e8b57;
+            background: #e94560;
             color: white;
             transform: scale(1.1);
         }
+
         .price-display {
             text-align: center;
             margin: 1.5rem 0;
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             font-weight: bold;
-            color: #2e8b57;
+            color: #e94560;
         }
+
         form {
+            width: 100%;
+            max-width: 500px;
             margin-top: 2rem;
         }
+
         form input,
         form button {
             width: 100%;
-            padding: 1rem;
+            padding: 0.9rem;
             margin: 0.8rem 0;
             font-size: 1rem;
             border: 2px solid #ddd;
             border-radius: 5px;
         }
-        form button {
-            background: #2e8b57;
+
+        form input {
+            background: #1a1a2e;
             color: white;
+            border: 2px solid #ddd;
+        }
+
+        form button {
+            background: #e94560;
+            color: white;
+            font-weight: bold;
             border: none;
             cursor: pointer;
             transition: background-color 0.3s, transform 0.3s;
         }
+
         form button:hover {
-            background: #226b43;
+            background: #ff4a75;
             transform: scale(1.05);
         }
+
         #card-element {
             padding: 1rem;
+            background: #1a1a2e;
             border: 1px solid #ddd;
             border-radius: 5px;
+            color: #fff;
         }
+
         #card-errors {
             color: red;
             margin-top: 1rem;
@@ -127,7 +167,7 @@
 <body>
     <!-- Header -->
     <header>
-        <h1>Phenibut HCL Budet</h1>
+        <h1>Phenibut HCL Budget</h1>
         <nav>
             <a href="index.html">Home</a>
             <a href="kratom.html">Phenibut HCL</a>
@@ -156,7 +196,6 @@
 
     <!-- JavaScript -->
     <script>
-        // Initialize Stripe
         const stripe = Stripe('pk_live_51OCTJVC4Mt94PQPK9yPemQaUffFF2q5YRzlmGpTLNWCShCYzQVyCWQseFpTrMhEoOoro36KabUbVbnGy9igOA48w00CUChkzLc'); // Replace with your Stripe publishable key
         const elements = stripe.elements();
         const cardElement = elements.create('card');
@@ -184,19 +223,17 @@
             const name = document.getElementById('name').value;
             const email = document.getElementById('email').value;
 
-            // Create PaymentIntent via backend
             const response = await fetch('/api/create-payment-intent', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    amount: selectedPrice * 100, // Send price in smallest unit
+                    amount: selectedPrice * 100,
                     currency: 'sek'
                 })
             });
 
             const { clientSecret } = await response.json();
 
-            // Confirm the payment
             const { error, paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
                 payment_method: {
                     card: cardElement,
