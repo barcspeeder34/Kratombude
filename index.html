@@ -15,69 +15,97 @@
 
         body {
             font-family: 'Roboto', sans-serif;
-            background: linear-gradient(to bottom, #f4f4f4, #e9ecef);
-            color: #333;
-            line-height: 1.6;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            color: #fff;
+            background: #0d0d0d;
+            overflow-x: hidden;
         }
 
-        header {
+        /* Parallax Container */
+        .parallax {
+            position: relative;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .parallax::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
-            background: linear-gradient(to right, #4b79a1, #283e51);
-            color: white;
-            text-align: center;
-            padding: 1rem 0;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+            height: 100%;
+            background: linear-gradient(180deg, rgba(13, 13, 13, 0.8), rgba(13, 13, 13, 1));
+            z-index: 1;
         }
 
-        header h1 {
-            font-size: 2.5rem;
-            letter-spacing: 1px;
-            margin: 0;
+        .parallax img {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120%;
+            height: auto;
+            animation: moveBackground 10s linear infinite;
         }
 
-        nav {
-            margin-top: 0.5rem;
+        @keyframes moveBackground {
+            0% {
+                transform: translate(-50%, 0);
+            }
+            50% {
+                transform: translate(-50%, 10%);
+            }
+            100% {
+                transform: translate(-50%, 0);
+            }
         }
 
-        nav a {
-            color: white;
-            text-decoration: none;
-            padding: 0.5rem 1.5rem;
-            margin: 0 0.5rem;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
+        .parallax h1 {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+            font-size: 4rem;
             font-weight: bold;
-            transition: background-color 0.3s, transform 0.3s;
+            letter-spacing: 2px;
+            text-align: center;
+            text-shadow: 0 4px 10px rgba(0, 0, 0, 0.8);
+            color: #ffbe0b;
         }
 
-        nav a:hover {
-            background: rgba(255, 255, 255, 0.3);
-            transform: scale(1.1);
+        .parallax p {
+            position: absolute;
+            top: 65%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+            font-size: 1.5rem;
+            text-align: center;
+            color: #fff;
+            opacity: 0.9;
         }
 
+        /* Main Content */
         main {
             max-width: 1400px;
             width: 90%;
-            margin: 2rem auto;
-            background: white;
-            border-radius: 30px;
-            padding: 3rem;
-            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            margin: 0 auto;
+            padding: 3rem 1.5rem;
+            background: #f4f4f4;
+            color: #333;
+            border-radius: 20px;
+            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3);
+            transform: translateY(-50px);
         }
 
         .product-image {
+            display: block;
+            margin: 0 auto 2rem;
             width: 100%;
             max-width: 600px;
-            margin-bottom: 2rem;
-            border-radius: 30px;
-            box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
             transition: transform 0.3s, box-shadow 0.3s;
         }
 
@@ -89,19 +117,18 @@
         .amount-toggle {
             display: flex;
             justify-content: center;
-            flex-wrap: wrap;
             gap: 1.5rem;
-            margin: 1.5rem 0;
+            margin: 2rem 0;
         }
 
         .amount-option {
-            padding: 0.8rem 1.5rem;
+            padding: 1rem 1.5rem;
             border: 2px solid #4b79a1;
             border-radius: 20px;
             cursor: pointer;
             font-size: 1.2rem;
             font-weight: bold;
-            background: #f9f9f9;
+            background: #fff;
             text-align: center;
             color: #4b79a1;
             transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
@@ -124,9 +151,8 @@
         }
 
         form {
-            width: 100%;
             max-width: 600px;
-            margin-top: 2rem;
+            margin: 2rem auto;
         }
 
         form input,
@@ -173,15 +199,12 @@
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <h1>Phenibut HCL Budget</h1>
-        <nav>
-            <a href="index.html">Home</a>
-            <a href="kratom.html">Phenibut HCL</a>
-            <a href="contact.html">Contact</a>
-        </nav>
-    </header>
+    <!-- Parallax Header -->
+    <div class="parallax">
+        <img src="background.jpg" alt="Parallax Background">
+        <h1>Welcome to Phenibut HCL Budget</h1>
+        <p>The highest quality products, tailored to your needs.</p>
+    </div>
 
     <!-- Main Content -->
     <main>
@@ -204,7 +227,7 @@
 
     <!-- JavaScript -->
     <script>
-        const stripe = Stripe('pk_live_51OCTJVC4Mt94PQPK9yPemQaUffFF2q5YRzlmGpTLNWCShCYzQVyCWQseFpTrMhEoOoro36KabUbVbnGy9igOA48w00CUChkzLc'); // Replace with your Stripe publishable key
+        const stripe = Stripe('pk_live_XXXXXXXXXXXXXXXXXXXXXXXXX'); // Replace with your Stripe publishable key
         const elements = stripe.elements();
         const cardElement = elements.create('card');
         cardElement.mount('#card-element');
