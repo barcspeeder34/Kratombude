@@ -15,129 +15,104 @@
 
         body {
             font-family: 'Roboto', sans-serif;
-            background: #000;
-            color: #fff;
-            overflow: hidden;
-            height: 100vh;
+            background: linear-gradient(to bottom, #f4f4f4, #e9ecef);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
             display: flex;
-            justify-content: center;
-            align-items: center;
             flex-direction: column;
+            align-items: center;
         }
 
-        /* Intro Animation Container */
-        #intro {
-            position: absolute;
-            top: 0;
-            left: 0;
+        header {
             width: 100%;
-            height: 100%;
-            background: #000;
+            background: linear-gradient(to right, #4b79a1, #283e51);
+            color: white;
+            text-align: center;
+            padding: 1rem 0;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            letter-spacing: 1px;
+            margin: 0;
+        }
+
+        nav {
+            margin-top: 0.5rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1.5rem;
+            margin: 0 0.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            font-weight: bold;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        nav a:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+        }
+
+        main {
+            max-width: 1400px;
+            width: 90%;
+            margin: 2rem auto;
+            background: white;
+            border-radius: 30px;
+            padding: 3rem;
+            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
             display: flex;
             flex-direction: column;
-            justify-content: center;
             align-items: center;
-            z-index: 10;
-            animation: fadeOut 5s ease-in forwards 4s;
-        }
-
-        @keyframes fadeOut {
-            0% {
-                opacity: 1;
-                transform: translateY(0);
-            }
-            100% {
-                opacity: 0;
-                transform: translateY(-50%);
-            }
-        }
-
-        #intro h1 {
-            font-size: 3rem;
-            font-weight: bold;
-            color: #ffcc00;
-            text-transform: uppercase;
-            text-align: center;
-            text-shadow: 2px 4px 10px rgba(0, 0, 0, 0.8);
-            animation: fadeText 4s ease-in-out infinite;
-        }
-
-        @keyframes fadeText {
-            0%, 100% {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            50% {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        #intro p {
-            font-size: 1.5rem;
-            margin-top: 1rem;
-            color: #ffcc00;
-            opacity: 0.8;
-        }
-
-        /* Main Content Container */
-        #mainContent {
-            opacity: 0;
-            animation: revealContent 3s ease-in-out forwards 5s;
-            max-width: 1200px;
-            margin: 2rem auto;
-            padding: 2rem;
-            background: #1e1e1e;
-            border-radius: 20px;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-            color: #f9f9f9;
-            transform: translateY(50px);
-        }
-
-        @keyframes revealContent {
-            0% {
-                opacity: 0;
-                transform: translateY(50px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
         }
 
         .product-image {
             width: 100%;
             max-width: 600px;
-            margin: 0 auto 2rem;
-            border-radius: 15px;
-            box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.3);
+            margin-bottom: 2rem;
+            border-radius: 30px;
+            box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .product-image:hover {
+            transform: scale(1.05);
+            box-shadow: 0px 12px 25px rgba(75, 121, 161, 0.6);
         }
 
         .amount-toggle {
             display: flex;
             justify-content: center;
+            flex-wrap: wrap;
             gap: 1.5rem;
-            margin: 2rem 0;
+            margin: 1.5rem 0;
         }
 
         .amount-option {
-            padding: 1rem 1.5rem;
-            border: 2px solid #ffcc00;
+            padding: 0.8rem 1.5rem;
+            border: 2px solid #4b79a1;
             border-radius: 20px;
             cursor: pointer;
             font-size: 1.2rem;
             font-weight: bold;
-            background: #fff;
-            color: #ffcc00;
+            background: #f9f9f9;
+            text-align: center;
+            color: #4b79a1;
             transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
         }
 
         .amount-option:hover,
         .amount-option.selected {
-            background: #ffcc00;
-            color: #1e1e1e;
+            background: #4b79a1;
+            color: white;
             transform: scale(1.1);
-            box-shadow: 0px 4px 15px rgba(255, 204, 0, 0.6);
+            box-shadow: 0px 4px 15px rgba(75, 121, 161, 0.6);
         }
 
         .price-display {
@@ -145,12 +120,13 @@
             margin: 1.5rem 0;
             font-size: 1.8rem;
             font-weight: bold;
-            color: #ffcc00;
+            color: #4b79a1;
         }
 
         form {
+            width: 100%;
             max-width: 600px;
-            margin: 2rem auto;
+            margin-top: 2rem;
         }
 
         form input,
@@ -169,18 +145,18 @@
         }
 
         form button {
-            background: #ffcc00;
-            color: #1e1e1e;
-            font-weight: bold;
+            background: #4b79a1;
+            color: white;
             border: none;
             cursor: pointer;
+            font-weight: bold;
             transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
         }
 
         form button:hover {
-            background: #ffd633;
+            background: #355c7d;
             transform: scale(1.05);
-            box-shadow: 0px 6px 15px rgba(255, 204, 0, 0.6);
+            box-shadow: 0px 6px 15px rgba(75, 121, 161, 0.6);
         }
 
         #card-element {
@@ -197,14 +173,18 @@
     </style>
 </head>
 <body>
-    <!-- Intro Section -->
-    <div id="intro">
-        <h1>Welcome to Phenibut HCL Budget</h1>
-        <p>Quality, Precision, Excellence</p>
-    </div>
+    <!-- Header -->
+    <header>
+        <h1>Phenibut HCL Budget</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="kratom.html">Phenibut HCL</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+    </header>
 
     <!-- Main Content -->
-    <div id="mainContent">
+    <main>
         <img src="product.jpg" alt="Phenibut HCL" class="product-image">
         <div class="amount-toggle" id="amountToggle">
             <div class="amount-option" data-price="50" data-label="5 grams">5 grams</div>
@@ -220,11 +200,11 @@
             <div id="card-errors" role="alert"></div>
             <button type="submit">Submit Payment</button>
         </form>
-    </div>
+    </main>
 
     <!-- JavaScript -->
     <script>
-        const stripe = Stripe('pk_live_XXXXXXXXXXXXXXXXXXXXXXXXX'); // Replace with your Stripe publishable key
+        const stripe = Stripe('pk_live_51OCTJVC4Mt94PQPK9yPemQaUffFF2q5YRzlmGpTLNWCShCYzQVyCWQseFpTrMhEoOoro36KabUbVbnGy9igOA48w00CUChkzLc'); // Replace with your Stripe publishable key
         const elements = stripe.elements();
         const cardElement = elements.create('card');
         cardElement.mount('#card-element');
