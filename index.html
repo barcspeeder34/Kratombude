@@ -6,54 +6,175 @@
     <title>Phenibut HCL Budget</title>
     <script src="https://js.stripe.com/v3/"></script>
     <style>
-        body { font-family: Arial, sans-serif; background: #f8f9fa; color: #333; padding: 1rem; }
-        .product-image { max-width: 100%; margin: 0 auto; }
-        .amount-option { padding: 0.5rem; border: 2px solid #2e8b57; cursor: pointer; }
-        .amount-option.selected { background: #2e8b57; color: white; }
-        .price-display { text-align: center; font-size: 1.2rem; }
-        form input, form button { width: 100%; padding: 0.8rem; margin: 0.5rem 0; }
-        form button { background: #2e8b57; color: white; cursor: pointer; }
+        /* Basic Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background: #f8f9fa;
+            color: #333;
+            line-height: 1.5;
+            padding: 0 1rem;
+        }
+        header {
+            background: #333;
+            color: #fff;
+            text-align: center;
+            padding: 1rem 0;
+        }
+        header h1 {
+            margin: 0;
+        }
+        main {
+            max-width: 600px;
+            margin: 2rem auto;
+            background: #fff;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .product-image {
+            display: block;
+            max-width: 100%;
+            margin: 0 auto 1rem;
+        }
+        .amount-toggle {
+            display: flex;
+            justify-content: space-around;
+            margin: 1rem 0;
+        }
+        .amount-option {
+            padding: 0.5rem 1rem;
+            border: 2px solid #2e8b57;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+            transition: 0.3s;
+        }
+        .amount-option:hover,
+        .amount-option.selected {
+            background: #2e8b57;
+            color: white;
+        }
+        .price-display {
+            text-align: center;
+            margin: 1rem 0;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+        form {
+            margin-top: 1rem;
+        }
+        form input,
+        form button {
+            width: 100%;
+            padding: 0.8rem;
+            margin: 0.5rem 0;
+            font-size: 1rem;
+        }
+        form button {
+            background: #2e8b57;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        form button:hover {
+            background: #226b43;
+        }
+        #card-element {
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        #card-errors {
+            color: red;
+            margin-top: 1rem;
+        }
     </style>
 </head>
 <body>
-    <h1>Phenibut HCL Budget</h1>
-    <img src="product.jpg" alt="Phenibut HCL" class="product-image">
-    <div class="amount-toggle">
-        <div class="amount-option" data-price="50">5 grams</div>
-        <div class="amount-option" data-price="250">30 grams</div>
-        <div class="amount-option" data-price="400">60 grams</div>
-        <div class="amount-option" data-price="900">150 grams</div>
-    </div>
-    <p class="price-display">Total: <span id="totalPrice">0</span> SEK</p>
-    <form id="paymentForm">
-        <input type="text" id="name" placeholder="Full Name" required>
-        <input type="email" id="email" placeholder="Email" required>
-        <button type="submit">Submit Payment</button>
-    </form>
+    <header>
+        <h1>Phenibut HCL Budget</h1>
+    </header>
+    <main>
+        <img src="product.jpg" alt="Phenibut HCL" class="product-image">
+        <div class="amount-toggle" id="amountToggle">
+            <div class="amount-option" data-price="50" data-label="5 grams">5 grams</div>
+            <div class="amount-option" data-price="250" data-label="30 grams">30 grams</div>
+            <div class="amount-option" data-price="400" data-label="60 grams">60 grams</div>
+            <div class="amount-option" data-price="900" data-label="150 grams">150 grams</div>
+        </div>
+        <p class="price-display">Total: <span id="totalPrice">0</span> SEK</p>
+        <form id="paymentForm">
+            <input type="text" id="name" name="name" placeholder="Full Name" required>
+            <input type="email" id="email" name="email" placeholder="Email" required>
+            <div id="card-element"></div>
+            <div id="card-errors" role="alert"></div>
+            <button type="submit">Submit Payment</button>
+        </form>
+    </main>
     <script>
-        const stripe = Stripe('pk_live_51OCTJVC4Mt94PQPK9yPemQaUffFF2q5YRzlmGpTLNWCShCYzQVyCWQseFpTrMhEoOoro36KabUbVbnGy9igOA48w00CUChkzLc'); // Replace with your Stripe publishable key
-        document.querySelectorAll('.amount-option').forEach(option => {
+        // Initialize Stripe
+        const stripe = Stripe('your-publishable-key'); // Replace with your Stripe publishable key
+        const elements = stripe.elements();
+        const cardElement = elements.create('card');
+        cardElement.mount('#card-element');
+
+        let selectedPrice = 0;
+        const totalPrice = document.getElementById('totalPrice');
+        const amountOptions = document.querySelectorAll('.amount-option');
+
+        // Handle product selection
+        amountOptions.forEach(option => {
             option.addEventListener('click', () => {
-                document.querySelectorAll('.amount-option').forEach(o => o.classList.remove('selected'));
+                amountOptions.forEach(opt => opt.classList.remove('selected'));
                 option.classList.add('selected');
-                document.getElementById('totalPrice').textContent = option.getAttribute('data-price');
+                selectedPrice = parseInt(option.getAttribute('data-price'));
+                totalPrice.textContent = selectedPrice;
             });
         });
-        document.getElementById('paymentForm').addEventListener('submit', async e => {
-            e.preventDefault();
-            const { clientSecret } = await fetch('/api/create-payment-intent', {
+
+        // Handle form submission
+        const paymentForm = document.getElementById('paymentForm');
+        paymentForm.addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+
+            // Create PaymentIntent via backend
+            const response = await fetch('/api/create-payment-intent', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ amount: document.getElementById('totalPrice').textContent, currency: 'sek' })
-            }).then(res => res.json());
-            const { error } = await stripe.confirmCardPayment(clientSecret, {
+                body: JSON.stringify({
+                    amount: selectedPrice * 100, // Send price in smallest unit
+                    currency: 'sek'
+                })
+            });
+
+            const { clientSecret } = await response.json();
+
+            // Confirm the payment
+            const { error, paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
                 payment_method: {
-                    card: stripe.elements().create('card'),
-                    billing_details: { name: document.getElementById('name').value, email: document.getElementById('email').value }
+                    card: cardElement,
+                    billing_details: {
+                        name,
+                        email,
+                    }
                 }
             });
-            if (error) alert('Payment failed: ' + error.message);
-            else alert('Payment successful!');
+
+            if (error) {
+                document.getElementById('card-errors').textContent = error.message;
+            } else if (paymentIntent && paymentIntent.status === 'succeeded') {
+                alert('Payment successful!');
+                window.location.href = "https://hook.eu2.make.com/5lg2v8qngc89alvlre9zi76meuybwr2d";
+            }
         });
     </script>
 </body>
